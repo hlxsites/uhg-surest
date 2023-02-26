@@ -5,13 +5,75 @@ import {
   loadFooter,
   decorateButtons,
   decorateIcons,
-  decorateSections,
-  decorateBlocks,
   decorateTemplateAndTheme,
   waitForLCP,
   loadBlocks,
   loadCSS,
+  readBlockConfig,
+  toClassName,
+  toCamelCase,
+  decorateBlock,
 } from './lib-franklin.js';
+
+/* START lib-franklin overrides/extensionts */
+
+/**
+ * Decorates all blocks in a container element.
+ * @param {Element} main The container element
+ */
+export function decorateBlocks(main) {
+  main
+    .querySelectorAll('div.section > div > div > div')
+    .forEach(decorateBlock);
+}
+
+/**
+ * Decorates all sections in a container element.
+ * @param {Element} $main The container element
+ */
+export function decorateSections(main) {
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    // custom add a section container
+    const container = document.createElement('div');
+    container.className = 'section-container';
+    [...section.children].forEach((child) => {
+      container.append(child);
+    });
+    section.append(container);
+
+    const wrappers = [];
+    let defaultContent = false;
+    [...container.children].forEach((e) => {
+      if (e.tagName === 'DIV' || !defaultContent) {
+        const wrapper = document.createElement('div');
+        wrappers.push(wrapper);
+        defaultContent = e.tagName !== 'DIV';
+        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+      }
+      wrappers[wrappers.length - 1].append(e);
+    });
+    wrappers.forEach((wrapper) => container.append(wrapper));
+    section.classList.add('section');
+    section.setAttribute('data-section-status', 'initialized');
+
+    /* process section metadata */
+    const sectionMeta = section.querySelector('div.section-metadata');
+    if (sectionMeta) {
+      const meta = readBlockConfig(sectionMeta);
+      Object.keys(meta).forEach((key) => {
+        if (key === 'style') {
+          const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
+          styles.forEach((style) => section.classList.add(style));
+        } else {
+          section.dataset[toCamelCase(key)] = meta[key];
+        }
+      });
+      sectionMeta.parentNode.remove();
+    }
+  });
+}
+
+/* END lib-franklin overrides/extensionts */
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
