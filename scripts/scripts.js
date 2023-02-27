@@ -130,22 +130,20 @@ async function loadEager(doc) {
 }
 
 /**
- * Adds the favicons
+ * Adds the favicon.
+ * @param {string} href The favicon URL
  */
-export function addFavIcons() {
-  const touchIcon = document.createElement('link');
-  touchIcon.rel = 'apple-touch-icon';
-  touchIcon.href = `${window.hlx.codeBasePath}/icons/apple-touch-icon.png`;
-  touchIcon.setAttribute('sizes', '180x180');
-
-  const maskIcon = document.createElement('link');
-  maskIcon.rel = 'mask-icon';
-  maskIcon.href = `${window.hlx.codeBasePath}/icons/safari-pinned-tab.svg`;
-  maskIcon.setAttribute('color', '#6449c1');
-
-  const head = document.getElementsByTagName('head')[0];
-  head.appendChild(touchIcon);
-  head.appendChild(maskIcon);
+export function addFavIcon(href) {
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  // link.type = 'image/svg+xml';
+  link.href = href;
+  const existingLink = document.querySelector('head link[rel="icon"]');
+  if (existingLink) {
+    existingLink.parentElement.replaceChild(link, existingLink);
+  } else {
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }
 }
 
 /**
@@ -163,7 +161,7 @@ async function loadLazy(doc) {
   loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  addFavIcons();
+  addFavIcon(`${window.hlx.codeBasePath}/icons/favicon.png`);
   sampleRUM('lazy');
   sampleRUM.observe(main.querySelectorAll('div[data-block-name]'));
   sampleRUM.observe(main.querySelectorAll('picture > img'));
