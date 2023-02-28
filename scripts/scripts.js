@@ -88,9 +88,10 @@ function isAdjacent(elem1, elem2) {
   if (!elem1 || !elem2) {
     return false;
   }
-  const compare = elem1.compareDocumentPosition(elem2);
   // eslint-disable-next-line no-bitwise
-  return compare & Node.DOCUMENT_POSITION_PRECEDING !== 0;
+  const compare = elem1.compareDocumentPosition(elem2)
+  & (Node.DOCUMENT_POSITION_PRECEDING + Node.DOCUMENT_POSITION_FOLLOWING);
+  return compare > 0;
 }
 
 function buildHeroBlock(main) {
@@ -98,15 +99,15 @@ function buildHeroBlock(main) {
   if (!h1) {
     return;
   }
-  const h2 = main.querySelector('h2');
+  const h4 = main.querySelector('h4');
   const picture = main.querySelector('picture');
   const elems = [];
   if (isAdjacent(h1, picture)) {
     elems.push(picture);
   }
   elems.push(h1);
-  if (isAdjacent(h1, h2)) {
-    elems.push(h2);
+  if (isAdjacent(h1, h4) || isAdjacent(picture, h4)) {
+    elems.push(h4);
   }
   if (elems.length > 0) {
     const section = document.createElement('div');
