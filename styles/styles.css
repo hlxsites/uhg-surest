@@ -260,16 +260,17 @@ main img {
   }
 }
 
-/* progressive section appearance */
-main .section[data-section-status='loading'],
-main .section[data-section-status='initialized'] {
-  display: none;
-}
 
 /* center sections by default, but allow exceptions */
 main .section:not(.hero-container, .left-align, .two-col) {
   display: flex;
   justify-content: center;
+}
+
+/* progressive section appearance */
+main .section[data-section-status='loading'],
+main .section[data-section-status='initialized'] {
+  display: none;
 }
 
 main .section .default-content-wrapper > p {
