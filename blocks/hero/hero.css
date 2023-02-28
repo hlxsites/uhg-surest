@@ -1,7 +1,8 @@
 /* block specific CSS goes here */
 
-main .hero-container > div {
+main .hero-container .section-container {
     max-width: unset;
+    margin: 0;
 }
   
 main .hero-container {
