@@ -18,6 +18,7 @@ footer {
   footer .footer-links {
     display: grid;
     grid-template-columns: 50% 50%;
+    margin-top: 24px;
   }
   footer .footer-column2 .footer-disclaimer{
     max-width: 500px;
@@ -28,7 +29,7 @@ footer {
     display: none;
   }
   footer .footer-column1 .footer-logo-large-screen {
-    margin-top: 240px;
+    margin-top: 320px;
   }
   footer .footer-column1 .footer-buttons {
     display: flex;
@@ -36,8 +37,12 @@ footer {
   footer .footer-column1 .footer-buttons .button-container {
     margin-right: 12px;
   }
-  footer .footer-column1 .footer-text {
+  footer .footer-column1 .footer-text h3 {
     font-size: 35px;
+    margin: 16px;
+  }
+  footer .footer-column2 .footer-social {
+    margin-top: 32px;
   }
 }
 
@@ -46,10 +51,10 @@ footer {
     display: none;
   }
 }
+
 footer .footer p {
   margin: 0;
 }
-
 
 footer .footer-logo-small-screen {
   display: block;
