@@ -30,6 +30,8 @@ export default async function decorate(block) {
       const section = footer.querySelector('.footer-legal').children[i];
       if (section) section.classList.add(`${c}`);
     });
+
+    // Set up main footer columns
     const column1 = document.createElement('div');
     column1.classList.add('footer-column1');
     const column2 = document.createElement('div');
@@ -48,6 +50,7 @@ export default async function decorate(block) {
     footer.appendChild(column1);
     footer.appendChild(column2);
 
+    // Set up link columns
     const footerLinks = footer.querySelector('.footer-links');
     const footerLinksColumns = document.createElement('div');
     footerLinksColumns.className = 'footer-links';

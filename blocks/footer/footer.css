@@ -9,38 +9,47 @@ footer {
   footer {
     padding: 7rem 15rem;
   }
+
   footer .footer-block {
     display: grid;
     align-items: start;
     grid-template-columns: 50% 50%;
     justify-items: start;
   }
+
   footer .footer-links {
     display: grid;
     grid-template-columns: 50% 50%;
     margin-top: 24px;
   }
+
   footer .footer-column2 .footer-disclaimer{
     max-width: 500px;
     font-size: 14px;
     margin-top: 24px;
   }
+
   footer .footer-column1 .footer-logo-small-screen {
     display: none;
   }
+
   footer .footer-column1 .footer-logo-large-screen {
     margin-top: 320px;
   }
+
   footer .footer-column1 .footer-buttons {
     display: flex;
   }
+
   footer .footer-column1 .footer-buttons .button-container {
     margin-right: 12px;
   }
+
   footer .footer-column1 .footer-text h3 {
     font-size: 35px;
     margin: 16px;
   }
+  
   footer .footer-column2 .footer-social {
     margin-top: 32px;
   }
