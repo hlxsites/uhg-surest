@@ -23,6 +23,7 @@
   --clr-off-white: rgb(248 248 248);
   --clr-black: rgb(0 0 0);
   --clr-off-black: rgb(24 18 47);
+  --clr-cool-white:  rgb(192 229 235);
   
   /* element colors */
   --link-color: var(--clr-purple);

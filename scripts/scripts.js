@@ -78,13 +78,37 @@ export function decorateSections(main) {
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
+/**
+ * Check if two elements exist and are adjacent to each other in any order
+ * @param {*} elem1 First element to evaluate
+ * @param {*} elem2 Second element to evaluate
+ * @returns False if either element does not exist or are not adjacent, otherwise true
+ */
+function isAdjacent(elem1, elem2) {
+  if (!elem1 || !elem2) {
+    return false;
+  }
+  return elem1.nextElementSibling === elem2 || elem1.previousElementSibling === elem2;
+}
+
 function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
+  if (!h1) {
+    return;
+  }
+  const subhead = main.querySelector('h2') || main.querySelector('h3') || main.querySelector('h4');
   const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (h1 && picture && (h1.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
+  const elems = [];
+  if (isAdjacent(h1, picture.parentElement)) {
+    elems.push(picture);
+  }
+  elems.push(h1);
+  if (isAdjacent(h1, subhead) || isAdjacent(picture.parentElement, subhead)) {
+    elems.push(subhead);
+  }
+  if (elems.length > 0) {
     const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, h1] }));
+    section.append(buildBlock('hero', { elems }));
     main.prepend(section);
   }
 }
