@@ -60,11 +60,13 @@ function initNavSections(navSections) {
 
 function initMobileNavSections(navSections) {
   navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-    navSection.addEventListener('click', () => {
-      const expanded = navSection.getAttribute('aria-expanded') === 'true';
-      toggleAllNavSections(navSections);
-      navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
+    if (navSection.classList.contains('nav-drop')) {
+      navSection.addEventListener('click', () => {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+    }
 
     const hr = document.createElement('hr');
     navSection.append(hr);
