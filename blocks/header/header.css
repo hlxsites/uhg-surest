@@ -4,21 +4,18 @@ header .nav-wrapper {
   box-shadow: rgb(0 0 0 / 12%) 0px 0px 24px 0px;
   z-index: 2;
   position: fixed;
-  top: 16px;
+  inset: 16px 22px auto;
   width: calc(100% - 44px);
-  margin-inline: 22px;
 }
 
 header nav {
   display: grid;
   grid-template:
-    'tools tools' 
-    'brand hamburger'
-    'sections sections';
-  grid-template-columns: auto 40px;
+    'tools' 
+    'brand'
+    'sections';
   align-items: center;
   gap: 0 2em;
-  margin: auto;
   font-family: var(--body-font-family);
 }
 
@@ -35,12 +32,6 @@ header nav a:any-link {
   color: currentcolor;
 }
 
-header nav .nav-hamburger {
-  grid-area: hamburger;
-  display: flex;
-  z-index: 10;
-}
-
 /* hambuerger icon */
 header nav .nav-hamburger button {
   height: 22px;
@@ -53,6 +44,7 @@ header nav .nav-hamburger button {
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+  vertical-align: middle;
 }
 
 header nav .nav-hamburger-icon,
@@ -68,31 +60,31 @@ header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
-  background: var(--clr-white);
+  background: currentColor;
 }
 
-header nav[aria-expanded=false] .nav-hamburger-icon,
-header nav[aria-expanded=false] .nav-hamburger-icon::before,
-header nav[aria-expanded=false] .nav-hamburger-icon::after {
+header nav:not(.expanded) .nav-hamburger-icon,
+header nav:not(.expanded) .nav-hamburger-icon::before,
+header nav:not(.expanded) .nav-hamburger-icon::after {
   height: 2px;
   border-radius: 2px;
   background: currentcolor;
 }
 
-header nav[aria-expanded=false] .nav-hamburger-icon::before {
+header nav:not(.expanded) .nav-hamburger-icon::before {
   top: -6px;
 }
 
-header nav[aria-expanded=false] .nav-hamburger-icon::after {
+header nav:not(.expanded) .nav-hamburger-icon::after {
   top: 6px;
 }
 
-header nav[aria-expanded=true] .nav-hamburger-icon {
+header nav.expanded .nav-hamburger-icon {
   height: 22px;
 }
 
-header nav[aria-expanded=true] .nav-hamburger-icon::before,
-header nav[aria-expanded=true] .nav-hamburger-icon::after {
+header nav.expanded .nav-hamburger-icon::before,
+header nav.expanded .nav-hamburger-icon::after {
   top: 3px;
   left: 1px;
   transform: rotate(45deg);
@@ -100,13 +92,15 @@ header nav[aria-expanded=true] .nav-hamburger-icon::after {
   width: 24px;
   height: 2px;
   border-radius: 2px;
+  background: var(--clr-white);
 }
 
-header nav[aria-expanded=true] .nav-hamburger-icon::after {
+header nav.expanded .nav-hamburger-icon::after {
   top: unset;
   bottom: 3px;
   transform: rotate(-45deg);
 }
+
 
 @media (min-width: 900px) {
   header nav .nav-hamburger {
@@ -120,6 +114,9 @@ header .nav-brand {
   grid-area: brand;
   padding: .4rem 1.4rem;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 header .nav-brand a {
@@ -134,7 +131,7 @@ header .nav-brand .icon svg {
   fill: var(--clr-purple);
 }
 
-header nav[aria-expanded=true] .nav-brand .icon svg {
+header nav.expanded .nav-brand .icon svg {
   fill: var(--background-color);
 }
 
@@ -162,13 +159,30 @@ header nav .nav-sections ul {
 }
 
 header nav .nav-sections > ul > li {
+  padding-block: 1.6rem
+}
+
+header nav .nav-sections > ul > li[aria-expanded=false] > hr {
   border-bottom: 1px solid var(--clr-white);
+  margin: 1.6rem 1.6rem 0;
+  margin-bottom: 0;
+}
+
+header nav .nav-sections > ul > li[aria-expanded=true] > hr {
+  display: none;
 }
 
 header nav .nav-sections .nav-drop {
   position: relative;
-  padding-right: 16px;
   cursor: pointer;
+}
+
+header nav .nav-sections > ul > li > a {
+  padding: 1.6rem;
+}
+
+header nav .nav-sections .nav-drop:focus > a {
+  text-decoration: underline;
 }
 
 header nav .nav-sections > ul > li.nav-drop::after {
@@ -176,7 +190,7 @@ header nav .nav-sections > ul > li.nav-drop::after {
   display: inline-block;
   position: absolute;
   top: 1.4em;
-  right: 50px;
+  right: 18px;
   transform: rotate(135deg);
   width: 12px;
   height: 12px;
@@ -192,24 +206,25 @@ header nav .nav-sections > ul > li.nav-drop[aria-expanded=true]::after {
 header nav .nav-sections ul > li {
   font-weight: 400;
   font-size: var(--body-font-size-l);
-  padding-block: 1.6rem;
 }
 
-header nav .nav-sections ul > li > ul {
+header nav .nav-sections > ul > li> ul > li {
+  font-size: var(--body-font-size-m);
+  padding-block: .8rem;
+}
+
+header nav .nav-sections ul > li.nav-drop > ul {
   margin: 0;
   background-color: var(--clr-white);
   color: var(--text-color);
   max-height: 0;
   visibility: hidden;
-  position: relative;
-  width: 100dvw;
-  padding-inline: 44px;
-  left: -22px;
 }
 
 header nav .nav-sections ul > li.nav-drop[aria-expanded=true] > ul {
   max-height: unset;
   visibility: visible;
+  padding: 3.8rem 1.6rem;
 }
 
 
@@ -250,6 +265,11 @@ header nav .nav-tools > ul {
   margin: 0;
 }
 
+header nav#movile-nav-menu .nav-tools > ul {
+  padding: 3rem;
+  justify-content: space-between;
+}
+
 @media (min-width: 600px) {
   header nav .nav-tools > ul {
     justify-content: flex-end;
@@ -261,24 +281,38 @@ header nav .nav-tools .icon-search {
   --icon-width: 16px;
 }
 
-/* menu overlay */
-header nav .menu-overlay {
-  background-color: var(--clr-purple);
-  position: fixed;
-  inset: 0;
+/* mobile nav menu */
+header nav#movile-nav-menu {
+  display: grid;
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
+  position: fixed;
   transform: translateX(-100%);
+  inset: 0;
+  z-index: 9;
+  background-color: var(--clr-purple);
+  padding-block-start: 6.4rem;
+  grid-template: 
+    'sections' 1fr
+    'tools' min-content;
   transition: opacity 500ms ease-in-out 0s, transform 0ms ease 500ms;
 }
 
-@media (max-width: 899px) {
-  header nav[aria-expanded=true] .menu-overlay {
-    opacity: 1;
-    transform: none;
-    pointer-events: auto;
-    transition: opacity 500ms ease-in-out 0s;
-  }
+header nav#movile-nav-menu[aria-expanded=true] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 500ms ease-in-out 0s;
+  overflow-y: scroll;
 }
 
-
+header nav#movile-nav-menu .mobile-menu-cover { 
+  height: 90px;
+  width: 100%;
+  background-color: var(--clr-purple);
+  position: fixed;
+  z-index: 11;
+  top: 0px;
+}
