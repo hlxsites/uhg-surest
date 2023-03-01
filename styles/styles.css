@@ -285,8 +285,13 @@ main .section.highlight-dark-purple {
 }
 
 main .section.highlight-purple {
-  background-color: var(--clr-purple);
+  /* background-color: var(--clr-purple); */
   color: var(--clr-white);
+  padding: 0 8.5%;
+}
+
+main .highlight-dark-purple .default-content-wrapper {
+  max-width:55%;
 }
 
 main .section.highlight-grey {
