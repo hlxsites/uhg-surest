@@ -1,7 +1,7 @@
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
-  box-shadow: rgb(0 0 0 / 12%) 0px 0px 24px 0px;
+  box-shadow: rgb(0 0 0 / 12%) 0 0 24px 0;
   z-index: 2;
   position: fixed;
   inset: 16px 22px auto;
@@ -67,7 +67,7 @@ header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
-  background: currentColor;
+  background: currentcolor;
 }
 
 header nav:not(.expanded) .nav-hamburger-icon,
@@ -126,6 +126,7 @@ header .nav-brand {
   justify-content: space-between;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 header .nav-brand a {
   display: inline-block;
 }
@@ -156,24 +157,24 @@ header nav[aria-expanded=true] .nav-sections {
   align-self: start;
 }
 
-header nav .nav-sections ul {
+header nav .nav-sections > ul {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
   color: var(--clr-white);
 }
 
-header nav .nav-sections>ul>li {
-  padding-block: 1.6rem
+header nav .nav-sections > ul > li {
+  padding-block-start: 1.6rem
 }
 
-header nav .nav-sections>ul>li[aria-expanded=false]>hr {
+header nav .nav-sections > ul > li[aria-expanded=false] > hr {
   border-bottom: 1px solid var(--clr-white);
   margin: 1.6rem 1.6rem 0;
   margin-bottom: 0;
 }
 
-header nav .nav-sections>ul>li[aria-expanded=true]>hr {
+header nav .nav-sections > ul > li[aria-expanded=true] > hr {
   display: none;
 }
 
@@ -182,15 +183,15 @@ header nav .nav-sections .nav-drop {
   cursor: pointer;
 }
 
-header nav .nav-sections>ul>li>a {
+header nav .nav-sections > ul > li > a {
   padding: 1.6rem;
 }
 
-header nav .nav-sections .nav-drop:focus>a {
+header nav .nav-sections .nav-drop:focus > a {
   text-decoration: underline;
 }
 
-header nav .nav-sections>ul>li.nav-drop::after {
+header nav .nav-sections > ul > li.nav-drop::after {
   content: '';
   display: inline-block;
   position: absolute;
@@ -204,21 +205,21 @@ header nav .nav-sections>ul>li.nav-drop::after {
   transition: transform .3s;
 }
 
-header nav .nav-sections>ul>li.nav-drop[aria-expanded=true]::after {
+header nav .nav-sections > ul > li.nav-drop[aria-expanded=true]::after {
   transform: rotate(315deg);
 }
 
-header nav .nav-sections ul>li {
+header nav .nav-sections ul > li {
   font-weight: 400;
   font-size: var(--body-font-size-l);
 }
 
-header nav .nav-sections>ul>li>ul>li {
+header nav .nav-sections > ul > li > ul > li {
   font-size: var(--body-font-size-m);
   padding-block: .8rem;
 }
 
-header nav .nav-sections ul>li.nav-drop>ul {
+header nav .nav-sections ul > li.nav-drop > ul {
   margin: 0;
   background-color: var(--clr-white);
   color: var(--text-color);
@@ -226,7 +227,7 @@ header nav .nav-sections ul>li.nav-drop>ul {
   visibility: hidden;
 }
 
-header nav .nav-sections ul>li.nav-drop[aria-expanded=true]>ul {
+header nav .nav-sections ul > li.nav-drop[aria-expanded=true] > ul {
   max-height: unset;
   visibility: visible;
   padding: 3.8rem 1.6rem;
@@ -289,7 +290,8 @@ header nav .nav-tools .nav-item-primary .button {
   display: flex;
 }
 
-header nav .nav-tools>ul {
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-tools > ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -297,13 +299,13 @@ header nav .nav-tools>ul {
   margin: 0;
 }
 
-header nav#movile-nav-menu .nav-tools>ul {
+header nav#movile-nav-menu .nav-tools > ul {
   padding: 3rem;
   justify-content: space-between;
 }
 
 @media (min-width: 600px) {
-  header nav .nav-tools>ul {
+  header nav .nav-tools > ul {
     justify-content: flex-end;
     gap: 3rem;
   }
@@ -346,5 +348,5 @@ header nav#movile-nav-menu .mobile-menu-cover {
   background-color: var(--clr-purple);
   position: fixed;
   z-index: 11;
-  top: 0px;
+  top: 0;
 }
