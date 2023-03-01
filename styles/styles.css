@@ -282,16 +282,44 @@ main .section.highlight,
 main .section.highlight-dark-purple {
   background-color: var(--highlight-background-color);
   color: var(--clr-white);
-}
-
-main .section.highlight-purple {
-  /* background-color: var(--clr-purple); */
-  color: var(--clr-white);
-  padding: 0 8.5%;
+  padding: 3.5em 8.5%;
 }
 
 main .highlight-dark-purple .default-content-wrapper {
-  max-width:55%;
+  max-width: 65%;
+}
+
+main .highlight-dark-purple .default-content-wrapper h2 {
+  line-height: 1.15em;
+}
+
+main .highlight-dark-purple .default-content-wrapper p {
+  margin-top:0;
+  line-height:1.5em;
+}
+
+main .highlight-dark-purple .columns img {
+  max-width: 90px;
+}
+
+main .highlight-dark-purple .columns > div {
+  border: solid white;
+  border-width: 0 0 2px;
+  border-image: repeating-linear-gradient(90deg, var(--clr-white) 0 2px, transparent 2px 6px) 1/1;
+  padding: 2em 0;
+}
+
+main .highlight-dark-purple .columns > div:last-of-type {
+  border-bottom: none;
+}
+
+main .highlight-dark-purple .columns > div > div:first-of-type {
+  max-width: 120px;
+}
+
+main .section.highlight-purple {
+  background-color: var(--clr-purple);
+  color: var(--clr-white);
 }
 
 main .section.highlight-grey {
