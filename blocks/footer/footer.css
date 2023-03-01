@@ -19,3 +19,21 @@ footer .footer p {
 footer a:any-link {
   color: var(--clr-white);
 }
+
+footer svg {
+  fill: var(--clr-white);
+  height: 30px;
+}
+
+footer ul{
+  list-style: none;
+  display: inline-flex;
+}
+
+footer ul li {
+  margin-right: 24px;
+}
+
+footer span.icon.icon-footer-logo svg {
+  height: 88px;
+}
