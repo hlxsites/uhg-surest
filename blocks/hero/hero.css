@@ -11,37 +11,46 @@ main .hero-container {
 }
   
 main .hero {
+    position: relative;
     min-height: calc(100vh - 100px);
-    padding:2em;
+    padding: 2em;
 }
 
 main .hero h1 {
     color:var(--clr-cool-white);
+    margin-block-end: 0;
 }
 
-main .hero picture + h1 {
-    max-width: 1200px;
-    margin:0 auto;
-    color: var(--clr-off-white);
-    filter: drop-shadow(0 0 2px rgba(0 0 0 40%)) drop-shadow(0 0 2px rgba(0 0 0 40%));
+main .hero h1, main .hero h2, main .hero h3, main .hero h4 {
+    position:relative;
 }
 
-.hero.block h2, .hero.block h3, .hero.block h4 {
+main .hero picture + h1 {    
     color: var(--clr-off-white);
-    margin-top:0.6em;
+    /* stylelint-disable-next-line color-function-notation */
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 40%)) drop-shadow(0 0 2px rgba(0, 0, 0, 40%));
+}
+
+main .hero h2, main .hero h3, main .hero h4 {
+    color: var(--clr-off-white);
+    margin-top:0.25em;
     font-size:2rem;
     letter-spacing:2.5px;
-    filter: drop-shadow(0 0 2px rgba(0 0 0 40%)) drop-shadow(0 0 2px rgba(0 0 0 40%));
+    /* stylelint-disable-next-line color-function-notation */    
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 40%)) drop-shadow(0 0 2px rgba(0, 0, 0, 40%));
 } 
 
 @media (min-width: 600px) {
-    .hero.block h1, .hero.block h2, .hero.block h3, .hero.block h4 {
+    main .hero h1, main .hero h2, main .hero h3, main .hero h4 {
         max-width: 55%;
-        margin-top:1.25em;
         margin-left: 2%;
     }
 
-    .hero.block h2, .hero.block h3, .hero.block h4 {
+    main .hero h1 {
+        margin-top:1.7em;
+    }
+
+    main .hero h2, main .hero h3, main .hero h4 {
         font-size:2.7rem;
         letter-spacing:1.75px;
     }
