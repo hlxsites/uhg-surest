@@ -79,7 +79,7 @@ const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
 
 /**
- * Check if two elements exist and are adjacent to each other
+ * Check if two elements exist and are adjacent to each other in any order
  * @param {*} elem1 First element to evaluate
  * @param {*} elem2 Second element to evaluate
  * @returns False if either element does not exist or are not adjacent, otherwise true
@@ -88,10 +88,7 @@ function isAdjacent(elem1, elem2) {
   if (!elem1 || !elem2) {
     return false;
   }
-  // eslint-disable-next-line no-bitwise
-  const compare = elem1.compareDocumentPosition(elem2)
-  & (Node.DOCUMENT_POSITION_PRECEDING + Node.DOCUMENT_POSITION_FOLLOWING);
-  return compare > 0;
+  return elem1.nextElementSibling === elem2 || elem1.previousElementSibling === elem2;
 }
 
 function buildHeroBlock(main) {
@@ -99,15 +96,15 @@ function buildHeroBlock(main) {
   if (!h1) {
     return;
   }
-  const h4 = main.querySelector('h4');
+  const subhead = main.querySelector('h2') || main.querySelector('h3') || main.querySelector('h4');
   const picture = main.querySelector('picture');
   const elems = [];
-  if (isAdjacent(h1, picture)) {
+  if (isAdjacent(h1, picture.parentElement)) {
     elems.push(picture);
   }
   elems.push(h1);
-  if (isAdjacent(h1, h4) || isAdjacent(picture, h4)) {
-    elems.push(h4);
+  if (isAdjacent(h1, subhead) || isAdjacent(picture.parentElement, subhead)) {
+    elems.push(subhead);
   }
   if (elems.length > 0) {
     const section = document.createElement('div');
