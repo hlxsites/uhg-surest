@@ -325,3 +325,12 @@ main .section.two-col .section-container {
 .icon svg {
   fill: currentcolor;
 }
+
+/* back to top */
+.back-to-top {
+  position: sticky;
+  bottom: 5px;
+  right: 5px;
+  content: "TO TOP";
+  background-color: green;
+}

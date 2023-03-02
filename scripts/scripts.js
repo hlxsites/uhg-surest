@@ -111,6 +111,14 @@ function buildHeroBlock(main) {
   }
 }
 
+function buildBackToTop(main) {
+  const toTop = createElement('div', 'back-to-top');
+  toTop.onclick(
+    () => window.scrollTo(0),
+  );
+  main.appendChild(toTop);
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -118,6 +126,7 @@ function buildHeroBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildBackToTop(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
