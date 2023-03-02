@@ -7,7 +7,7 @@ footer {
 
 @media (min-width: 900px) {
   footer {
-    padding: 7rem 15rem;
+    padding: 70px 8.3333%;
   }
 
   footer .footer-block {
@@ -24,7 +24,6 @@ footer {
   }
 
   footer .footer-column2 .footer-disclaimer{
-    max-width: 500px;
     font-size: 14px;
     margin-top: 24px;
   }
@@ -94,6 +93,7 @@ footer .footer-disclaimer {
   margin-bottom: 48px;
   font-weight: 400;
   font-size: 12px;
+  max-width: 500px;
 }
 
 footer .footer-legal {
@@ -101,7 +101,7 @@ footer .footer-legal {
   justify-content: flex-start;
   margin-top: 18px;
   font-size: 16px;
-  width: 720px;
+  max-width: 720px;
   height: 22px;
   line-height: 22px;
 }
