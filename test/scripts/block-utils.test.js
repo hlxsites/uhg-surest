@@ -6,6 +6,7 @@ import { expect } from '@esm-bundle/chai';
 import sinon from 'sinon';
 
 let blockUtils;
+let scriptsUtils;
 
 document.body.innerHTML = await readFile({ path: './dummy.html' });
 document.head.innerHTML = await readFile({ path: './head.html' });
@@ -13,6 +14,7 @@ document.head.innerHTML = await readFile({ path: './head.html' });
 describe('Utils methods', () => {
   before(async () => {
     blockUtils = await import('../../scripts/lib-franklin.js');
+    scriptsUtils = await import('../../scripts/scripts.js');
     document.body.innerHTML = await readFile({ path: './body.html' });
   });
 
@@ -86,12 +88,12 @@ describe('Utils methods', () => {
 
 describe('Sections and blocks', () => {
   it('Decorates sections', async () => {
-    blockUtils.decorateSections(document.querySelector('main'));
-    expect(document.querySelectorAll('main .section').length).to.equal(2);
+    scriptsUtils.decorateSections(document.querySelector('main'));
+    expect(document.querySelectorAll('main .section').length).to.equal(4);
   });
 
   it('Decorates blocks', async () => {
-    blockUtils.decorateBlocks(document.querySelector('main'));
+    scriptsUtils.decorateBlocks(document.querySelector('main'));
     expect(document.querySelectorAll('main .block').length).to.equal(1);
   });
 
@@ -109,15 +111,16 @@ describe('Sections and blocks', () => {
     });
 
     // test section with block still loading
-    const $section = document.querySelector('main .section');
+    const aBlock = document.querySelector('.block');
+    const $section = aBlock.closest('.section');
     delete $section.dataset.sectionStatus;
-    $section.querySelector(':scope .block').dataset.blockStatus = 'loading';
+    aBlock.dataset.blockStatus = 'loading';
     blockUtils.updateSectionsStatus(document.querySelector('main'));
     expect($section.dataset.sectionStatus).to.equal('loading');
   });
 
   it('Reads block config', async () => {
-    document.querySelector('main .section > div').innerHTML += await readFile({ path: './config.html' });
+    document.querySelector('main .section > div > div').innerHTML += await readFile({ path: './config.html' });
     const cfg = blockUtils.readBlockConfig(document.querySelector('main .config'));
     expect(cfg).to.deep.include({
       'prop-0': 'Plain text',
