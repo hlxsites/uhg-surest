@@ -246,7 +246,7 @@ main img {
 
 @media (min-width: 600px) {
   main .section {
-    padding: 64px 0;
+    padding: 64px 8.5% 100px;
   }
 
   main .section .section-container {
@@ -278,63 +278,20 @@ main .section .default-content-wrapper > p {
   max-width: 720px;
 }
 
+@media (min-width: 600px) {
+  /* main .section .default-content-wrapper {
+    max-width: 95%;
+  }
+ */
+  main .section p {
+    line-height: 1.33em;
+  }
+}
+
 main .section.highlight,
 main .section.highlight-dark-purple {
   background-color: var(--highlight-background-color);
   color: var(--clr-white);
-  padding: 1em 8.5%;
-}
-
-main .highlight-dark-purple .default-content-wrapper h2 {
-  line-height: 1.15em;
-}
-
-main .highlight-dark-purple .default-content-wrapper p {
-  margin-top:0;
-  line-height:1.5em;
-}
-
-main .highlight-dark-purple .columns img {
-  max-width: 70px;
-}
-
-main .highlight-dark-purple .columns > div {
-  padding: 1em 0;
-  border: solid white;
-  border-width: 0 0 2px;
-  border-image: repeating-linear-gradient(90deg, var(--clr-white) 0 2px, transparent 2px 6px) 1/1;
-}
-
-main .highlight-dark-purple .columns > div:last-of-type {
-  border-bottom: none;
-}
-
-main .highlight-dark-purple .columns > div > div:first-of-type {
-  margin-top:1em;
-  max-width: 100px;
-}
-
-@media (min-width: 600px) {
-  main .section.highlight-dark-purple {
-    padding: 3.5em 8.5%;
-  }
-
-  main .highlight-dark-purple .default-content-wrapper {
-    max-width: 65%;
-  }
-
-  main .highlight-dark-purple .columns > div {
-    padding: 1.2em 0;
-  }
-
-  main .highlight-dark-purple .columns > div > div:first-of-type {
-    margin-top:0;
-    max-width: 120px;
-  }  
-
-  main .highlight-dark-purple .columns img {
-    max-width: 90px;
-  }  
 }
 
 main .section.highlight-purple {
