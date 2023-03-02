@@ -15,8 +15,29 @@ import {
   decorateBlock,
 } from './lib-franklin.js';
 
-/* START lib-franklin overrides/extensionts */
+/**
+ * Create an element with the given id and classes.
+ * @param {string} tagName the tag
+ * @param {string[]|string} classes the class or classes to add
+ * @param {object} props any other attributes to add to the element
+ * @returns the element
+ */
+export function createElement(tagName, classes, props) {
+  const elem = document.createElement(tagName);
+  if (classes) {
+    const classesArr = (typeof classes === 'string') ? [classes] : classes;
+    elem.classList.add(...classesArr);
+  }
+  if (props) {
+    Object.keys(props).forEach((propName) => {
+      elem.setAttribute(propName, props[propName]);
+    });
+  }
 
+  return elem;
+}
+
+/* START lib-franklin overrides/extensionts */
 /**
  * Decorates all blocks in a container element.
  * @param {Element} main The container element
@@ -34,8 +55,7 @@ export function decorateBlocks(main) {
 export function decorateSections(main) {
   main.querySelectorAll(':scope > div').forEach((section) => {
     // custom add a section container
-    const container = document.createElement('div');
-    container.className = 'section-container';
+    const container = createElement('div', 'section-container');
     [...section.children].forEach((child) => {
       container.append(child);
     });
@@ -45,7 +65,7 @@ export function decorateSections(main) {
     let defaultContent = false;
     [...container.children].forEach((e) => {
       if (e.tagName === 'DIV' || !defaultContent) {
-        const wrapper = document.createElement('div');
+        const wrapper = createElement('div');
         wrappers.push(wrapper);
         defaultContent = e.tagName !== 'DIV';
         if (defaultContent) wrapper.classList.add('default-content-wrapper');
@@ -75,39 +95,17 @@ export function decorateSections(main) {
 
 /* END lib-franklin overrides/extensionts */
 
-const LCP_BLOCKS = []; // add your LCP blocks to the list
+const LCP_BLOCKS = ['hero']; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
-
-/**
- * Check if two elements exist and are adjacent to each other in any order
- * @param {*} elem1 First element to evaluate
- * @param {*} elem2 Second element to evaluate
- * @returns False if either element does not exist or are not adjacent, otherwise true
- */
-function isAdjacent(elem1, elem2) {
-  if (!elem1 || !elem2) {
-    return false;
-  }
-  return elem1.nextElementSibling === elem2 || elem1.previousElementSibling === elem2;
-}
 
 function buildHeroBlock(main) {
   const h1 = main.querySelector('h1');
   if (!h1) {
     return;
   }
-  const subhead = main.querySelector('h2') || main.querySelector('h3') || main.querySelector('h4');
-  const picture = main.querySelector('picture');
-  const elems = [];
-  if (isAdjacent(h1, picture.parentElement)) {
-    elems.push(picture);
-  }
-  elems.push(h1);
-  if (isAdjacent(h1, subhead) || isAdjacent(picture.parentElement, subhead)) {
-    elems.push(subhead);
-  }
+  const section = h1.closest('div');
+  const elems = [...section.children];
   if (elems.length > 0) {
-    const section = document.createElement('div');
     section.append(buildBlock('hero', { elems }));
     main.prepend(section);
   }
@@ -158,10 +156,10 @@ async function loadEager(doc) {
  * @param {string} href The favicon URL
  */
 export function addFavIcon(href) {
-  const link = document.createElement('link');
-  link.rel = 'icon';
-  // link.type = 'image/svg+xml';
-  link.href = href;
+  const link = createElement('link', '', {
+    rel: 'icon',
+    href,
+  });
   const existingLink = document.querySelector('head link[rel="icon"]');
   if (existingLink) {
     existingLink.parentElement.replaceChild(link, existingLink);
