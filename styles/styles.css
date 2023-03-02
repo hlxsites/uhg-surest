@@ -46,13 +46,10 @@
   --heading-font-size-xs: 2rem;
 
   /* body sizes */
+  --body-font-size-l: 2.5rem;
   --body-font-size-m: 2.2rem;
   --body-font-size-s: 1.8rem;
   --body-font-size-xs: 1.6rem;
-
-  /* nav height */
-  --nav-height: 64px;
-
 }
 
 @font-face {
@@ -91,10 +88,6 @@ body.appear {
   display: unset;
 }
 
-header {
-  height: var(--nav-height);
-}
-
 h1, h2, h3,
 h4, h5, h6 {
   font-family: var(--heading-font-family);
@@ -102,7 +95,6 @@ h4, h5, h6 {
   line-height: 1.25;
   margin-top: 1em;
   margin-bottom: .5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
 }
 
 h1 { font-size: var(--heading-font-size-l) }
@@ -302,4 +294,22 @@ main .section.two-col .section-container {
   main .section.two-col .section-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* icons */
+.icon {
+  --icon-width: 10px;
+
+  display: inline-block;
+  width: var(--icon-width);
+  padding-inline: .5rem;
+}
+
+.icon :is(svg, img) {
+  width: var(--icon-width);
+  height: auto;
+}
+
+.icon svg {
+  fill: currentcolor;
 }
