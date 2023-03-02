@@ -72,19 +72,20 @@ footer a:any-link {
   color: var(--clr-white);
 }
 
-footer svg {
-  fill: var(--clr-white);
-}
-
 footer .footer-social {
   display: inline-flex;
   justify-content: flex-start;
 }
 
-footer .footer-social svg {
+footer .footer-social .icon {
   height: 30px;
+  width: auto;
   margin-right: 35px;
   margin-top: 24px;
+}
+footer .footer-social .icon svg {
+  height: 30px;
+  width: auto;
 }
 
 footer .footer-disclaimer {
@@ -117,6 +118,7 @@ footer .footer-links {
 
 footer span.icon.icon-footer-logo svg {
   height: 88px;
+  width: auto;
 }
 
 footer .footer-buttons {
