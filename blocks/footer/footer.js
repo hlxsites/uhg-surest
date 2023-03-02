@@ -1,4 +1,5 @@
 import { readBlockConfig, decorateIcons, decorateButtons } from '../../scripts/lib-franklin.js';
+import { createElement } from '../../scripts/scripts.js';
 
 /**
  * loads and decorates the footer
@@ -13,8 +14,7 @@ export default async function decorate(block) {
   const resp = await fetch(`${footerPath}.plain.html`, window.location.pathname.endsWith('/footer') ? { cache: 'reload' } : {});
   if (resp.ok) {
     const html = await resp.text();
-    const footer = document.createElement('div');
-    footer.className = 'footer-block';
+    const footer = createElement('div', 'footer-block');
     footer.innerHTML = html;
 
     const classes = ['logo-small-screen', 'text', 'buttons', 'logo-large-screen', 'links', 'social', 'legal', 'disclaimer'];
@@ -32,10 +32,8 @@ export default async function decorate(block) {
     });
 
     // Set up main footer columns
-    const column1 = document.createElement('div');
-    column1.classList.add('footer-column1');
-    const column2 = document.createElement('div');
-    column2.classList.add('footer-column2');
+    const column1 = createElement('div', 'footer-column1');
+    const column2 = createElement('div', 'footer-column2');
 
     column1.appendChild(footer.querySelector('.footer-logo-small-screen'));
     column1.appendChild(footer.querySelector('.footer-text'));
@@ -52,12 +50,9 @@ export default async function decorate(block) {
 
     // Set up link columns
     const footerLinks = footer.querySelector('.footer-links');
-    const footerLinksColumns = document.createElement('div');
-    footerLinksColumns.className = 'footer-links';
-    const linksColumn1 = document.createElement('div');
-    linksColumn1.classList.add('links-column1');
-    const linksColumn2 = document.createElement('div');
-    linksColumn2.classList.add('links-column2');
+    const footerLinksColumns = createElement('div', 'footer-links');
+    const linksColumn1 = createElement('div', 'links-column1');
+    const linksColumn2 = createElement('div', 'links-column2');
     for (let i = 0; i < 5; i += 1) {
       linksColumn1.appendChild(footerLinks.children[i].cloneNode(true));
     }

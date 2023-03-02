@@ -2,7 +2,7 @@
 header .nav-wrapper {
   background-color: var(--background-color);
   box-shadow: rgb(0 0 0 / 12%) 0 0 24px 0;
-  z-index: 2;
+  z-index: 100;
   position: fixed;
   inset: 16px 22px auto;
   width: calc(100% - 44px);
@@ -121,7 +121,7 @@ header nav.expanded .nav-hamburger-icon::after {
 header .nav-brand {
   grid-area: brand;
   padding: .4rem 1.4rem;
-  z-index: 10;
+  z-index: 120;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -149,7 +149,6 @@ header nav .nav-sections {
   grid-area: sections;
   display: none;
   visibility: hidden;
-  z-index: 10;
 }
 
 header nav[aria-expanded=true] .nav-sections {
@@ -344,7 +343,7 @@ header nav#movile-nav-menu {
   position: fixed;
   transform: translateX(-100%);
   inset: 0;
-  z-index: 9;
+  z-index: 110;
   background-color: var(--clr-purple);
   padding-block-start: 6.4rem;
   grid-template:
@@ -367,6 +366,6 @@ header nav#movile-nav-menu .mobile-menu-cover {
   width: 100%;
   background-color: var(--clr-purple);
   position: fixed;
-  z-index: 11;
+  z-index: 120;
   top: 0;
 }

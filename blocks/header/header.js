@@ -1,4 +1,5 @@
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
+import { createElement } from '../../scripts/scripts.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -77,7 +78,7 @@ function initMobileNavSections(navSections) {
       });
     }
 
-    const hr = document.createElement('hr');
+    const hr = createElement('hr');
     navSection.append(hr);
   });
 }
@@ -135,15 +136,16 @@ export default async function decorate(block) {
     const html = await resp.text();
 
     // decorate nav DOM
-    const nav = document.createElement('nav');
-    nav.id = 'nav';
+    const nav = createElement('nav', '', {
+      id: 'nav',
+    });
     nav.innerHTML = html;
 
-    const mobileMenu = document.createElement('nav');
-    mobileMenu.id = 'movile-nav-menu';
+    const mobileMenu = createElement('nav', '', {
+      id: 'movile-nav-menu',
+    });
 
-    const cover = document.createElement('div');
-    cover.className = 'mobile-menu-cover';
+    const cover = createElement('div', 'mobile-menu-cover');
     mobileMenu.append(cover);
 
     const classes = ['brand', 'tools', 'sections'];
@@ -181,8 +183,7 @@ export default async function decorate(block) {
     }
 
     // hamburger for mobile
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
+    const hamburger = createElement('div', 'nav-hamburger');
     hamburger.innerHTML = `<button type="button" aria-controls="movile-nav-menu" aria-label="Open navigation">
         <span class="nav-hamburger-icon"></span>
       </button>`;
@@ -196,8 +197,7 @@ export default async function decorate(block) {
     decorateIcons(nav);
     decorateIcons(mobileMenu);
 
-    const navWrapper = document.createElement('div');
-    navWrapper.className = 'nav-wrapper';
+    const navWrapper = createElement('div', 'nav-wrapper');
     navWrapper.append(nav);
     navWrapper.append(mobileMenu);
 
