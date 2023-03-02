@@ -37,6 +37,7 @@ header nav ul {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
 }
 
 /* hambuerger icon */
@@ -187,10 +188,6 @@ header nav .nav-sections > ul > li > a {
   padding: 1.6rem;
 }
 
-header nav .nav-sections .nav-drop:focus > a {
-  text-decoration: underline;
-}
-
 header nav .nav-sections > ul > li.nav-drop::after {
   content: '';
   display: inline-block;
@@ -207,6 +204,12 @@ header nav .nav-sections > ul > li.nav-drop::after {
 
 header nav .nav-sections > ul > li.nav-drop[aria-expanded=true]::after {
   transform: rotate(315deg);
+}
+
+@media (min-width: 900px) {
+  header nav .nav-sections > ul > li.nav-drop::after {
+    content: none;
+  }
 }
 
 header nav .nav-sections ul > li {
@@ -247,24 +250,40 @@ header nav .nav-sections ul > li.nav-drop[aria-expanded=true] > ul {
     margin: 0;
   }
 
+  header nav .nav-sections > ul > li {
+    padding-block: .8rem;
+  }
+
   header nav .nav-sections > ul > li > a {
     padding: 1rem;
     font-weight: 600;
     font-size: 18px;
-    text-underline-offset: 22px;
-    text-decoration-thickness: 6px;
   }
 
-  header nav .nav-sections > ul > li > ul {
+  header nav .nav-sections > ul > li.nav-drop > ul {
+    background-color: var(--clr-purple);
+    color: var(--clr-white);
     flex-direction: column;
     position: absolute;
-    top: 7.4rem;
+    top: 56px;
     width: max-content;
+    padding: 0 0 1.6rem 0;
   }
 
   header nav .nav-sections > ul > li:hover > ul {
     visibility: visible;
     max-height: unset;
+  }
+
+  header nav .nav-sections > ul > li.nav-drop > ul > li {
+    font-size: var(--body-font-size-s);
+    padding: 1.6rem 1.4rem;
+    border-bottom: 1px solid var(--clr-white);
+  }
+
+  header nav .nav-sections > ul > li.nav-drop > ul > li:hover {
+    background-color: var(--clr-white);
+    color: var(--text-color);
   }
 }
 
