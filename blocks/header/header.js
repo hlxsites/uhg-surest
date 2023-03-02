@@ -7,15 +7,24 @@ function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
     const mobileNav = document.getElementById('movile-nav-menu');
-    const navSectionExpanded = mobileNav.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections();
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, mobileNav, false);
-      nav.querySelector('button').focus();
+    if (isDesktop.matches) {
+      const navSectionExpanded = nav.querySelector('[aria-expanded="true"]');
+      if (navSectionExpanded) {
+        // eslint-disable-next-line no-use-before-define
+        toggleAllNavSections(nav);
+        navSectionExpanded.focus();
+      }
+    } else {
+      const navSectionExpanded = mobileNav.querySelector('[aria-expanded="true"]');
+      if (navSectionExpanded) {
+        // eslint-disable-next-line no-use-before-define
+        toggleAllNavSections(mobileNav);
+        navSectionExpanded.focus();
+      } else {
+        // eslint-disable-next-line no-use-before-define
+        toggleMenu(nav, mobileNav, false);
+        nav.querySelector('button').focus();
+      }
     }
   }
 }
@@ -70,6 +79,23 @@ function initMobileNavSections(navSections) {
 
     const hr = document.createElement('hr');
     navSection.append(hr);
+  });
+}
+
+function initDesktopNavSections(navSections) {
+  navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
+    if (navSection.classList.contains('nav-drop')) {
+      navSection.addEventListener('mouseenter', () => {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+      navSection.addEventListener('mouseleave', () => {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      });
+    }
   });
 }
 
@@ -133,6 +159,7 @@ export default async function decorate(block) {
       initNavSections(mobileNavSections);
       initMobileNavSections(mobileNavSections);
       initNavSections(navSections);
+      initDesktopNavSections(navSections);
     }
 
     const navTools = nav.querySelector('.nav-tools');

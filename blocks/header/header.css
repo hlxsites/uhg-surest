@@ -270,9 +270,10 @@ header nav .nav-sections ul > li.nav-drop[aria-expanded=true] > ul {
     padding: 0 0 1.6rem 0;
   }
 
-  header nav .nav-sections > ul > li:hover > ul {
+  header nav .nav-sections > ul > li.nav-drop[aria-expanded=true] > ul {
     visibility: visible;
     max-height: unset;
+    padding: 0 0 1.6rem 0;
   }
 
   header nav .nav-sections > ul > li.nav-drop > ul > li {
