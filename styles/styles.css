@@ -315,3 +315,14 @@ main .section.two-col .section-container {
 .icon svg {
   fill: currentcolor;
 }
+
+/* footnotes */
+.section.footnotes .default-content-wrapper {
+  font-size: 60%;
+  padding: 140px 0;
+  line-height: 29px;
+}
+
+.section.footnotes .default-content-wrapper sup {
+  font-size: 60%;
+}
