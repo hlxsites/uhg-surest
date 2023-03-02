@@ -240,7 +240,7 @@ main img {
 
 @media (min-width: 600px) {
   main .section {
-    padding: 64px 0;
+    padding: 64px 8.5% 100px;
   }
 
   main .section .section-container {
@@ -270,6 +270,16 @@ main .section[data-section-status='initialized'] {
 
 main .section .default-content-wrapper > p {
   max-width: 720px;
+}
+
+@media (min-width: 600px) {
+  /* main .section .default-content-wrapper {
+    max-width: 95%;
+  }
+ */
+  main .section p {
+    line-height: 1.33em;
+  }
 }
 
 main .section.highlight,
