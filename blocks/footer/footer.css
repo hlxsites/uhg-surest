@@ -1,14 +1,135 @@
 footer {
-  padding: 2rem;
-  background-color: var(--overlay-background-color);
+  padding: 8rem 7rem;
+  background-color: var(--clr-dark-purple);
   font-size: var(--body-font-size-s);
+  color: var(--clr-white);
 }
 
-footer .footer {
-  max-width: 1200px;
-  margin: auto;
+@media (min-width: 900px) {
+  footer {
+    padding: 70px 8.3333%;
+  }
+
+  footer .footer-block {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 50% 50%;
+    justify-items: start;
+  }
+
+  footer .footer-links {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-top: 24px;
+  }
+
+  footer .footer-column2 .footer-disclaimer{
+    font-size: 14px;
+    margin-top: 24px;
+  }
+
+  footer .footer-column1 .footer-logo-small-screen {
+    display: none;
+  }
+
+  footer .footer-column1 .footer-logo-large-screen {
+    margin-top: 320px;
+  }
+
+  footer .footer-column1 .footer-buttons {
+    display: flex;
+  }
+
+  footer .footer-column1 .footer-buttons .button-container {
+    margin-right: 12px;
+  }
+
+  footer .footer-column1 .footer-text h3 {
+    font-size: 35px;
+    margin: 16px;
+  }
+  
+  footer .footer-column2 .footer-social {
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 900px) {
+  footer .footer-column1 .footer-logo-large-screen {
+    display: none;
+  }
 }
 
 footer .footer p {
   margin: 0;
+}
+
+footer .footer-logo-small-screen {
+  display: block;
+}
+
+footer a:any-link {
+  color: var(--clr-white);
+}
+
+footer .footer-social {
+  display: inline-flex;
+  justify-content: flex-start;
+}
+
+footer .footer-social .icon {
+  height: 30px;
+  width: auto;
+  margin-right: 35px;
+  margin-top: 24px;
+}
+
+footer .footer-social .icon svg {
+  height: 30px;
+  width: auto;
+}
+
+footer .footer-disclaimer {
+  line-height: 19px;
+  margin-top: 12px;
+  margin-bottom: 48px;
+  font-weight: 400;
+  font-size: 12px;
+  max-width: 500px;
+}
+
+footer .footer-legal {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 18px;
+  font-size: 16px;
+  max-width: 720px;
+  height: 22px;
+  line-height: 22px;
+}
+
+footer .footer-legal p {
+  margin-right: 24px;
+}
+
+footer .footer-links {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+footer span.icon.icon-footer-logo svg {
+  height: 88px;
+  width: auto;
+}
+
+footer .footer-buttons {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+footer .footer-buttons .button {
+  margin-top: 4px;
+  margin-bottom: 4px;
 }

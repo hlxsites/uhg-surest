@@ -24,8 +24,10 @@ await sleep();
 
 describe('Footer block', () => {
   it('Displays footer content', async () => {
-    const a = document.querySelector('footer a');
-    expect(a).to.exist;
-    expect(a.href).to.equal('https://www.adobe.com/privacy.html');
+    const footerDiv = document.querySelector('footer .footer-block');
+    expect(footerDiv).to.exist;
+    expect(footerDiv.children.length).to.equal(2);
+    expect(footerDiv.children[0].className).to.equal('footer-column1');
+    expect(footerDiv.children[1].className).to.equal('footer-column2');
   });
 });
