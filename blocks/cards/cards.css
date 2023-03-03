@@ -41,6 +41,15 @@ h2#in-the-news {
     max-width: 1440px;
 }
 
+.cards.news.block > ul > li > a.card-link {
+    color: var(--clr-black);
+    text-decoration: none;
+}
+
+.cards.news.block > ul > li > a.card-link:hover h3 {
+    color: var(--clr-purple);
+}
+
 .cards.news.block > ul > li {
     display: flex;
     flex-direction: column;

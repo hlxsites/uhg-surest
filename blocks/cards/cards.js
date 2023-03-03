@@ -5,7 +5,7 @@ function addLinksToNewsCards(block) {
   [...block.firstChild.children].forEach((card) => {
     const cardBody = card.children[1];
     const link = cardBody.querySelector('p');
-    const linkWrapper = createElement('a');
+    const linkWrapper = createElement('a', 'card-link');
     linkWrapper.href = link.textContent;
     link.remove();
     linkWrapper.appendChild(card.children[0].cloneNode(true));
