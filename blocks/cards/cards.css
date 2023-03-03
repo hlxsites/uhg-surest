@@ -32,6 +32,7 @@
 
 h2#in-the-news {
     text-align: center;
+    margin-bottom: 90px;
 }
 
 .cards.news.block > ul {
@@ -42,6 +43,7 @@ h2#in-the-news {
 
 .cards.news.block > ul > li {
     display: grid;
+    grid-template-rows: 50% 50%;
     box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0px;
     border: 0;
     width: 240px;
