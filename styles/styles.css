@@ -328,9 +328,35 @@ main .section.two-col .section-container {
 
 /* back to top */
 .back-to-top {
-  position: sticky;
-  bottom: 5px;
-  right: 5px;
-  content: "TO TOP";
-  background-color: green;
+  display: block;
+  position: fixed;
+  bottom:calc(-100vh);
+  right: 0;
+  z-index:1000;
+  border-radius:25px;
+  margin: 20px;
+  padding: 0;
+  min-width: 50px;
+  max-width: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  cursor: pointer;
+  background-color: var(--clr-purple);
+  transition-duration: 0.3s;
+  transition-property: filter;
+  filter: brightness(100%) drop-shadow(0 2px 6px rgb(0 0 0 / 40%));
+}
+
+.back-to-top .arrow {
+  fill: none;
+  stroke: rgb(255 255 255);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.back-to-top:hover {
+  transition-duration: 0.3s;
+  transition-property: filter;
+  filter:brightness(75%) drop-shadow(0 2px 4px rgb(0 0 0 / 55%));
 }
