@@ -398,11 +398,18 @@ main .section.two-col .section-container {
 }
 
 .block.images > div {
+  filter:grayscale();
+  transition:filter 0.3s;
   display:flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   max-width: 15%;
+}
+
+.block.images > div:hover {
+  filter:none;
+  transition:filter 0.3s;
 }
 
 .block.images picture {
