@@ -353,6 +353,12 @@ main .section.two-col .section-container {
   }
 }
 
+.back-to-top .icon {
+  --icon-width: 50px;
+
+  padding: 0;
+}
+
 .back-to-top .arrow {
   fill: none;
   stroke: rgb(255 255 255);

@@ -120,10 +120,9 @@ function buildBackToTop() {
   const toTop = createElement('div', 'back-to-top');
   document.onscroll = scrollBackToTop;
   toTop.onclick = () => window.scrollTo(0, 0);
+  toTop.innerHTML = '<span class="icon icon-up-arrow"></span>';
+  decorateIcons(toTop);
   document.body.appendChild(toTop);
-  toTop.innerHTML = `
-  <svg viewBox='24 24 52 52'><line x1='50' y1='42' x2='50' y2='62' class='arrow'></line><polyline points='40,50 50,40 60,50' class='arrow'></polyline></svg>
-  `;
 }
 /**
  * Builds all synthetic blocks in a container element.
