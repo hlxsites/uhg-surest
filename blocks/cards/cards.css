@@ -29,3 +29,51 @@
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
+
+h2#in-the-news {
+    text-align: center;
+}
+
+.cards.news.block > ul {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 1440px;
+}
+
+.cards.news.block > ul > li {
+    display: grid;
+    box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0px;
+    border: 0;
+    width: 240px;
+}
+
+.cards.news.block > ul > li .cards-card-image {
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 100%;
+}
+
+.cards.news.block > ul > li .cards-card-image img {
+    flex: 0 0 100%;
+    background-color: var(--clr-off-white);
+}
+
+.cards.news.block >ul > li .cards-card-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 24px 20px;
+}
+
+.cards.news.block >ul > li .cards-card-body > h3 {
+    font-size: 22px;
+}
+
+.cards.news.block >ul > li .cards-card-body > h4 {
+    font-size: 16px;
+}
+
+div.section.highlight-grey.cards-container > div.section-container {
+    width: 100%;
+}
