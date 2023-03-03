@@ -334,7 +334,7 @@ main .section.two-col .section-container {
   right: 0;
   z-index:1000;
   border-radius:25px;
-  margin: 20px;
+  margin:10px;
   padding: 0;
   min-width: 50px;
   max-width: 50px;
@@ -345,6 +345,12 @@ main .section.two-col .section-container {
   transition-duration: 0.3s;
   transition-property: filter;
   filter: brightness(100%) drop-shadow(0 2px 6px rgb(0 0 0 / 40%));
+}
+
+@media (min-width: 600px) {
+  .back-to-top {
+    margin: 20px 40px;
+  }
 }
 
 .back-to-top .arrow {
