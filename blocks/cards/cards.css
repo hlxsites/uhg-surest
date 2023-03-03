@@ -63,7 +63,7 @@ h2#in-the-news {
     object-fit: scale-down;  
 }
 
-.cards.news.block >ul > li .cards-card-body {
+.cards.news.block > ul > li .cards-card-body {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -71,12 +71,12 @@ h2#in-the-news {
     padding: 24px 20px;
 }
 
-.cards.news.block >ul > li .cards-card-body > h3 {
+.cards.news.block > ul > li .cards-card-body > h3 {
     font-size: 22px;
     margin-top: 4px;
 }
 
-.cards.news.block >ul > li .cards-card-body > h4 {
+.cards.news.block > ul > li .cards-card-body > h4 {
     font-size: 16px;
     margin-top: 8px;
 }
