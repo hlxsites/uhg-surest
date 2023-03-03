@@ -373,3 +373,14 @@ main .section.two-col .section-container {
   transition-property: filter;
   filter:brightness(75%) drop-shadow(0 2px 4px rgb(0 0 0 / 55%));
 }
+
+/* footnotes */
+.section.footnotes .default-content-wrapper {
+  font-size: 60%;
+  padding: 140px 0;
+  line-height: 29px;
+}
+
+.section.footnotes .default-content-wrapper sup {
+  font-size: 60%;
+}
