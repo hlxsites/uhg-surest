@@ -111,6 +111,19 @@ function buildHeroBlock(main) {
   }
 }
 
+function scrollBackToTop() {
+  const pos = -Math.max(window.visualViewport.height - window.scrollY, 0);
+  document.querySelector('.back-to-top').style.bottom = `${pos}px`;
+}
+
+function buildBackToTop() {
+  const toTop = createElement('div', 'back-to-top');
+  document.onscroll = scrollBackToTop;
+  toTop.onclick = () => window.scrollTo(0, 0);
+  toTop.innerHTML = '<span class="icon icon-up-arrow"></span>';
+  decorateIcons(toTop);
+  document.body.appendChild(toTop);
+}
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -118,6 +131,7 @@ function buildHeroBlock(main) {
 function buildAutoBlocks(main) {
   try {
     buildHeroBlock(main);
+    buildBackToTop();
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
