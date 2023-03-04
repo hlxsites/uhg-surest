@@ -46,14 +46,10 @@ h2#in-the-news {
     text-decoration: none;
 }
 
-.cards.news.block > ul > li > a.card-link:hover h3 {
-    color: var(--clr-purple);
-}
-
 .cards.news.block > ul > li {
     display: flex;
     flex-direction: column;
-    box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0px;
+    box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0;
     border: 0;
     max-width: 240px;
     min-width: 200px;
@@ -83,6 +79,10 @@ h2#in-the-news {
 .cards.news.block > ul > li .cards-card-body > h3 {
     font-size: 22px;
     margin-top: 4px;
+}
+
+.cards.news.block > ul > li > a.card-link:hover h3 {
+    color: var(--clr-purple);
 }
 
 .cards.news.block > ul > li .cards-card-body > p {
