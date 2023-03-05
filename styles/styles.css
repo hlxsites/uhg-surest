@@ -301,6 +301,7 @@ main .section.highlight-grey {
 main .section.two-col .section-container {
   display: grid;
   gap: 2rem;
+  margin: auto;
 }
 
 @media (min-width: 900px) {

@@ -1,31 +1,41 @@
 main .carousel-wrapper {
   position: relative;
-  max-width: 1400px;
+  height: min-content;
+  align-self: center;
 }
 
-main .carousel {
+main .carousel-wrapper .carousel {
+  display: flex;
+  max-width: calc(100dvw - 12rem);
+  margin: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   overflow-x: scroll;
-  color: var(--overlay-text-color);
-  display: none;
-}
-
-main .carousel.appear {
-  display: flex;
 }
 
 main .carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* slides */
-main .carousel > div {
+main .carousel-wrapper .carousel > div.carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  flex-shrink: 0;
-  position: relative;
+}
+
+@media(min-width: 900px) {
+  main .carousel-wrapper .carousel > div.carousel-slide {
+    flex-direction: row;
+    gap: 2rem;
+    padding-inline: 6rem;
+  }
+
+  /* main .carousel-wrapper .carousel > div.carousel-slide > * {
+    flex: 1
+  } */
 }
 
 main .carousel .carousel-image .icon {
@@ -40,9 +50,8 @@ main .carousel .carousel-image .icon svg {
 main .carousel .carousel-text {
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap; */
-  justify-content: center;
-  width: 100%;
+  align-items: center;
+  max-width: 60%;
 }
 
 main .carousel .carousel-text p {
@@ -52,4 +61,45 @@ main .carousel .carousel-text p {
 main .carousel .carousel-text strong {
   font-size: var(--heading-font-size-l);
   font-family: var(--heading-font-family);
+}
+
+main .carousel .carousel-button {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  --icon-width: 4rem;
+  cursor: pointer;
+}
+
+main .carousel .carousel-button svg {
+  height: 100%;
+}
+
+main .carousel .carousel-button.carousel-button-next {
+  right: 1rem;
+}
+
+main .carousel .carousel-button.carousel-button-prev {
+  left: 1rem;
+}
+
+main .carousel .carousel-slide-indicators {
+  position: absolute;
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+main .carousel .carousel-slide-indicators .slide-indicator {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(233 233 233);
+  border-radius: 1000px;
+}
+
+main .carousel .carousel-slide-indicators .slide-indicator.selected {
+  background-color: rgb(177 229 249);
 }
