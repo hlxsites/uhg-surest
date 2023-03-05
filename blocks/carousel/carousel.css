@@ -32,10 +32,6 @@ main .carousel-wrapper .carousel > div.carousel-slide {
     gap: 2rem;
     padding-inline: 6rem;
   }
-
-  /* main .carousel-wrapper .carousel > div.carousel-slide > * {
-    flex: 1
-  } */
 }
 
 main .carousel .carousel-image .icon {
@@ -64,13 +60,15 @@ main .carousel .carousel-text strong {
 }
 
 main .carousel .carousel-button {
+  --icon-width: 4rem;
+
   position: absolute;
   top: 0;
   height: 100%;
-  --icon-width: 4rem;
   cursor: pointer;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 main .carousel .carousel-button svg {
   height: 100%;
 }
