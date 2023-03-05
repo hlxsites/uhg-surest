@@ -1,0 +1,55 @@
+main .carousel-wrapper {
+  position: relative;
+  max-width: 1400px;
+}
+
+main .carousel {
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  color: var(--overlay-text-color);
+  display: none;
+}
+
+main .carousel.appear {
+  display: flex;
+}
+
+main .carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* slides */
+main .carousel > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+main .carousel .carousel-image .icon {
+  --icon-width: 100%;
+}
+
+main .carousel .carousel-image .icon svg {
+  max-width: fit-content;
+  max-height: fit-content;
+}
+
+main .carousel .carousel-text {
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  width: 100%;
+}
+
+main .carousel .carousel-text p {
+  font-size: var(--body-font-size-s);
+}
+
+main .carousel .carousel-text strong {
+  font-size: var(--heading-font-size-l);
+  font-family: var(--heading-font-family);
+}
