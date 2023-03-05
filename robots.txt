@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /drafts/
+
+
+Sitemap: https://www.surest.com/sitemap-index.xml
