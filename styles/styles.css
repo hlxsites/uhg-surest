@@ -12,6 +12,7 @@
  html {
   /* 1rem = 10 px */
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
  :root {
@@ -325,4 +326,62 @@ main .section.two-col .section-container {
 
 .icon svg {
   fill: currentcolor;
+}
+
+/* back to top */
+.back-to-top {
+  display: block;
+  position: fixed;
+  bottom:calc(-100vh);
+  right: 0;
+  z-index:1000;
+  border-radius:25px;
+  margin:10px;
+  padding: 0;
+  min-width: 50px;
+  max-width: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  cursor: pointer;
+  background-color: var(--clr-purple);
+  transition-duration: 0.3s;
+  transition-property: filter;
+  filter: brightness(100%) drop-shadow(0 2px 6px rgb(0 0 0 / 40%));
+}
+
+@media (min-width: 600px) {
+  .back-to-top {
+    margin: 20px 40px;
+  }
+}
+
+.back-to-top .icon {
+  --icon-width: 50px;
+
+  padding: 0;
+}
+
+.back-to-top .arrow {
+  fill: none;
+  stroke: rgb(255 255 255);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.back-to-top:hover {
+  transition-duration: 0.3s;
+  transition-property: filter;
+  filter:brightness(75%) drop-shadow(0 2px 4px rgb(0 0 0 / 55%));
+}
+
+/* footnotes */
+.section.footnotes .default-content-wrapper {
+  font-size: 60%;
+  padding: 140px 0;
+  line-height: 29px;
+}
+
+.section.footnotes .default-content-wrapper sup {
+  font-size: 60%;
 }
