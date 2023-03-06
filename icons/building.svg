@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.27 200" width="101" height="159" role="img" aria-labelledby="titleid95e0ce1bf">
+	<defs>
+		<linearGradient class="cerosgradient" data-cerosgradient="true" id="CerosGradient_id4494bb23b" gradientUnits="userSpaceOnUse" x1="50%" y1="100%" x2="50%" y2="0%">
+			<stop offset="0%" stop-color="#d1d1d1" style="transition-property: none;">
+			</stop>
+			<stop offset="100%" stop-color="#d1d1d1" style="transition-property: none;">
+			</stop>
+		</linearGradient>
+		<linearGradient>
+		</linearGradient>
+	</defs>
+	<g id="Layer_2618ea0a82169a" data-name="Layer 2">
+		<g id="graphics618ea0a82169a">
+			<path fill="#a3e7fc" d="M40.91,27.27h-9.1a4.55,4.55,0,0,0,0,9.09h9.1a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M68.18,27.27H59.09a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,1,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M95.46,27.28H86.37a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M40.91,45.46h-9.1a4.55,4.55,0,0,0,0,9.09h9.1a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M68.18,45.46H59.09a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,1,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M95.46,45.46H86.37a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M40.91,63.64h-9.1a4.55,4.55,0,0,0,0,9.09h9.1a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M68.18,63.65H59.09a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,1,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M95.46,63.65H86.37a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M40.91,81.83h-9.1a4.55,4.55,0,0,0,0,9.09h9.1a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M68.18,81.83H59.09a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,1,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M95.46,81.84H86.37a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M40.91,100h-9.1a4.55,4.55,0,0,0,0,9.09h9.1a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M68.18,100H59.09a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,1,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M95.46,100H86.37a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M40.91,118.2h-9.1a4.55,4.55,0,0,0,0,9.09h9.1a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M68.18,118.2H59.09a4.55,4.55,0,0,0,0,9.1h9.09a4.55,4.55,0,0,0,0-9.1Z" style="transition-property: none;">
+			</path>
+			<path fill="#a3e7fc" d="M95.46,118.21H86.37a4.55,4.55,0,1,0,0,9.09h9.09a4.55,4.55,0,0,0,0-9.09Z" style="transition-property: none;">
+			</path>
+			<path fill="#6950c3" d="M113.64,0h-100A13.63,13.63,0,0,0,0,13.63V186.37A13.63,13.63,0,0,0,13.63,200H31.82a13.64,13.64,0,0,0,13.64-13.63V159.08A4.54,4.54,0,0,1,50,154.54H77.28a4.54,4.54,0,0,1,4.54,4.54v27.29A13.63,13.63,0,0,0,95.45,200h18.19a13.63,13.63,0,0,0,13.63-13.63V13.63A13.63,13.63,0,0,0,113.64,0Zm4.54,186.37a4.54,4.54,0,0,1-4.54,4.54H95.45a4.54,4.54,0,0,1-4.54-4.54V150a4.54,4.54,0,0,0-4.54-4.54H40.91A4.55,4.55,0,0,0,36.36,150v36.38a4.54,4.54,0,0,1-4.54,4.54H13.63a4.55,4.55,0,0,1-4.54-4.54V13.63a4.55,4.55,0,0,1,4.54-4.54h100a4.54,4.54,0,0,1,4.54,4.54Z" style="transition-property: none;">
+			</path>
+		</g>
+	</g>
+	<title id="titleid95e0ce1bf">
+		Purple and blue icon showing a building.
+	</title>
+</svg>
