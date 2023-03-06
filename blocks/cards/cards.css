@@ -29,3 +29,104 @@
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
+
+div.default-content-wrapper h2 {
+    text-align: center;
+    margin-bottom: 90px;
+}
+
+.cards.news.block > ul {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 1440px;
+}
+
+.cards.news.block > ul > li > a.card-link {
+    color: var(--clr-black);
+    text-decoration: none;
+}
+
+.cards.news.block > ul > li {
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0;
+    border: 0;
+    max-width: 240px;
+    min-width: 200px;
+}
+
+.cards.news.block > ul > li .cards-card-image {
+    background-color: var(--clr-off-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards.news.block > ul > li .cards-card-image img {
+    width: 200px;
+    height: auto;
+    object-fit: scale-down;  
+}
+
+.cards.news.block > ul > li .cards-card-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 24px 20px;
+}
+
+.cards.news.block > ul > li .cards-card-body > h3 {
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.cards.news.block > ul > li > a.card-link:hover h3 {
+    color: var(--clr-purple);
+}
+
+.cards.news.block > ul > li .cards-card-body > p {
+    font-size: var(--body-font-size-xs);
+    margin-top: 8px;
+}
+
+div.section.highlight-grey.cards-container > div.section-container {
+    width: 100%;
+    margin: 0;
+}
+
+@media(max-width:900px) {
+    .cards.news.block > ul > li .cards-card-image {
+        display: none;
+    }
+
+    .cards.news.block > ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cards.news.block > ul > li {
+        min-width: 100%;
+        box-shadow: none;
+        background-color: var(--clr-off-white);
+        border: solid var(--clr-off-white);
+        border-width: 0 0 1.5px;
+        border-image: repeating-linear-gradient(90deg, var(--clr-purple) 0 1px, var(--clr-off-white) 2px 6px) 1/1;
+    }
+
+    .cards.news.block > ul > li .cards-card-body {
+        padding: 20px 0;
+    }
+
+    .cards.news.block > ul > li .cards-card-body p {
+        margin: 0;
+    }
+
+    .cards.news.block > ul > li .cards-card-body h3 {
+        font-size: 18px;
+    }
+
+    div.default-content-wrapper h2 {
+        margin-bottom: 32px;
+    }
+}
