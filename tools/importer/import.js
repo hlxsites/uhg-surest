@@ -11,8 +11,203 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
+function addCommonMetadata(document, main, meta) {
+  const title = document.querySelector('title');
+  if (title) {
+    meta.Title = title.textContent;
+  } else {
+    meta.Title = main.querySelector('h1').textContent;
+  }
 
-function getBlogPost(document) {
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) {
+    meta.Description = desc.content;
+  } else {
+    meta.Description = main.querySelector('.blog-body p').textContent;
+  }
+
+  const heroImg = main.querySelector('img');
+  if (heroImg) {
+    meta.Image = main.querySelector('img').cloneNode(true);
+  }
+}
+
+async function importPage(document, origHtml) {
+  const meta = {};
+  const main = document.querySelector('main');
+
+  const heroImg = main.querySelector('.hero .image-wrapper');
+  WebImporter.DOMUtils.replaceBackgroundByImg(heroImg, document);
+
+  const sectionBreak = document.createElement('p');
+  sectionBreak.innerHTML = '---';
+  main.querySelector('.hero').append(sectionBreak);
+
+  main.querySelectorAll('iframe').forEach(async (iFrame) => {
+    let { src } = iFrame;
+    if (!src.startsWith('http')) {
+      src = `https:${src}`;
+    }
+
+    // if (src.includes('ceros.com')) {
+    //   const cerosDiv = document.createElement('div');
+    //   const resp = await fetch(src);
+    //   if (resp.ok) {
+    //     const html = await resp.text();
+    //     cerosDiv.innerHTML = html;
+    //     iFrame.replaceWith(cerosDiv);
+    //   }
+    // } else {
+      const a = document.createElement('a');
+      a.href = src;
+      a.textContent = src;
+      iFrame.replaceWith(a);
+    // }
+  });
+
+  main.querySelectorAll('.featured-cta').forEach((cta) => {
+    const blockCells = [
+      ['Columns (cta)'],
+    ];
+
+    const row = [...cta.querySelector('.featured-cta--inner-wrapper').children];
+    blockCells.push(row);
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    cta.replaceWith(block);
+  });
+
+  main.querySelectorAll('.drawers-outer').forEach((accordion) => {
+    const blockCells = [
+      ['Accordion'],
+    ];
+
+    let foundJson;
+    const fakeDoc = document.createElement('div');
+    fakeDoc.innerHTML = origHtml;
+    const ldJsons = fakeDoc.querySelectorAll('script[type="application/ld+json"]');
+    ldJsons.forEach((ldJson) => {
+      const json = JSON.parse(ldJson.innerHTML);
+      if (json['@type'] === 'FAQPage') {
+        foundJson = json;
+      }
+    });
+
+    const headline = accordion.querySelector('.drawers-headline-wrapper');
+    accordion.insertAdjacentElement('beforebegin', headline);
+
+    accordion.querySelectorAll('.drawers-item-wrapper').forEach((item) => {
+      const itemCells = [];
+      const question = item.querySelector('.drawers-item-wrapper-inner-upper');
+      const answer = item.querySelector('.drawers-item-wrapper-inner-lower');
+      if (foundJson) {
+        foundJson.mainEntity.forEach((entity) => {
+          if (entity['@type'] === 'Question' && entity.name === answer.id.replace('drawers-lower-', '')) {
+            answer.innerHTML = entity.acceptedAnswer.text;
+          }
+        });
+      }
+
+      itemCells.push(question);
+      itemCells.push(answer);
+
+      blockCells.push(itemCells);
+    });
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    accordion.replaceWith(block);
+  });
+
+  main.querySelectorAll('.event-interrupter').forEach((cta) => {
+    const blockCells = [
+      ['Columns (cta)'],
+    ];
+
+    const row = [...cta.querySelector('.event-interrupter-wrapper').children];
+    blockCells.push(row);
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    cta.replaceWith(block);
+  });
+
+  main.querySelectorAll('.list-with-icons').forEach((listWithIcons) => {
+    const blockCells = [
+      ['Columns (icons)'],
+    ];
+    const listWrapper = listWithIcons.querySelector('.list-wrapper');
+    listWithIcons.querySelectorAll('.icon-list-item').forEach((listItem) => {
+      const row = [];
+      row.push(listItem.querySelector('.icon-wrapper'));
+      row.push(listItem.querySelector('.list-item-body'));
+      blockCells.push(row);
+    });
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    listWrapper.replaceWith(block);
+  });
+
+  main.querySelectorAll('.text-with-image').forEach((textWithImage) => {
+    const colsContent = [];
+    const colImage = textWithImage.querySelector('.image-wrapper');
+    const colText = textWithImage.querySelector('.text-wrapper');
+    colsContent.push(colText);
+    colsContent.push(colImage);
+    if (colImage.classList.contains('-image-left')) {
+      colsContent.reverse();
+    }
+
+    const blockCells = [
+      ['Columns'],
+      colsContent,
+    ];
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    textWithImage.replaceWith(block);
+  });
+
+  main.querySelectorAll('.section').forEach((section) => {
+    const metdataCells = [
+      ['Section Metadata'],
+    ];
+
+    const sectionStyle = [];
+    if (section.querySelector('.rich-text-section')) {
+      sectionStyle.push('Center');
+    }
+
+    // background color purple
+    if (section.classList.contains('section-color-bg')) {
+      if (section.classList.contains('jsx-2489806016')) {
+        sectionStyle.push('highlight-purple');
+      }
+      if (section.classList.contains('jsx-3768660036')) {
+        sectionStyle.push('highlight-grey');
+      }
+      if (section.classList.contains('jsx-2078021124')) {
+        sectionStyle.push('highlight-dark-purple');
+      }
+    }
+
+    if (sectionStyle.length > 0) {
+      metdataCells.push(['Style', sectionStyle.join(', ')]);
+    }
+
+    if (metdataCells.length > 1) {
+      const sectionMetadataBlock = WebImporter.DOMUtils.createTable(metdataCells, document);
+      section.append(sectionMetadataBlock);
+    }
+
+    section.append(sectionBreak.cloneNode(true));
+  });
+
+  addCommonMetadata(document, main, meta);
+
+  const metaBlock = WebImporter.Blocks.getMetadataBlock(document, meta);
+  main.append(metaBlock);
+
+  return main;
+}
+
+function importBlogPost(document) {
   const meta = {
     Template: 'Blog Post',
   };
@@ -39,15 +234,8 @@ function getBlogPost(document) {
   const sectionBreak = document.createElement('p');
   sectionBreak.innerHTML = '---';
   heroImg.append(sectionBreak);
-  meta.Image = heroImg.querySelector('img').cloneNode(true);
 
-  meta.Title = main.querySelector('h1').textContent;
-  const desc = document.querySelector('meta[name="description"]');
-  if (desc) {
-    meta.Description = desc.content;
-  } else {
-    meta.Description = main.querySelector('.blog-body p').textContent;
-  }
+  addCommonMetadata(document, main, meta);
 
   main.querySelector('.blog-body').append(sectionBreak.cloneNode(true));
 
@@ -80,14 +268,16 @@ export default {
    * @param {object} params Object containing some parameters given by the import process.
    * @returns {Array} The { element, path } pairs to be transformed
    */
-  transform: ({
+  transform: async ({
     // eslint-disable-next-line no-unused-vars
     document, url, html, params,
   }) => {
     const urlObject = new URL(params.originalURL);
     let el = document.querySelector('main');
     if (urlObject.pathname.startsWith('/blog/')) {
-      el = getBlogPost(document);
+      el = importBlogPost(document);
+    } else {
+      el = await importPage(document, html);
     }
 
     return [{
