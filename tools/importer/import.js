@@ -33,6 +33,7 @@ function addCommonMetadata(document, main, meta) {
 }
 
 async function importPage(document, origHtml) {
+  const blockList = new Set();
   const meta = {};
   const main = document.querySelector('main');
 
@@ -41,7 +42,133 @@ async function importPage(document, origHtml) {
 
   const sectionBreak = document.createElement('p');
   sectionBreak.innerHTML = '---';
-  main.querySelector('.hero').append(sectionBreak);
+  main.querySelector('.hero')?.append(sectionBreak);
+
+  main.querySelectorAll('.proof-bank-ul').forEach((images) => {
+    blockList.add('Images');
+    const blockCells = [
+      ['Images'],
+    ];
+
+    images.querySelectorAll('li').forEach((li) => {
+      const row = [];
+      row.push(li.querySelector('img'));
+      blockCells.push(row);
+    });
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    images.replaceWith(block);
+  });
+
+  main.querySelectorAll('.card-grid').forEach((cards) => {
+    blockList.add('Cards');
+    const blockCells = [
+      ['Cards'],
+    ];
+
+    cards.querySelectorAll('.card-inner').forEach((card) => {
+      const cardStuff = [];
+
+      cardStuff.push(card.querySelector('.image-wrapper'));
+      cardStuff.push(card.querySelector('.text-wrapper'));
+
+      blockCells.push(cardStuff);
+    });
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    cards.replaceWith(block);
+  });
+
+  main.querySelectorAll('.featured-content-block').forEach((cards) => {
+    blockList.add('Cards (featured)');
+    const blockCells = [
+      ['Cards (featured)'],
+    ];
+
+    const headline = cards.querySelector('.heading-wrapper');
+    if (headline) {
+      cards.insertAdjacentElement('beforebegin', headline);
+    }
+
+    const cardStuff = document.createElement('div');
+    cards.querySelectorAll('.featured-content-item-wrapper').forEach((card) => {
+      const cardP = document.createElement('p');
+      const link = card.querySelector('a').cloneNode(false);
+      let linkTo = link.href;
+      if (linkTo.startsWith('/')) {
+        linkTo = `https://main--uhg-surest--hlxsites.hlx.page${linkTo}`;
+      }
+      link.textContent = linkTo;
+      link.href = linkTo;
+      cardP.append(link);
+      cardStuff.append(cardP);
+    });
+    blockCells.push([cardStuff]);
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    cards.replaceWith(block);
+  });
+
+  main.querySelectorAll('.article-link-block').forEach((newsBlock) => {
+    blockList.add('Cards (news)');
+    const blockCells = [
+      ['Cards (news)'],
+    ];
+
+    const headline = newsBlock.querySelector('.heading-wrapper');
+    if (headline) {
+      newsBlock.insertAdjacentElement('beforebegin', headline);
+    }
+
+    newsBlock.querySelectorAll('.articles-wrapper > .link-wrapper').forEach((articleCard) => {
+      const row = [];
+
+      const img = articleCard.querySelector('.image-outer-wrapper');
+      img.style.display = 'block';
+      row.push(img);
+      const text = articleCard.querySelector('.article-text-wrapper');
+      const link = articleCard.querySelector('a').cloneNode(false);
+      link.textContent = link.href;
+      text.prepend(link);
+      row.push(text);
+
+      blockCells.push(row);
+    });
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    newsBlock.replaceWith(block);
+  });
+
+  main.querySelectorAll('.split-block').forEach((split) => {
+    blockList.add('Columns (split-highlight)');
+    const blockCells = [
+      ['Columns (split-highlight)'],
+    ];
+
+    const row = [...split.children];
+    blockCells.push(row);
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    split.replaceWith(block);
+  });
+
+  main.querySelectorAll('.testimonial').forEach((testimonial) => {
+    blockList.add('Testimonial');
+    const blockCells = [
+      ['Testimonial'],
+    ];
+
+    const row = [...testimonial.querySelector('.inner-wrapper').children];
+    blockCells.push(row);
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    testimonial.replaceWith(block);
+  });
+
+  main.querySelectorAll('.mkto-form').forEach((form) => {
+    blockList.add('Marketo Form');
+    // todo
+  });
 
   main.querySelectorAll('iframe').forEach(async (iFrame) => {
     let { src } = iFrame;
@@ -50,6 +177,7 @@ async function importPage(document, origHtml) {
     }
 
     // if (src.includes('ceros.com')) {
+    //   blockList.add('Cero');
     //   const cerosDiv = document.createElement('div');
     //   const resp = await fetch(src);
     //   if (resp.ok) {
@@ -58,6 +186,7 @@ async function importPage(document, origHtml) {
     //     iFrame.replaceWith(cerosDiv);
     //   }
     // } else {
+      blockList.add('Embed');
       const a = document.createElement('a');
       a.href = src;
       a.textContent = src;
@@ -66,8 +195,9 @@ async function importPage(document, origHtml) {
   });
 
   main.querySelectorAll('.featured-cta').forEach((cta) => {
+    blockList.add('CTA');
     const blockCells = [
-      ['Columns (cta)'],
+      ['CTA'],
     ];
 
     const row = [...cta.querySelector('.featured-cta--inner-wrapper').children];
@@ -78,6 +208,7 @@ async function importPage(document, origHtml) {
   });
 
   main.querySelectorAll('.drawers-outer').forEach((accordion) => {
+    blockList.add('Accordion');
     const blockCells = [
       ['Accordion'],
     ];
@@ -119,8 +250,9 @@ async function importPage(document, origHtml) {
   });
 
   main.querySelectorAll('.event-interrupter').forEach((cta) => {
+    blockList.add('CTA (narrow)');
     const blockCells = [
-      ['Columns (cta)'],
+      ['CTA (narrow)'],
     ];
 
     const row = [...cta.querySelector('.event-interrupter-wrapper').children];
@@ -131,6 +263,7 @@ async function importPage(document, origHtml) {
   });
 
   main.querySelectorAll('.list-with-icons').forEach((listWithIcons) => {
+    blockList.add('Columns (icons)');
     const blockCells = [
       ['Columns (icons)'],
     ];
@@ -147,6 +280,7 @@ async function importPage(document, origHtml) {
   });
 
   main.querySelectorAll('.text-with-image').forEach((textWithImage) => {
+    blockList.add('Columns');
     const colsContent = [];
     const colImage = textWithImage.querySelector('.image-wrapper');
     const colText = textWithImage.querySelector('.text-wrapper');
@@ -204,7 +338,12 @@ async function importPage(document, origHtml) {
   const metaBlock = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(metaBlock);
 
-  return main;
+  return {
+    el: main,
+    report: {
+      blocks: Array.from(blockList).join(', '),
+    },
+  };
 }
 
 function importBlogPost(document) {
@@ -274,15 +413,19 @@ export default {
   }) => {
     const urlObject = new URL(params.originalURL);
     let el = document.querySelector('main');
+    let report = {};
     if (urlObject.pathname.startsWith('/blog/')) {
       el = importBlogPost(document);
     } else {
-      el = await importPage(document, html);
+      const result = await importPage(document, html);
+      el = result.el;
+      report = result.report;
     }
 
     return [{
       element: el,
       path: urlObject.pathname,
+      report,
     }];
   },
 };
