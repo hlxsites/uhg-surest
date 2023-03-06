@@ -386,3 +386,17 @@ main .section.two-col .section-container {
 .section.footnotes .default-content-wrapper sup {
   font-size: 60%;
 }
+
+.blog-post.blog main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.blog-post.blog main h2 {
+  font-size: var(--heading-font-size-m);
+}
+
+.blog-post.blog main .default-content-wrapper{
+  max-width: 720px;
+}
