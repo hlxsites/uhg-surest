@@ -167,7 +167,13 @@ async function importPage(document, origHtml) {
 
   main.querySelectorAll('.mkto-form').forEach((form) => {
     blockList.add('Marketo Form');
-    // todo
+    const blockCells = [
+      ['Marketo Form'],
+      [...form.children],
+    ];
+
+    const block = WebImporter.DOMUtils.createTable(blockCells, document);
+    form.replaceWith(block);
   });
 
   main.querySelectorAll('iframe').forEach(async (iFrame) => {
