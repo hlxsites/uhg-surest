@@ -33,7 +33,7 @@ export default function decorate(block) {
   block.append(ul);
 
   /* add links for news cards */
-  if (block.className === 'cards news block') {
+  if (block.classList.contains('news')) {
     addLinksToNewsCards(block);
   }
 }
