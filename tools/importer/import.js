@@ -176,22 +176,22 @@ async function importPage(document, origHtml) {
       src = `https:${src}`;
     }
 
-    // if (src.includes('ceros.com')) {
-    //   blockList.add('Cero');
-    //   const cerosDiv = document.createElement('div');
-    //   const resp = await fetch(src);
-    //   if (resp.ok) {
-    //     const html = await resp.text();
-    //     cerosDiv.innerHTML = html;
-    //     iFrame.replaceWith(cerosDiv);
-    //   }
-    // } else {
-      blockList.add('Embed');
-      const a = document.createElement('a');
-      a.href = src;
-      a.textContent = src;
-      iFrame.replaceWith(a);
-    // }
+    if (src.includes('ceros.com')) {
+      blockList.add('Ceros');
+      // const cerosDiv = document.createElement('div');
+      // const resp = await fetch(src);
+      // if (resp.ok) {
+      //   const html = await resp.text();
+      //   cerosDiv.innerHTML = html;
+      //   iFrame.replaceWith(cerosDiv);
+      // }
+    }
+
+    blockList.add('Embed');
+    const a = document.createElement('a');
+    a.href = src;
+    a.textContent = src;
+    iFrame.replaceWith(a);
   });
 
   main.querySelectorAll('.featured-cta').forEach((cta) => {
