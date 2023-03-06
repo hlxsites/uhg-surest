@@ -384,36 +384,3 @@ main .section.two-col .section-container {
 .section.footnotes .default-content-wrapper sup {
   font-size: 60%;
 }
-
-/* images with rollovers */
-.block.images {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.block.images > div {
-  filter:grayscale(100%) drop-shadow(0 0 2px rgb(0 0 0 / 0%));
-  margin:0;
-  transition:filter 1s, margin 1s;
-  display:flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 15%;
-}
-
-.block.images > div:hover {
-  filter:grayscale(0%) drop-shadow(0 5px 4px rgb(0 0 0 / 40%));
-  margin:-4px 0 4px;
-  transition:filter 1s, margin 1s;
-}
-
-.block.images .icon {
-  --icon-width: 100%;
-}
-
-.block.images picture {
-  zoom:0.5;
-}
