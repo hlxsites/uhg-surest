@@ -14,6 +14,7 @@ export default async function decorate(block) {
         if (linkWrapper && linkWrapper.children.length === 1) {
           const embedBlock = buildBlock('embed', [['Source', link]]);
           linkWrapper.append(embedBlock);
+          linkWrapper.classList.add('columns-img-col');
           decorateBlock(embedBlock);
           embedBlocks.push(embedBlock);
         }
