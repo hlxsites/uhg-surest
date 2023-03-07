@@ -102,6 +102,25 @@ main .hero img {
     filter: none;
 }
 
+.blog-post.blog .hero.block .hero-text-container .back-button {
+    display: flex;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button p .icon {
+    padding-right: 20px;
+    color: var(--clr-white);
+    position: relative;
+    top: 2px;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button p.button-container a {
+    margin: 0;
+    padding: 0;
+    color: var(--clr-white);
+    text-decoration: none;
+    font-size: var(--body-font-size-xs);
+}
+
 .blog-post.blog .hero.block .hero-media-wrapper picture {
     max-width: 720px;
     position: relative;

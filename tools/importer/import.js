@@ -357,7 +357,10 @@ function importBlogPost(document) {
     Template: 'Blog Post',
   };
   const main = document.querySelector('main');
-  main.querySelector('.blog-header-back-link').remove();
+  main.querySelector('.blog-header-back-link img').remove();
+  const backArrow = document.createElement('p');
+  backArrow.textContent = ':arrow-left:';
+  main.querySelector('.blog-header-back-link').insertBefore(backArrow, main.querySelector('.blog-header-back-link a'));
   const tagBlock = main.querySelector('.blog-tag-block');
   tagBlock.querySelectorAll('.blog-tag-block-bullet').forEach((bullet) => bullet.remove());
   tagBlock.querySelectorAll('.blog-tag-block-item').forEach((tagItem, i) => {

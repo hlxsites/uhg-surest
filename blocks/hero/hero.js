@@ -14,14 +14,28 @@ function decorateBlogHeader(block) {
   blogDescription.appendChild(blogAuthor);
   const separator = createElement('p', 'description-separator');
   separator.textContent = '•';
-  blogDescription.appendChild(separator.cloneNode(true));
-  blogDescription.appendChild(blogDate);
-  blogDescription.appendChild(separator.cloneNode(true));
-  blogDescription.appendChild(blogTag);
+  if (blogDate) {
+    blogDescription.appendChild(separator.cloneNode(true));
+    blogDescription.appendChild(blogDate);
+  }
+  if (blogTag) {
+    blogDescription.appendChild(separator.cloneNode(true));
+    blogDescription.appendChild(blogTag);
+  }
   const blogHeaderWrapper = createElement('div', 'blog-header');
   blogHeaderWrapper.appendChild(block.children[0]);
   blogHeaderWrapper.appendChild(blogDescription);
   block.appendChild(blogHeaderWrapper);
+  const backButton = createElement('div', 'back-button');
+  const textContainer = block.querySelector('.hero-text-container');
+  backButton.appendChild(textContainer.querySelector('p').cloneNode());
+  backButton.children[0].innerHTML = textContainer.querySelector('p').innerHTML;
+  backButton.appendChild(textContainer.querySelector('p.button-container').cloneNode());
+  backButton.children[1].innerHTML = textContainer.querySelector('p.button-container').innerHTML;
+  backButton.querySelector('p.button-container a').classList.remove('button', 'primary');
+  textContainer.children[1].remove();
+  textContainer.children[0].remove();
+  textContainer.insertBefore(backButton, textContainer.querySelector('h1'));
 }
 
 /**
