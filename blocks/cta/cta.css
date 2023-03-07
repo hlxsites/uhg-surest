@@ -15,11 +15,20 @@ main .cta .button {
 }
 
 main .cta.narrow {
-  padding-block: 2rem;
+  padding-block: 1rem;
 }
 
-main .cta.narrow :is(h1, h2, h3, h4, h5, h6, p) {
+main .cta.narrow :is(h2, p) {
   margin: 0;
+}
+
+
+main .cta.narrow h2 {
+  font-size: var(--heading-font-size-s);
+}
+
+main .cta.narrow p {
+  font-size: var(--body-font-size-xs);
 }
 
 @media (min-width: 600px) {
@@ -30,5 +39,13 @@ main .cta.narrow :is(h1, h2, h3, h4, h5, h6, p) {
   main .cta .button {
     min-width: 220px;
     padding: 16px 30px;
+  }
+
+  main .cta.narrow h2 {
+    font-size: var(--heading-font-size-m);
+  }
+
+  main .cta.narrow p {
+    font-size: var(--body-font-size-s);
   }
 }
