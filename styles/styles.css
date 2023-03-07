@@ -275,7 +275,7 @@ main .section .section-container {
   }
 }
 
-main .section.center {
+main .section.center[data-section-status='loaded'] {
   display: flex;
   align-content: center;
 }
