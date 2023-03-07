@@ -17,10 +17,12 @@ function changeSlide(direction, block) {
 }
 
 export default async function decorate(block) {
+  const inner = createElement('div', 'carousel-inner');
   const indicators = createElement('div', 'carousel-slide-indicators');
 
   [...block.children].forEach((row, i) => {
     row.classList.add('carousel-slide');
+    inner.append(row);
     const classes = ['image', 'text'];
     classes.forEach((e, j) => {
       if (row.children[j]) row.children[j].classList.add(`carousel-${e}`);
@@ -32,7 +34,7 @@ export default async function decorate(block) {
     }
     indicators.append(slideIndicator);
   });
-  block.append(indicators);
+  inner.append(indicators);
 
   const buttons = createElement('div', 'carousel-buttons');
   const buttonPrev = createElement('span', ['icon', 'icon-arrow-left', 'carousel-button', 'carousel-button-prev'], {
@@ -40,21 +42,22 @@ export default async function decorate(block) {
     role: 'button',
   });
   buttonPrev.addEventListener('click', () => {
-    changeSlide(-1, block);
+    changeSlide(-1, inner);
   });
   const buttonNext = createElement('span', ['icon', 'icon-arrow-right', 'carousel-button', 'carousel-button-next'], {
     'aria-label': 'Next Slide',
     role: 'button',
   });
   buttonNext.addEventListener('click', () => {
-    changeSlide(1, block);
+    changeSlide(1, inner);
   });
   window.addEventListener('resize', () => {
-    changeSlide(0, block);
+    changeSlide(0, inner);
   });
   buttons.append(buttonPrev);
   buttons.append(buttonNext);
   decorateIcons(buttons);
-  block.append(buttons);
-  block.dataset.activeSlide = '0';
+  inner.dataset.activeSlide = '0';
+  inner.append(buttons);
+  block.append(inner);
 }

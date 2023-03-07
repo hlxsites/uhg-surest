@@ -44,6 +44,35 @@ async function importPage(document, origHtml) {
   sectionBreak.innerHTML = '---';
   main.querySelector('.hero')?.append(sectionBreak);
 
+  main.querySelectorAll('iframe').forEach(async (iFrame) => {
+    let { src } = iFrame;
+    if (!src.startsWith('http')) {
+      src = `https:${src}`;
+    }
+
+    const a = document.createElement('a');
+    a.href = src;
+    a.textContent = src;
+
+    if (src.includes('ceros.com')) {
+      blockList.add('Embed (Ceros)');
+    } else {
+      blockList.add('Embed');
+    }
+
+    if (iFrame.closest('.text-with-image')) {
+      iFrame.replaceWith(a);
+    } else {
+      const blockCells = [
+        ['Embed'],
+      ];
+      const row = ['Source', a];
+      blockCells.push(row);
+      const block = WebImporter.DOMUtils.createTable(blockCells, document);
+      iFrame.replaceWith(block);
+    }
+  });
+
   main.querySelectorAll('.proof-bank-ul').forEach((images) => {
     blockList.add('Images');
     const blockCells = [
@@ -141,15 +170,14 @@ async function importPage(document, origHtml) {
 
   main.querySelectorAll('.split-block').forEach((split) => {
     blockList.add('Columns (split-highlight)');
-    const blockCells = [
-      ['Columns (split-highlight)'],
-    ];
-
-    const row = [...split.children];
-    blockCells.push(row);
-
-    const block = WebImporter.DOMUtils.createTable(blockCells, document);
-    split.replaceWith(block);
+    [...split.children].forEach((splitItem) => {
+      const blockCells = [
+        ['ContentWrapper'],
+        [splitItem],
+      ];
+      const block = WebImporter.DOMUtils.createTable(blockCells, document);
+      split.append(block);
+    });
   });
 
   main.querySelectorAll('.testimonial').forEach((testimonial) => {
@@ -174,30 +202,6 @@ async function importPage(document, origHtml) {
 
     const block = WebImporter.DOMUtils.createTable(blockCells, document);
     form.replaceWith(block);
-  });
-
-  main.querySelectorAll('iframe').forEach(async (iFrame) => {
-    let { src } = iFrame;
-    if (!src.startsWith('http')) {
-      src = `https:${src}`;
-    }
-
-    if (src.includes('ceros.com')) {
-      blockList.add('Ceros');
-      // const cerosDiv = document.createElement('div');
-      // const resp = await fetch(src);
-      // if (resp.ok) {
-      //   const html = await resp.text();
-      //   cerosDiv.innerHTML = html;
-      //   iFrame.replaceWith(cerosDiv);
-      // }
-    }
-
-    blockList.add('Embed');
-    const a = document.createElement('a');
-    a.href = src;
-    a.textContent = src;
-    iFrame.replaceWith(a);
   });
 
   main.querySelectorAll('.featured-cta').forEach((cta) => {
@@ -312,6 +316,10 @@ async function importPage(document, origHtml) {
     const sectionStyle = [];
     if (section.querySelector('.rich-text-section')) {
       sectionStyle.push('Center');
+    }
+
+    if (section.querySelector('.split-block')) {
+      sectionStyle.push('Columns', 'Split Highlight');
     }
 
     // background color purple
