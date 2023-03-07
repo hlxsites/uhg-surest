@@ -1,0 +1,51 @@
+main .section.cta-narrow-container {
+  padding-block: 0;
+}
+
+main .cta  > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main .cta .button {
+  min-width: 170px;
+  padding: 12px 30px;
+}
+
+main .cta.narrow {
+  padding-block: 1rem;
+}
+
+main .cta.narrow :is(h2, p) {
+  margin: 0;
+}
+
+
+main .cta.narrow h2 {
+  font-size: var(--heading-font-size-s);
+}
+
+main .cta.narrow p {
+  font-size: var(--body-font-size-xs);
+}
+
+@media (min-width: 600px) {
+  main .cta  > div {
+    flex-direction: row;
+  }
+
+  main .cta .button {
+    min-width: 220px;
+    padding: 16px 30px;
+  }
+
+  main .cta.narrow h2 {
+    font-size: var(--heading-font-size-m);
+  }
+
+  main .cta.narrow p {
+    font-size: var(--body-font-size-s);
+  }
+}

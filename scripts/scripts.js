@@ -84,6 +84,11 @@ export function decorateSections(main) {
         if (key === 'style') {
           const styles = meta.style.split(',').map((style) => toClassName(style.trim()));
           styles.forEach((style) => section.classList.add(style));
+
+          // a bit of a hack, but if any sections have the columsn style, we need to load that css
+          if (styles.includes('columns')) {
+            loadCSS(`${window.hlx.codeBasePath}/blocks/columns/columns.css`);
+          }
         } else {
           section.dataset[toCamelCase(key)] = meta[key];
         }
