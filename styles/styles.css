@@ -434,11 +434,20 @@ main .section.columns.split-highlight > div > div {
   flex-direction: column;
 }
 
-.blog-post.blog main h2 {
+.blog-post.blog h2 {
   font-size: var(--heading-font-size-m);
 }
 
-.blog-post.blog main .default-content-wrapper{
+.blog-post.blog .default-content-wrapper {
   max-width: 720px;
   padding-top: 150px;
+}
+
+.blog-post.blog .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.blog-post.blog [class="section"] .section-container {
+  max-width: 720px;
 }
