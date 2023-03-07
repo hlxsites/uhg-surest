@@ -161,8 +161,6 @@ a.button:any-link, button {
   font-style: normal; 
   font-weight: 600;
   cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
@@ -171,6 +169,11 @@ a.button:any-link, button {
   transition-property: color, border, background-color;
   transition-duration: .25s, .25s, .25s;
   transition-timing-function: ease, ease, ease;
+}
+
+a.button:any-link, button {
+  color: var(--background-color);
+  background-color: var(--link-color);
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus  {
@@ -191,6 +194,21 @@ a.button.secondary, button.secondary {
 
 a.button.secondary:hover, a.button.secondary:focus, button.secondary:hover, button.secondary:focus  {
   background-color: var(--link-color);
+}
+
+:is(.highlight, .highlight-dark-purple, .highlight-purple) :is(a.button:any-link, button) {
+  background-color: var(--clr-white);
+  color: var(--text-color);
+}
+
+:is(.highlight, .highlight-dark-purple) :is(a.button:any-link:hover, button:hover, a.button:any-link:focus, button:focus) {
+  background-color: var(--clr-purple);
+  color: var(--cls-white);
+}
+
+:is(.highlight-purple) :is(a.button:any-link:hover, button:hover, a.button:any-link:focus, button:focus) {
+  background-color: var(--clr-dark-purple);
+  color: var(--cls-white);
 }
 
 main .section {
