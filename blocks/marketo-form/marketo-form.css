@@ -27,11 +27,12 @@
 
 .mktoFieldWrap select {
   appearance: none;
-  background-image: url(../../icons/up-arrow.svg);
+  background-image: url(../../icons/chevron-down.svg);
   background-size: 13px 8px;
   background-repeat: no-repeat;
   background-position: 95% 50%;
 }
+
 
 .mktoFieldWrap select.mktoField::after {
   content: "";
@@ -59,7 +60,7 @@
   border-width: 1px;
   box-shadow: none;
   font-family: var(--body-font-family);
-  color: var(--clr-purple);
+  color: var(--text-color);
 }
 
 .marketo-form form .mktoFieldWrap textarea.mktoField {
@@ -97,8 +98,8 @@
   margin: 0 !important;
 }
 
-/* .marketo-form form .mktoButton {
-  height: 48px;
+.marketo-form form .mktoButton {
+  /* height: 48px;
   font-size: 16px !important;
   line-height: 1.41;
   background-image: none !important;
@@ -116,13 +117,35 @@
   line-height: ${TYPOGRAPHY.CTA.LINE_HEIGHT_MOBILE};
   letter-spacing: ${TYPOGRAPHY.CTA.LETTER_SPACING};
   font-weight: ${TYPOGRAPHY.CTA.WEIGHT};
-  -webkit-appearance: none;
+  -webkit-appearance: none; */
+  background-image: none !important;
+  font-family: var(--body-font-family);
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent !important;
+  padding: 5px 30px !important;
+  text-align: center;
+  font-style: normal; 
+  font-weight: 600 !important;
+  cursor: pointer;
+  margin: 16px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 30px;
+  transition-property: color, border, background-color;
+  transition-duration: .25s, .25s, .25s;
+  transition-timing-function: ease, ease, ease;
+  color: var(--background-color) !important;
+  background-color: var(--link-color) !important;
 }
+
 
 .marketo-form form .mktoButton:hover,
 .marketo-form form .mktoButton:focus {
-  ${getButtonHoverStyles()}
-} */
+  background-color: var(--link-hover-color) !important;
+}
 
 #LblmktoOptIn {
   margin-left: 30px;
