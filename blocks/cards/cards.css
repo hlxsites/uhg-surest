@@ -32,6 +32,7 @@
 
 .cards.news > ul {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     max-width: 1440px;
 }
@@ -115,4 +116,8 @@
     .cards.news > ul > li .cards-card-body h3 {
         font-size: 18px;
     }
+}
+
+.section.cards-container {
+    background-color: var(--clr-off-white);
 }
