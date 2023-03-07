@@ -438,6 +438,14 @@ main .section.columns.split-highlight > div > div {
   font-size: var(--heading-font-size-m);
 }
 
+.blog-post.blog h3 {
+  font-size: var(--heading-font-size-s);
+}
+
+.blog-post.blog h4 {
+  font-size: var(--heading-font-size-xs);
+}
+
 .blog-post.blog .default-content-wrapper {
   max-width: 720px;
   padding-top: 150px;
