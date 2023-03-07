@@ -31,7 +31,7 @@ export default async function decorate(block) {
     });
   });
 
-  for (let i=0; i <= embedBlocks.length; i += 1) {
+  for (let i = 0; i <= embedBlocks.length; i += 1) {
     const eb = embedBlocks[i];
     // eslint-disable-next-line no-await-in-loop
     await loadBlock(eb);
