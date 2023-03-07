@@ -399,4 +399,5 @@ main .section.two-col .section-container {
 
 .blog-post.blog main .default-content-wrapper{
   max-width: 720px;
+  padding-top: 150px;
 }
