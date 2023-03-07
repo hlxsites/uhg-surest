@@ -12,8 +12,8 @@ header .nav-wrapper {
   header .nav-wrapper {
     transform: translateX(-50%);
     left: 50%;
-    width: calc(91.666667%);
-    max-width: calc(8.333333% + var(--section-max-width));
+    width: calc(91.6667%);
+    max-width: calc(8.3333% + var(--section-max-width));
   }
 }
 

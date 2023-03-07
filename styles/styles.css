@@ -184,9 +184,6 @@ a.button:any-link, button {
   transition-property: color, border, background-color;
   transition-duration: .25s, .25s, .25s;
   transition-timing-function: ease, ease, ease;
-}
-
-a.button:any-link, button {
   color: var(--background-color);
   background-color: var(--link-color);
 }
@@ -227,11 +224,13 @@ a.button.secondary:hover, a.button.secondary:focus, button.secondary:hover, butt
 }
 
 main .section {
-  padding: 64px 0;
+  padding-block: 64px;
+  padding-inline: 16px;
 }
 
 main .section .section-container {
-  margin-inline: 16px;
+  max-width: var(--section-max-width);
+  margin: 0 auto;
 }
 
 main pre {
@@ -282,16 +281,6 @@ main .section[data-section-status='initialized'] {
   main .section p {
     line-height: 1.33em;
   }
-}
-
-main .section {
-  padding-block: 64px;
-  padding-inline: 16px;
-}
-
-main .section .section-container {
-  max-width: var(--section-max-width);
-  margin: 0 auto;
 }
 
 @media (min-width: 600px) {
