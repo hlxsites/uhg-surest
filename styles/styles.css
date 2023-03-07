@@ -180,7 +180,7 @@ a.button:any-link, button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  border-radius: 30em;
   transition-property: color, border, background-color;
   transition-duration: .25s, .25s, .25s;
   transition-timing-function: ease, ease, ease;
@@ -200,12 +200,12 @@ button:disabled, button:disabled:hover {
 
 a.button.secondary, button.secondary {
   background-color: var(--clr-white);
-  border: 2px solid currentcolor;
   color: var(--text-color)
 } 
 
 a.button.secondary:hover, a.button.secondary:focus, button.secondary:hover, button.secondary:focus  {
   background-color: var(--link-color);
+  color: var(--clr-white);
 }
 
 :is(.highlight, .highlight-dark-purple, .highlight-purple) :is(a.button:any-link, button) {
