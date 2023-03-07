@@ -1,10 +1,9 @@
-main .carousel-wrapper {
+main .carousel{
   position: relative;
-  height: min-content;
   align-self: center;
 }
 
-main .carousel-wrapper .carousel {
+main .carousel .carousel-inner {
   display: flex;
   max-width: calc(100dvw - 12rem);
   margin: auto;
@@ -13,11 +12,11 @@ main .carousel-wrapper .carousel {
   overflow-x: scroll;
 }
 
-main .carousel::-webkit-scrollbar {
+main .carousel .carousel-inner::-webkit-scrollbar {
   display: none;
 }
 
-main .carousel-wrapper .carousel > div.carousel-slide {
+main .carousel .carousel-inner > div.carousel-slide {
   flex: 0 0 100%;
   scroll-snap-align: start;
   display: flex;
@@ -27,7 +26,7 @@ main .carousel-wrapper .carousel > div.carousel-slide {
 }
 
 @media(min-width: 900px) {
-  main .carousel-wrapper .carousel > div.carousel-slide {
+  main .carousel .carousel-inner > div.carousel-slide {
     flex-direction: row;
     gap: 2rem;
     padding-inline: 6rem;
@@ -55,6 +54,7 @@ main .carousel .carousel-text p {
 }
 
 main .carousel .carousel-text strong {
+  line-height: 1.25;
   font-size: var(--heading-font-size-l);
   font-family: var(--heading-font-family);
 }

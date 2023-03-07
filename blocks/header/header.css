@@ -8,6 +8,15 @@ header .nav-wrapper {
   width: calc(100% - 44px);
 }
 
+@media(min-width:900px) {
+  header .nav-wrapper {
+    transform: translateX(-50%);
+    left: 50%;
+    width: calc(91.666667%);
+    max-width: calc(8.333333% + var(--section-max-width));
+  }
+}
+
 header nav {
   display: grid;
   grid-template:
