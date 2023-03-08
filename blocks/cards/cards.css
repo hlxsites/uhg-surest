@@ -72,7 +72,8 @@
     box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0;
     border: 0;
     max-width: 240px;
-    min-width: 200px;
+    min-width: 175px;
+    width: 20vw;
 }
 
 .cards.news > ul > li .cards-card-image {
@@ -92,8 +93,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0;
-    padding: 24px 20px;
+    padding: 5px 10px;
 }
 
 .cards.news > ul > li .cards-card-body > h3 {
