@@ -1,19 +1,30 @@
 .cards > ul {
     list-style: none;
-    margin: 0;
+    margin: 0 50px;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 16px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    align-content: space-between;
+    justify-content:space-evenly;
+    row-gap:30px;
 }
 
 .cards > ul > li {
-    border: 1px solid var(--highlight-background-color);
-    background-color: var(--background-color)
+    max-width:275px;
+    border: none;
+    background-color: var(--background-color);
+    font-size: 0.8em;
+    position: relative;
+}
+
+.cards > ul > li h3 {
+    line-height:1;
+    letter-spacing: -1px;
 }
 
 .cards .cards-card-body {
-    margin: 16px;
+    margin: 5px;
 }
 
 .cards .cards-card-image {
@@ -25,11 +36,24 @@
 }
 
 .cards > ul > li img {
-    width: 100%;
+    width: 75%;
+    margin: 30px auto;
+    padding: 0;
+    display: block;
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
 
+.cards > ul > li .button-container {
+    padding:1.3em 0.25em;
+}
+
+.cards > ul > li .button-container a {
+    position:absolute;
+    bottom:0;
+}
+
+/* ----------------- News variation ------------------ */
 .cards.news > ul {
     display: flex;
     flex-wrap: wrap;
