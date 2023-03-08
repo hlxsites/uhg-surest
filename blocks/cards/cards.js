@@ -16,6 +16,17 @@ function addLinksToNewsCards(block) {
   });
 }
 
+function addLinksToFeaturedCards(block) {
+  [...block.firstChild.children].forEach((card) => {
+    const cardBody = card.children[1];
+    const link = cardBody.querySelector('a');
+    const { href } = link;
+    link.parentElement.remove();
+    // eslint-disable-next-line no-return-assign
+    card.onclick = () => window.location.href = href;
+  });
+}
+
 export default function decorate(block) {
   /* change to ul, li */
   const ul = createElement('ul');
@@ -35,5 +46,9 @@ export default function decorate(block) {
   /* add links for news cards */
   if (block.classList.contains('news')) {
     addLinksToNewsCards(block);
+  }
+
+  if (block.classList.contains('featured')) {
+    addLinksToFeaturedCards(block);
   }
 }
