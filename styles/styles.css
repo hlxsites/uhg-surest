@@ -427,3 +427,35 @@ main .section.columns.split-highlight > div > div {
 .section.footnotes .default-content-wrapper sup {
   font-size: 60%;
 }
+
+.blog-post.blog main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.blog-post.blog h2 {
+  font-size: var(--heading-font-size-m);
+}
+
+.blog-post.blog h3 {
+  font-size: var(--heading-font-size-s);
+}
+
+.blog-post.blog h4 {
+  font-size: var(--heading-font-size-xs);
+}
+
+.blog-post.blog .default-content-wrapper {
+  max-width: 720px;
+  padding-top: 150px;
+}
+
+.blog-post.blog .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.blog-post.blog [class="section"] .section-container {
+  max-width: 720px;
+}

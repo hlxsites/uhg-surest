@@ -3,12 +3,12 @@ main .hero-container .section-container {
     max-width: unset;
     margin: 0;
 }
-  
+
 main .hero-container {
     padding: 0;
     background-color:var(--clr-dark-purple);
 }
-  
+
 main .hero {
     position: relative;
     min-height: calc(100vh - 100px);
@@ -82,4 +82,72 @@ main .hero img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+.blog-post.blog .hero.block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20%;
+}
+
+.blog-post.blog .hero.block p {
+    margin: 0;
+}
+
+.blog-post.blog .hero.block .blog-header {
+    max-width: 720px;
+}
+
+.blog-post.blog .hero-container {
+    max-height: 500px;
+    background-color: var(--clr-purple);
+}
+
+.blog-post.blog .hero.block .hero-text-container h1 {
+    max-width: 100%;
+    margin: 0;
+    font-size: var(--heading-font-size-m);
+    filter: none;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button {
+    display: flex;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button span.icon {
+    padding-right: 20px;
+    color: var(--clr-white);
+    position: relative;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button span.icon svg {
+    display: block;
+    width: 6px;
+    position: relative;
+    top: 12px;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button a {
+    margin: 0;
+    padding: 0;
+    color: var(--clr-white);
+    text-decoration: none;
+    font-size: var(--body-font-size-xs);
+}
+
+.blog-post.blog .hero.block .hero-media-wrapper picture {
+    max-width: 720px;
+    position: relative;
+}
+
+.blog-post.blog .hero.block .blog-description {
+    display: flex;
+    width: 720px;
+    font-size: var(--body-font-size-xs);
+    color: var(--clr-white)
+}
+
+.blog-post.blog .hero.block .blog-description p {
+    padding: 12px 4px;
 }
