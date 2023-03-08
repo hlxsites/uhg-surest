@@ -1,3 +1,7 @@
+.section.cards-container {
+    background-color: var(--clr-off-white);
+}
+
 .cards > ul {
     list-style: none;
     margin: 0 50px;
@@ -51,6 +55,56 @@
 .cards > ul > li .button-container a {
     position:absolute;
     bottom:0;
+}
+
+/* ----------------- Featured variation ------------------ */
+.cards.featured > ul > li {
+    background-color: var(--clr-dark-purple);
+    color: var(--clr-off-white);
+    cursor: pointer;
+    min-width:170px;
+    max-width:400px;
+    width:25vw;
+}
+
+.cards.featured > ul > li img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.cards.featured > ul > li p {
+    display:none;
+}
+
+@media(max-width:900px) {
+    .cards.featured > ul {
+        column-gap: 15px;
+        row-gap: 15px;
+    }
+
+    .cards.featured > ul > li {
+        width: 35vw;
+    }
+
+    .cards.featured > ul > li h3 {
+        font-size: var(--heading-font-size-xxs);
+    }
+}
+
+@media(min-width:900px) {
+    .cards.featured > ul {
+        column-gap: 30px;
+    }
+
+    .cards.featured .cards-card-body {
+        margin: 5px;
+        padding: 1em 1em 0;
+    }
+
+    .cards.featured > ul > li p {
+        display: block;
+    }
 }
 
 /* ----------------- News variation ------------------ */
@@ -140,8 +194,4 @@
     .cards.news > ul > li .cards-card-body h3 {
         font-size: 18px;
     }
-}
-
-.section.cards-container {
-    background-color: var(--clr-off-white);
 }
