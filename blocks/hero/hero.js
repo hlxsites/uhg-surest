@@ -1,16 +1,14 @@
 import { createElement } from '../../scripts/scripts.js';
+import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 
 function decorateBlogHeader(block) {
-  const date = document.querySelector('meta[name="date"]');
-  const author = document.querySelector('meta[name="author"]');
-  const tag = document.querySelector('meta[property="article:tag"]');
   const blogDescription = createElement('div', 'blog-description');
   const blogAuthor = createElement('p', 'blog-author');
-  blogAuthor.textContent = author.content;
+  blogAuthor.textContent = getMetadata('author');
   const blogDate = createElement('p', 'blog-date');
-  blogDate.textContent = date.content;
+  blogDate.textContent = getMetadata('date');
   const blogTag = createElement('p', 'blog-tag');
-  blogTag.textContent = tag.content;
+  blogTag.textContent = getMetadata('article:tag');
   blogDescription.appendChild(blogAuthor);
   const separator = createElement('p', 'description-separator');
   separator.textContent = '•';
@@ -27,15 +25,17 @@ function decorateBlogHeader(block) {
   blogHeaderWrapper.appendChild(blogDescription);
   block.appendChild(blogHeaderWrapper);
   const backButton = createElement('div', 'back-button');
+  const leftArrow = createElement('span', ['icon', 'icon-arrow-left']);
+  const backButtonText = createElement('p', 'back-button-text');
+  const backButtonLink = createElement('a', 'back-button-link');
+  backButtonLink.href = ('/blog');
+  backButtonLink.textContent = 'All articles';
+  backButtonText.appendChild(backButtonLink);
+  backButton.appendChild(leftArrow);
+  backButton.appendChild(backButtonText);
   const textContainer = block.querySelector('.hero-text-container');
-  backButton.appendChild(textContainer.querySelector('p').cloneNode());
-  backButton.children[0].innerHTML = textContainer.querySelector('p').innerHTML;
-  backButton.appendChild(textContainer.querySelector('p.button-container').cloneNode());
-  backButton.children[1].innerHTML = textContainer.querySelector('p.button-container').innerHTML;
-  backButton.querySelector('p.button-container a').classList.remove('button', 'primary');
-  textContainer.children[1].remove();
-  textContainer.children[0].remove();
   textContainer.insertBefore(backButton, textContainer.querySelector('h1'));
+  decorateIcons(block);
 }
 
 /**

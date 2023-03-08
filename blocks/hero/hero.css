@@ -115,14 +115,20 @@ main .hero img {
     display: flex;
 }
 
-.blog-post.blog .hero.block .hero-text-container .back-button p .icon {
+.blog-post.blog .hero.block .hero-text-container .back-button span.icon {
     padding-right: 20px;
     color: var(--clr-white);
     position: relative;
-    top: 2px;
 }
 
-.blog-post.blog .hero.block .hero-text-container .back-button p.button-container a {
+.blog-post.blog .hero.block .hero-text-container .back-button span.icon svg {
+    display: block;
+    width: 6px;
+    position: relative;
+    top: 12px;
+}
+
+.blog-post.blog .hero.block .hero-text-container .back-button a {
     margin: 0;
     padding: 0;
     color: var(--clr-white);
