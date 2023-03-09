@@ -1,0 +1,17 @@
+.accordion > .div .body {
+    display:none;
+}
+
+.accordion > .div .arrow {
+    rotate:0deg;
+    transition: rotate 0.5s;
+}
+
+.accordion > .div:focus .body {
+    display:block;
+}
+
+.accordion > .div:focus .arrow {
+    rotate:180deg;
+    transition: rotate 0.5s;
+}
