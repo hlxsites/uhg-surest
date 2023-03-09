@@ -1,17 +1,7 @@
-.accordion > .div .body {
-    display:none;
+.accordion details {
+    box-shadow: 2px 2px 4px rgb(0 0 0 / 60%);
 }
 
-.accordion > .div .arrow {
-    rotate:0deg;
-    transition: rotate 0.5s;
-}
-
-.accordion > .div:focus .body {
-    display:block;
-}
-
-.accordion > .div:focus .arrow {
-    rotate:180deg;
-    transition: rotate 0.5s;
+.accordion details summary {
+    display: inline-block;
 }
