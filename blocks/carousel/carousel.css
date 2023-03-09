@@ -96,6 +96,7 @@ main .carousel .carousel-slide-indicators .slide-indicator {
   height: 20px;
   background-color: rgb(233 233 233);
   border-radius: 1000px;
+  cursor: pointer;
 }
 
 main .carousel .carousel-slide-indicators .slide-indicator.selected {

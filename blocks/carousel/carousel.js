@@ -36,6 +36,10 @@ export default async function decorate(block) {
     if (i === 0) {
       slideIndicator.classList.add('selected');
     }
+    slideIndicator.addEventListener('click', () => {
+      block.dataset.activeSlide = i;
+      changeSlide(0, block, inner);
+    });
     indicators.append(slideIndicator);
   });
   inner.append(indicators);
@@ -63,6 +67,7 @@ export default async function decorate(block) {
   decorateIcons(buttons);
   block.dataset.activeSlide = '0';
   inner.append(buttons);
+
   block.append(inner);
 
   if (block.classList.contains('stats')) {
