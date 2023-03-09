@@ -11,23 +11,6 @@
  */
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
-const makeProxySrcs = (main, host) => {
-  main.querySelectorAll('img').forEach((img) => {
-    if (img.src.startsWith('/')) {
-      // make absolute
-      const cu = new URL(host);
-      img.src = `${cu.origin}${img.src}`;
-    }
-    try {
-      const u = new URL(img.src);
-      u.searchParams.append('host', u.origin);
-      img.src = `http://localhost:3001${u.pathname}${u.search}`;
-    } catch (error) {
-      console.warn(`Unable to make proxy src for ${img.src}: ${error.message}`);
-    }
-  });
-};
-
 function addCommonMetadata(document, main, meta) {
   const title = document.querySelector('title');
   if (title) {
@@ -376,7 +359,6 @@ async function importPage(document, origHtml) {
   const metaBlock = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(metaBlock);
 
-  // makeProxySrcs(main, 'https://www.surest.com');
   return {
     el: main,
     report: {

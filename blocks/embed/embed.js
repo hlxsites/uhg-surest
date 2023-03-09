@@ -92,6 +92,11 @@ export default function decorate(block) {
   const link = block.querySelector('a').href;
   block.textContent = '';
 
+  if (block.classList.contains('ceros')) {
+    const section = block.closest('.section');
+    section.classList.add('ceros-embed-container');
+  }
+
   if (placeholder) {
     const wrapper = document.createElement('div');
     wrapper.className = 'embed-placeholder';
