@@ -117,7 +117,7 @@ h6 { font-size: var(--heading-font-size-xs) }
 @media (min-width: 900px) {  
   h1 { font-size: var(--heading-font-size-xxl) }
   h2 { font-size: var(--heading-font-size-xl) }
-  h3 { font-size: var(--heading-font-size-l) }
+  h3 { font-size: calc(0.9 * var(--heading-font-size-l)) }
   h4 { font-size: var(--heading-font-size-m) }
   h5 { font-size: var(--heading-font-size-s) }
   h6 { font-size: var(--heading-font-size-xs) }
@@ -180,7 +180,7 @@ a.button:any-link, button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  border-radius: 30em;
   transition-property: color, border, background-color;
   transition-duration: .25s, .25s, .25s;
   transition-timing-function: ease, ease, ease;
@@ -200,12 +200,12 @@ button:disabled, button:disabled:hover {
 
 a.button.secondary, button.secondary {
   background-color: var(--clr-white);
-  border: 2px solid currentcolor;
   color: var(--text-color)
 } 
 
 a.button.secondary:hover, a.button.secondary:focus, button.secondary:hover, button.secondary:focus  {
   background-color: var(--link-color);
+  color: var(--clr-white);
 }
 
 :is(.highlight, .highlight-dark-purple, .highlight-purple) :is(a.button:any-link, button) {
@@ -426,4 +426,36 @@ main .section.columns.split-highlight > div > div {
 
 .section.footnotes .default-content-wrapper sup {
   font-size: 60%;
+}
+
+.blog-post.blog main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.blog-post.blog h2 {
+  font-size: var(--heading-font-size-m);
+}
+
+.blog-post.blog h3 {
+  font-size: var(--heading-font-size-s);
+}
+
+.blog-post.blog h4 {
+  font-size: var(--heading-font-size-xs);
+}
+
+.blog-post.blog .default-content-wrapper {
+  max-width: 720px;
+  padding-top: 150px;
+}
+
+.blog-post.blog .default-content-wrapper :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.blog-post.blog [class="section"] .section-container {
+  max-width: 720px;
 }

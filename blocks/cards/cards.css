@@ -1,19 +1,34 @@
+.section.cards-container {
+    background-color: var(--clr-off-white);
+}
+
 .cards > ul {
     list-style: none;
-    margin: 0;
+    margin: 0 50px;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 16px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    align-content: space-between;
+    justify-content:space-evenly;
+    row-gap:30px;
 }
 
 .cards > ul > li {
-    border: 1px solid var(--highlight-background-color);
-    background-color: var(--background-color)
+    max-width:275px;
+    border: none;
+    background-color: var(--background-color);
+    font-size: 0.8em;
+    position: relative;
+}
+
+.cards > ul > li h3 {
+    line-height:1;
+    letter-spacing: -1px;
 }
 
 .cards .cards-card-body {
-    margin: 16px;
+    margin: 5px;
 }
 
 .cards .cards-card-image {
@@ -25,13 +40,77 @@
 }
 
 .cards > ul > li img {
-    width: 100%;
+    width: 75%;
+    margin: 30px auto;
+    padding: 0;
+    display: block;
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
 
+.cards > ul > li .button-container {
+    padding:1.3em 0.25em;
+}
+
+.cards > ul > li .button-container a {
+    position:absolute;
+    bottom:0;
+}
+
+/* ----------------- Featured variation ------------------ */
+.cards.featured > ul > li {
+    background-color: var(--clr-dark-purple);
+    color: var(--clr-off-white);
+    cursor: pointer;
+    min-width:170px;
+    max-width:400px;
+    width:25vw;
+}
+
+.cards.featured > ul > li img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.cards.featured > ul > li p {
+    display:none;
+}
+
+@media(max-width:900px) {
+    .cards.featured > ul {
+        column-gap: 15px;
+        row-gap: 15px;
+    }
+
+    .cards.featured > ul > li {
+        width: 35vw;
+    }
+
+    .cards.featured > ul > li h3 {
+        font-size: var(--heading-font-size-xxs);
+    }
+}
+
+@media(min-width:900px) {
+    .cards.featured > ul {
+        column-gap: 30px;
+    }
+
+    .cards.featured .cards-card-body {
+        margin: 5px;
+        padding: 1em 1em 0;
+    }
+
+    .cards.featured > ul > li p {
+        display: block;
+    }
+}
+
+/* ----------------- News variation ------------------ */
 .cards.news > ul {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     max-width: 1440px;
 }
@@ -47,7 +126,8 @@
     box-shadow: rgb(0 0 0 / 20%) 3px 3px 5px 0;
     border: 0;
     max-width: 240px;
-    min-width: 200px;
+    min-width: 175px;
+    width: 20vw;
 }
 
 .cards.news > ul > li .cards-card-image {
@@ -67,8 +147,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0;
-    padding: 24px 20px;
+    padding: 5px 10px;
 }
 
 .cards.news > ul > li .cards-card-body > h3 {
