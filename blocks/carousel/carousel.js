@@ -1,19 +1,23 @@
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import { createElement } from '../../scripts/scripts.js';
 
-function changeSlide(direction, block) {
+function changeSlide(direction, block, inner) {
   const active = Number(block.dataset.activeSlide);
-  const indicators = block.querySelectorAll('.slide-indicator');
-  const totalSlides = [...indicators].length;
+  const slides = block.querySelectorAll('.carousel-slide');
+  const totalSlides = [...slides].length;
   let moveTo = active + direction;
   if (moveTo < 0) moveTo = (totalSlides - 1);
   if (moveTo >= totalSlides) moveTo = 0;
 
-  block.querySelector('.slide-indicator.selected').classList.remove('selected');
-  indicators[moveTo].classList.add('selected');
+  const indicators = block.querySelectorAll('.slide-indicator');
+  if (indicators.length > 0) {
+    block.querySelector('.slide-indicator.selected').classList.remove('selected');
+    indicators[moveTo].classList.add('selected');
+  }
+
   block.dataset.activeSlide = moveTo;
   const toSlide = block.querySelector(`.carousel-slide:nth-child(${moveTo + 1})`);
-  block.scrollTo({ top: 0, left: toSlide.offsetLeft - toSlide.parentNode.offsetLeft, behavior: 'smooth' });
+  inner.scrollTo({ top: 0, left: toSlide.offsetLeft - toSlide.parentNode.offsetLeft, behavior: 'smooth' });
 }
 
 export default async function decorate(block) {
@@ -42,22 +46,37 @@ export default async function decorate(block) {
     role: 'button',
   });
   buttonPrev.addEventListener('click', () => {
-    changeSlide(-1, inner);
+    changeSlide(-1, block, inner);
   });
   const buttonNext = createElement('span', ['icon', 'icon-arrow-right', 'carousel-button', 'carousel-button-next'], {
     'aria-label': 'Next Slide',
     role: 'button',
   });
   buttonNext.addEventListener('click', () => {
-    changeSlide(1, inner);
+    changeSlide(1, block, inner);
   });
   window.addEventListener('resize', () => {
-    changeSlide(0, inner);
+    changeSlide(0, block, inner);
   });
   buttons.append(buttonPrev);
   buttons.append(buttonNext);
   decorateIcons(buttons);
-  inner.dataset.activeSlide = '0';
+  block.dataset.activeSlide = '0';
   inner.append(buttons);
   block.append(inner);
+
+  if (block.classList.contains('stats')) {
+    const topAnimator = createElement('div', ['animator', 'animator-top', 'stage1']);
+    const bottomAnimator = createElement('div', ['animator', 'animator-bottom', 'stage1']);
+    block.append(topAnimator);
+    block.append(bottomAnimator);
+
+    setInterval(() => {
+      changeSlide(1, block, inner);
+      topAnimator.classList.toggle('stage1');
+      topAnimator.classList.toggle('stage2');
+      bottomAnimator.classList.toggle('stage1');
+      bottomAnimator.classList.toggle('stage2');
+    }, 2000);
+  }
 }
