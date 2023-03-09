@@ -10,8 +10,7 @@ export default async function decorate(block) {
 
   const placeholders = await fetchPlaceholders();
   const formId = cfg['form-id'];
-  //const { munchkinId } = placeholders;
-  const munchkinId = '646-FXB-772';
+  const { munchkinId } = placeholders;
   const redirectUrl = cfg.redirect || placeholders.formRedirect;
 
   block.innerHTML = `<form id="mktoForm_${formId}"></form>`;
@@ -27,12 +26,14 @@ export default async function decorate(block) {
           (form) => {
             if (form) {
               form.onSubmit(fireSegmentEvent);
-              window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({
-                event: 'mkto_form_submit',
-                eventCallback: () => {
-                  window.location.pathname = redirectUrl;
-                },
+              form.onSuccess(() => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                  event: 'mkto_form_submit',
+                  eventCallback: () => {
+                    window.location.pathname = redirectUrl;
+                  },
+                });
               });
             }
             return false;
