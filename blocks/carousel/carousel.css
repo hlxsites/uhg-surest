@@ -109,6 +109,10 @@ main .carousel.stats {
   display: flex;
 }
 
+main .carousel.stats .carousel-inner {
+  pointer-events: none;
+}
+
 main .carousel.stats .carousel-buttons,
 main .carousel.carousel.stats .carousel-slide-indicators {
   display: none;
