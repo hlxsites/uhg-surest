@@ -144,6 +144,26 @@ function buildAutoBlocks(main) {
 }
 
 /**
+ * load a script by adding to page head
+ * @param {string} url the script src url
+ * @param {string} type the script type
+ * @param {function} callback a funciton to callback after loading
+ */
+export function loadScript(url, type, callback) {
+  const head = document.querySelector('head');
+  let script = head.querySelector(`script[src="${url}"]`);
+  if (!script) {
+    script = document.createElement('script');
+    script.src = url;
+    if (type) script.setAttribute('type', type);
+    head.append(script);
+    script.onload = callback;
+    return script;
+  }
+  return script;
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
