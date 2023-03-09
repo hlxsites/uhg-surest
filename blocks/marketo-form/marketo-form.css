@@ -1,3 +1,9 @@
+/*
+  this css sucks and should be rewritten to modern standards 
+  the problem is there are a bunch of :poop: style injected by marketo that we can't control
+  so to an extent, limited by that.
+ */
+/* stylelint-disable */
 .marketo-form form label {
   display: block;
   margin-bottom: 7px;
