@@ -29,14 +29,23 @@ main .hero h1 {
     margin-block-end: 0;
 }
 
+
 main .hero :is(h1, h2, h3, h4) {
     position:relative;
 }
 
-main .hero .hero-has-media >  h1 {    
+main .hero .hero-has-media > :is(h1, h2, h3, h4) {    
     color: var(--clr-off-white);
-    /* stylelint-disable-next-line color-function-notation */
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 40%)) drop-shadow(0 0 2px rgba(0, 0, 0, 40%));
+    filter: drop-shadow(0 0 2px rgb(0 0 0 / 40%)) drop-shadow(0 0 2px rgb(0 0 0 / 40%));
+}
+
+main .hero-container.dark-text .hero :is(h1, h2, h3, h4) {
+    color: var(--clr-dark-purple);
+    filter: drop-shadow(0 0 2px rgb(255 255 255 / 40%)) drop-shadow(0 0 2px rgb(255 255 255 / 40%));
+}
+
+main .hero-container.light-text .hero :is(h1, h2, h3, h4) {
+    color:var(--clr-off-white);
 }
 
 main .hero :is(h2, h3, h4) {
@@ -44,12 +53,10 @@ main .hero :is(h2, h3, h4) {
     margin-top:0.25em;
     font-size:2rem;
     letter-spacing:2.5px;
-    /* stylelint-disable-next-line color-function-notation */    
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 40%)) drop-shadow(0 0 2px rgba(0, 0, 0, 40%));
 } 
 
 @media (min-width: 600px) {
-    main .hero h1, main .hero h2, main .hero h3, main .hero h4 {
+    main .hero :is(h1, h2, h3, h4) {
         max-width: 55%;
         margin-left: 4.5%;
     }
@@ -62,7 +69,7 @@ main .hero :is(h2, h3, h4) {
         margin-top: 1.7em;
     }
 
-    main .hero h2, main .hero h3, main .hero h4 {
+    main .hero :is(h2, h3, h4) {
         font-size:2.7rem;
         letter-spacing:1.75px;
     }

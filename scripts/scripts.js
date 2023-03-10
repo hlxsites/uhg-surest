@@ -169,7 +169,7 @@ function buildHeroBlock(main) {
   const section = h1.closest('div');
   const elems = [...section.children];
   if (elems.length > 0) {
-    section.append(buildBlock('hero', { elems }));
+    section.append(buildBlock('hero', [elems]));
     main.prepend(section);
   }
 }
