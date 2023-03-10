@@ -56,6 +56,36 @@
     }  
 }
 
+/* split hightlight */
+main .section.split-highlight-columns-container,
+main .section.split-highlight-columns-container * {
+    margin: 0;
+    padding: 0;
+}
+
+main .section.split-highlight-columns-container .section-container {
+    max-width: unset;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns.split-highlight > div {
+    gap: 0;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.columns.split-highlight > div > div {
+    padding-block: 64px;
+    padding-inline: 16px;
+    height: 100%;
+}
+
+@media (min-width: 600px) {
+    .columns.split-highlight > div > div {
+      padding-block-end: 100px;
+      padding-inline: 32px;
+    }
+  }
+
 .columns.split-highlight > div > div:first-of-type {
     background-color: var(--clr-purple);
     color: var(--clr-white);

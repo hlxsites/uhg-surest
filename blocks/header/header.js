@@ -85,18 +85,26 @@ function initMobileNavSections(navSections) {
 
 function initDesktopNavSections(navSections) {
   navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-    if (navSection.classList.contains('nav-drop')) {
-      navSection.addEventListener('mouseenter', () => {
-        const expanded = navSection.getAttribute('aria-expanded') === 'true';
-        toggleAllNavSections(navSections);
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      });
-      navSection.addEventListener('mouseleave', () => {
-        const expanded = navSection.getAttribute('aria-expanded') === 'true';
-        toggleAllNavSections(navSections);
-        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      });
+    const navLink = navSection.querySelector(':scope > a');
+    if (navLink.href.endsWith(window.location.pathname)) {
+      navSection.classList.add('perma-selected');
     }
+    navSection.addEventListener('mouseenter', () => {
+      if (navSection.classList.contains('nav-drop')) {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      }
+      navSection.classList.add('selected');
+    });
+    navSection.addEventListener('mouseleave', () => {
+      if (navSection.classList.contains('nav-drop')) {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      }
+      navSection.classList.remove('selected');
+    });
   });
 }
 
