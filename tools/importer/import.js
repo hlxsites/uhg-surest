@@ -406,7 +406,7 @@ function importBlogPost(document) {
   main.append(h3);
 
   const cells = [
-    ['Cards (related)'],
+    ['Cards (blog)'],
     ['limit', '3'],
   ];
   const postCardsBlock = WebImporter.DOMUtils.createTable(cells, document);
