@@ -107,8 +107,8 @@
     }
 }
 
-/* ----------------- Related variation ------------------ */
-.blog-post.blog .section.cards-container {
+/* ----------------- Blog variation ------------------ */
+.blog .section.cards-container {
     background-color: var(--clr-white);
 }
 
@@ -125,13 +125,13 @@
     padding: 0;
 }
 
-.cards.blog > ul > li .blog-description {
+.cards.blog > ul > li .blog-info {
     display: flex;
     flex-wrap: wrap;
     font-size: var(--body-font-size-xs);
 }
 
-.cards.blog > ul > li .blog-description p {
+.cards.blog > ul > li .blog-info p {
     padding: 0 4px 0 0;
     margin: 0;
 }

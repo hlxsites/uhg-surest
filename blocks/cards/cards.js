@@ -1,6 +1,12 @@
 import { createOptimizedPicture, getMetadata, readBlockConfig } from '../../scripts/lib-franklin.js';
 import { createElement } from '../../scripts/scripts.js';
 
+function getFormattedDate(date) {
+  const month = date.getUTCMonth();
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  return `${months[month]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
+}
+
 function createBlogCard(blog) {
   const blogImage = createElement('div');
   const blogPicture = createElement('picture');
@@ -13,63 +19,68 @@ function createBlogCard(blog) {
   const blogLink = createElement('a');
   blogLinkWrapper.appendChild(blogLink);
   blogLink.href = blog.path;
-  const blogDescription = createElement('div', 'blog-description');
+  const blogInfo = createElement('div', 'blog-info');
   const blogAuthor = createElement('p', 'blog-author');
-  blogAuthor.textContent = getMetadata('author');
+  blogAuthor.textContent = blog.author;
   const blogDate = createElement('p', 'blog-date');
-  blogDate.textContent = getMetadata('date');
+  blogDate.textContent = getFormattedDate(new Date(blog.date * 1000));
   const blogTags = JSON.parse(blog.tags);
-  blogDescription.appendChild(blogAuthor);
-  const separator = createElement('p', 'description-separator');
+  blogInfo.appendChild(blogAuthor);
+  const separator = createElement('p', 'info-separator');
   separator.textContent = '•';
   if (blogDate) {
-    blogDescription.appendChild(separator.cloneNode(true));
-    blogDescription.appendChild(blogDate);
+    blogInfo.appendChild(separator.cloneNode(true));
+    blogInfo.appendChild(blogDate);
   }
   if (blogTags.length > 0) {
-    blogDescription.appendChild(separator.cloneNode(true));
+    blogInfo.appendChild(separator.cloneNode(true));
     blogTags.forEach((tag, index, array) => {
       const blogTag = createElement('p', 'blog-tag');
       blogTag.textContent = tag;
       if (index !== (array.length - 1)) {
         blogTag.textContent += ',';
       }
-      blogDescription.appendChild(blogTag);
+      blogInfo.appendChild(blogTag);
     });
   }
   const blogTitle = createElement('h3');
   blogTitle.textContent = blog.title;
   blogBody.appendChild(blogLinkWrapper);
-  blogBody.appendChild(blogDescription);
+  blogBody.appendChild(blogInfo);
   blogBody.appendChild(blogTitle);
+  if (document.querySelector('body[class="blog appear"')) {
+    const blogDescription = createElement('p', 'blog-description');
+    blogDescription.textContent = blog.description;
+    blogBody.appendChild(blogDescription);
+  }
   const blogCard = createElement('div');
   blogCard.appendChild(blogImage);
   blogCard.appendChild(blogBody);
   return blogCard;
 }
 
-async function getRelatedBlogs(block, limit = 3) {
+async function getBlogs(block, limit = 3) {
   while (block.firstChild) {
     block.removeChild(block.lastChild);
   }
   const tagList = getMetadata('article:tag').split(', ');
   const resp = await fetch('/query-index.json');
   if (resp.ok) {
-    const blogs = await resp.json();
-    const relatedBlogList = [];
-    for (let i = 0; i < blogs.data.length; i += 1) {
-      const { tags, title } = blogs.data[i];
+    const pages = await resp.json();
+    const blogList = [];
+    for (let i = 0; i < pages.data.length; i += 1) {
+      const { tags, title } = pages.data[i];
       for (let j = 0; j < tagList.length; j += 1) {
-        if (tags.includes(tagList[j]) && getMetadata('og:title') !== title) {
-          relatedBlogList.push(blogs.data[i]);
+        if (pages.data[i].template === 'Blog Post' && tags.includes(tagList[j]) && getMetadata('og:title') !== title) {
+          blogList.push(pages.data[i]);
           break;
         }
       }
-      if (relatedBlogList.length >= limit) {
+      if (blogList.length >= limit) {
         break;
       }
     }
-    relatedBlogList.forEach((blog) => {
+    blogList.forEach((blog) => {
       block.appendChild(createBlogCard(blog));
     });
   }
@@ -89,7 +100,7 @@ function addLinksToCards(block) {
 export default async function decorate(block) {
   if (block.classList.contains('blog')) {
     const cfg = readBlockConfig(block);
-    await getRelatedBlogs(block, cfg.limit);
+    await getBlogs(block, cfg.limit);
   }
   /* change to ul, li */
   const ul = createElement('ul');
