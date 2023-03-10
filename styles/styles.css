@@ -340,44 +340,6 @@ main .section.highlight-grey {
   background-color: var(--clr-off-white);
 }
 
-/* split hightlight */
-main .section.columns.split-highlight {
-  margin: 0;
-  padding: 0;
-}
-
-main .section.columns.split-highlight > div {
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  max-width: unset;
-}
-
-main .section.columns.split-highlight > div > div {
-  margin: 0;
-  padding-block: 64px;
-  padding-inline: 16px;
-  height: 100%;
-}
-
-
-@media (min-width: 600px) {
-  main .section.columns.split-highlight > div > div {
-    padding-block-end: 100px;
-    padding-inline: 32px;
-  }
-}
-
-@media(min-width: 1400px) {
-  main .section.columns.split-highlight > div > div:first-of-type {
-    padding-inline-start: clamp(32px, calc((100vw / 2) - 764px), 300px);
-  }
-
-  main .section.columns.split-highlight > div > div:nth-of-type(2) {
-    padding-inline-end: clamp(32px, calc((100vw / 2) - 764px), 300px);
-  }
-}
-
 /* icons */
 .icon {
   --icon-width: 10px;
