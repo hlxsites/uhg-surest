@@ -1,0 +1,51 @@
+main .testimonial .testimonial-inner {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main .testimonial .quote-wrapper,
+.img-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 100%;
+  margin: 0;
+  padding: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+main .testimonial .quote-inner { 
+  max-width: 280px;
+}
+
+main .testimonial .quote-inner blockquote {
+  font-style: normal;
+  margin: 0;
+  text-indent: 0;
+}
+
+main .testimonial .quote-inner blockquote ~ p { 
+  font-size: var(--body-font-size-xs);
+  margin: 0;;
+}
+
+main .testimonial .img-wrapper picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 900px) {
+  main .testimonial .testimonia-inner {
+    flex-direction: row-reverse;
+  }
+
+  main .testimonial .quote-inner { 
+    max-width: 420px;
+  }
+
+  main .testimonial .quote-wrapper,
+  main .testimonial .img-wrapper {
+    flex: 0 0 50%;
+  }
+}

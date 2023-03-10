@@ -1,5 +1,5 @@
-import { createOptimizedPicture, getMetadata, readBlockConfig } from '../../scripts/lib-franklin.js';
-import { createElement } from '../../scripts/scripts.js';
+import { getMetadata, readBlockConfig } from '../../scripts/lib-franklin.js';
+import { createElement, createOptimizedPicture } from '../../scripts/scripts.js';
 
 function getFormattedDate(date) {
   const month = date.getUTCMonth();
@@ -113,7 +113,7 @@ export default async function decorate(block) {
     });
     ul.append(li);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ dimensions: [{ width: '750' }] }])));
   block.textContent = '';
   block.append(ul);
 
