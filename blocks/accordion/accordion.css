@@ -39,6 +39,11 @@
     border:1px solid white;
 }
 
+/* Fix safari issue with visible marker */
+.accordion details summary::-webkit-details-marker {
+    display: none;
+}
+
 .accordion details[open] summary::after {
     transition:rotate 0.25s;
     rotate:90deg;
