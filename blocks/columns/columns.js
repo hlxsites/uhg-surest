@@ -24,8 +24,9 @@ export default async function decorate(block) {
             // not a url, ignore
           }
           if (linkTextUrl && linkTextUrl.pathname === linkUrl.pathname) {
-            const fragmentDomains = ['localhost', 'www.surest.com', '/main--uhg-surest--hlxsites.hlx.page', '/main--uhg-surest--hlxsites.hlx.live'];
-            if (fragmentDomains.includes(linkUrl.hostname)) {
+            const fragmentDomains = ['localhost', 'surest.com', 'uhg-surest--hlxsites.hlx.page', 'uhg-surest--hlxsites.hlx.live'];
+            const found = fragmentDomains.find((domain) => linkUrl.hostname.endsWith(domain));
+            if (found) {
               // fragment or video
               if (linkUrl.pathname.includes('.mp4')) {
                 // video
