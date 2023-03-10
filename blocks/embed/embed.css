@@ -63,3 +63,15 @@ main .embed .embed-placeholder-play button::before {
   top: 4px;
   left: 7px;
 }
+
+main .ceros-embed-container {
+  margin: 0;
+  padding: 0;
+}
+
+main .ceros-embed-container .section-container,
+main .ceros-embed-container .embed  {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}

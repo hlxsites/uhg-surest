@@ -26,8 +26,13 @@ function addCommonMetadata(document, main, meta) {
     meta.Description = main.querySelector('.blog-body p').textContent;
   }
 
+  const ogImg = document.querySelector('meta[property="og:image"]');
   const heroImg = main.querySelector('img');
-  if (heroImg) {
+  if (ogImg) {
+    const ogImgEl = document.createElement('img');
+    ogImgEl.src = ogImg.content;
+    meta.Image = ogImgEl;
+  } else if (heroImg) {
     meta.Image = main.querySelector('img').cloneNode(true);
   }
 }
@@ -54,17 +59,16 @@ async function importPage(document, origHtml) {
     a.href = src;
     a.textContent = src;
 
+    let blockName = 'Embed';
     if (src.includes('ceros.com')) {
-      blockList.add('Embed (Ceros)');
-    } else {
-      blockList.add('Embed');
+      blockName = 'Embed (Ceros)';
     }
-
+    blockList.add(blockName);
     if (iFrame.closest('.text-with-image')) {
       iFrame.replaceWith(a);
     } else {
       const blockCells = [
-        ['Embed'],
+        [blockName],
       ];
       const row = ['Source', a];
       blockCells.push(row);
@@ -76,7 +80,7 @@ async function importPage(document, origHtml) {
   main.querySelectorAll('.proof-bank-ul').forEach((images) => {
     blockList.add('Images');
     const blockCells = [
-      ['Images'],
+      ['Rollover Images'],
     ];
 
     images.querySelectorAll('li').forEach((li) => {
@@ -195,9 +199,12 @@ async function importPage(document, origHtml) {
 
   main.querySelectorAll('.mkto-form').forEach((form) => {
     blockList.add('Marketo Form');
+    const mktoForm = form.querySelector('form');
+    const { id } = mktoForm;
+    const formId = id.split('_')[1];
     const blockCells = [
       ['Marketo Form'],
-      [...form.children],
+      ['Form ID', formId],
     ];
 
     const block = WebImporter.DOMUtils.createTable(blockCells, document);
