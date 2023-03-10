@@ -233,32 +233,6 @@ main .section .section-container {
   margin: 0 auto;
 }
 
-main .section[data-background] {
-  position: relative;
-}
-
-main .section picture.section-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-}
-
-main .section picture.section-background img {
-  max-width: 100%;
-  height: 600px;
-  object-fit: cover;
-}
-
-@media (min-width: 600px) {
-  main .section picture.section-background img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
 main pre {
   background-color: var(--clr-off-white);
   padding: 1em;
@@ -403,6 +377,33 @@ main .section.highlight-grey {
   transition-duration: 0.3s;
   transition-property: filter;
   filter:brightness(75%) drop-shadow(0 2px 4px rgb(0 0 0 / 55%));
+}
+
+/* section bg images */
+main .section[data-background] {
+  position: relative;
+}
+
+main .section picture.section-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+main .section picture.section-background img {
+  max-width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+@media (min-width: 600px) {
+  main .section picture.section-background img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* footnotes */

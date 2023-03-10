@@ -67,10 +67,12 @@ main .section.split-highlight-columns-container .section-container {
     max-width: unset;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .columns.split-highlight > div {
     gap: 0;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .columns.split-highlight > div > div {
     padding-block: 64px;
     padding-inline: 16px;
