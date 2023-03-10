@@ -46,6 +46,8 @@ export default function decorate(hero) {
   const textContainer = hero.querySelector('h1').closest('div');
   textContainer.classList.add('hero-text-container');
 
+  //--
+
   const pic = hero.querySelector('picture');
   if (pic) {
     const heroMedia = createElement('div', 'hero-media-wrapper');
