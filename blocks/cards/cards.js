@@ -1,4 +1,4 @@
-import { createOptimizedPicture, getMetadata } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, getMetadata, readBlockConfig } from '../../scripts/lib-franklin.js';
 import { createElement } from '../../scripts/scripts.js';
 
 function createBlogCard(blog) {
@@ -55,8 +55,7 @@ async function getRelatedBlogs(block, limit = 3) {
   const tagList = getMetadata('article:tag').split(', ');
   const resp = await fetch('/query-index.json');
   if (resp.ok) {
-    const json = await resp.text();
-    const blogs = JSON.parse(json);
+    const blogs = await resp.json();
     const relatedBlogList = [];
     for (let i = 0; i < blogs.data.length; i += 1) {
       const tag = tagList.slice(-1)[0];
@@ -74,10 +73,6 @@ async function getRelatedBlogs(block, limit = 3) {
   }
 }
 
-function getBlogLimit(block) {
-  return Array.from(block.querySelectorAll('div')).find((el) => el.textContent === 'limit').nextElementSibling.textContent;
-}
-
 function addLinksToCards(block) {
   [...block.firstChild.children].forEach((card) => {
     const cardBody = card.children[1];
@@ -90,8 +85,9 @@ function addLinksToCards(block) {
 }
 
 export default async function decorate(block) {
-  if (getMetadata('template') === 'Blog Post') {
-    await getRelatedBlogs(block, getBlogLimit(block));
+  if (block.classList.contains('blog')) {
+    const cfg = readBlockConfig(block);
+    await getRelatedBlogs(block, cfg.limit);
   }
   /* change to ul, li */
   const ul = createElement('ul');
@@ -108,7 +104,7 @@ export default async function decorate(block) {
   block.textContent = '';
   block.append(ul);
 
-  if (block.classList.contains('news') || block.classList.contains('featured') || block.classList.contains('related')) {
+  if (block.classList.contains('news') || block.classList.contains('featured') || block.classList.contains('blog')) {
     addLinksToCards(block);
   }
 }
