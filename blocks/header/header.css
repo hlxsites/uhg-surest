@@ -294,6 +294,10 @@ header nav .nav-sections ul > li.nav-drop[aria-expanded=true] > ul {
     background-color: var(--clr-white);
     color: var(--text-color);
   }
+
+  header nav .nav-sections > ul > li:is(.selected, .perma-selected) > a{
+    border-bottom: 6px solid var(--clr-dark-purple);
+  }
 }
 
 
