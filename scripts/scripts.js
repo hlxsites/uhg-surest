@@ -13,7 +13,6 @@ import {
   toClassName,
   toCamelCase,
   decorateBlock,
-  createOptimizedPicture,
 } from './lib-franklin.js';
 
 /**
@@ -38,7 +37,65 @@ export function createElement(tagName, classes, props) {
   return elem;
 }
 
+function buildSrcSet(dimensions, path, format) {
+  let srcset = '';
+  dimensions.forEach((dim, i) => {
+    if (i > 0) {
+      srcset += ', ';
+    }
+    srcset += `${path}?width=${dim.width}&format=${format}&optimize=medium`;
+    if (dim.density) {
+      srcset += ` ${dim.density}`;
+    }
+  });
+  return srcset;
+}
+
 /* START lib-franklin overrides/extensionts */
+/**
+ * Returns a picture element with webp and fallbacks
+ * @param {string} src The image URL
+ * @param {boolean} eager load image eager
+ * @param {Array} breakpoints breakpoints and corresponding params (eg. width)
+ */
+export function createOptimizedPicture(src, alt = '', eager = false, breakpoints = [{ media: '(min-width: 400px)', dimensions: [{ width: '2000' }] }, { dimensions: [{ width: '750' }] }]) {
+  const url = new URL(src, window.location.href);
+  const picture = document.createElement('picture');
+  const { pathname } = url;
+  const ext = pathname.substring(pathname.lastIndexOf('.') + 1);
+
+  // webp
+  breakpoints.forEach((br) => {
+    const { media, dimensions } = br;
+    const source = document.createElement('source');
+    if (br.media) source.setAttribute('media', media);
+    source.setAttribute('type', 'image/webp');
+    const srcset = buildSrcSet(dimensions, pathname, 'webply');
+    source.setAttribute('srcset', srcset);
+    picture.appendChild(source);
+  });
+
+  // fallback
+  breakpoints.forEach((br, i) => {
+    const { media, dimensions } = br;
+    if (i < breakpoints.length - 1) {
+      const source = document.createElement('source');
+      if (br.media) source.setAttribute('media', media);
+      const srcset = buildSrcSet(dimensions, pathname, ext);
+      source.setAttribute('srcset', srcset);
+      picture.appendChild(source);
+    } else {
+      const img = document.createElement('img');
+      img.setAttribute('loading', eager ? 'eager' : 'lazy');
+      img.setAttribute('alt', alt);
+      picture.appendChild(img);
+      img.setAttribute('src', `${pathname}?width=${dimensions[0].width}&format=${ext}&optimize=medium`);
+    }
+  });
+
+  return picture;
+}
+
 /**
  * Decorates all blocks in a container element.
  * @param {Element} main The container element

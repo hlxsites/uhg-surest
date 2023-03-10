@@ -1,5 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { createElement } from '../../scripts/scripts.js';
+import { createElement, createOptimizedPicture } from '../../scripts/scripts.js';
 
 function addLinksToNewsCards(block) {
   [...block.firstChild.children].forEach((card) => {
@@ -39,7 +38,7 @@ export default function decorate(block) {
     });
     ul.append(li);
   });
-  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
+  ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ dimensions: [{ width: '750' }] }])));
   block.textContent = '';
   block.append(ul);
 

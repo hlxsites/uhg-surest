@@ -35,10 +35,6 @@ main .testimonial .img-wrapper picture {
   justify-content: center;
 }
 
-main .testimonial .img-wrapper img {
-  width: 250px;
-}
-
 @media (min-width: 900px) {
   main .testimonial .testimonia-inner {
     flex-direction: row-reverse;

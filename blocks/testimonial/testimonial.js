@@ -1,4 +1,4 @@
-import { createElement } from '../../scripts/scripts.js';
+import { createElement, createOptimizedPicture } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   [...block.children].forEach((row) => {
@@ -22,5 +22,38 @@ export default async function decorate(block) {
         col.classList.add('img-wrapper');
       }
     });
+  });
+
+  block.querySelectorAll('picture > img').forEach((img) => {
+    const { src } = img;
+    const imgUrl = new URL(src);
+    const pic = createOptimizedPicture(imgUrl.pathname, img.alt, false, [
+      {
+        media: '(min-width: 900px)',
+        dimensions: [
+          {
+            width: '700',
+            density: '1x',
+          },
+          {
+            width: '1400',
+            density: '2x',
+          },
+        ],
+      },
+      {
+        dimensions: [
+          {
+            width: '500',
+            density: '1x',
+          },
+          {
+            width: '1000',
+            density: '2x',
+          },
+        ],
+      },
+    ]);
+    img.closest('picture').replaceWith(pic);
   });
 }
