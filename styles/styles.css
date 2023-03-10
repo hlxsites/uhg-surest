@@ -35,7 +35,7 @@
 
   /* fonts */
   --body-font-family: 'Source Sans Pro', 'Source Sans Pro-fallback', helvetica, ubuntu, roboto, noto, sans-serif;
-  --heading-font-family: 'Source Serif Pro', 'Source Serif Pro-fallback', 'Times New Roman', serif;
+  --heading-font-family: 'IvarHeadline', 'IvarHeadline-fallback', 'Times New Roman', serif;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
   
   -webkit-font-smoothing: antialiased;
@@ -68,11 +68,11 @@
 }
 
 @font-face {
-  font-family: 'Source Serif Pro-fallback';
+  font-family: IvarHeadline-fallback;
   src: local(times new roman);
-  size-adjust: 110%;
-  ascent-override: 84%;
-  descent-override: 26%;
+  size-adjust: 107%;
+  ascent-override: normal;
+  descent-override: normal;
   line-gap-override: normal;
 }
 

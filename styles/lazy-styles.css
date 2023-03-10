@@ -1,3 +1,30 @@
 /* below the fold CSS goes here */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap');
+@font-face {
+  font-family: IvarHeadline;
+  src: url('/fonts/IvarHeadline-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap
+}
+@font-face {
+  font-family: IvarHeadline;
+  src: url('/fonts/IvarHeadline-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap
+}
+
+@font-face {
+  font-family: IvarHeadline;
+  src: url('/fonts/IvarHeadline-Bold.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap
+}
+
+@font-face {
+  font-family: IvarHeadline;
+  src: url('/fonts/IvarHeadline-BoldItalic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap
+}

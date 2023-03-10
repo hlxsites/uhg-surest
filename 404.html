@@ -36,14 +36,6 @@
       display: flex;
       align-items: center;
     }
-
-    main.error .error-number {
-      width: 100%;
-    }
-
-    main.error .error-number text {
-      font-family: var(--fixed-font-family);
-    }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
@@ -52,13 +44,12 @@
   <header></header>
   <main class="error">
     <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
+      <h1>Uh oh. That page doesn’t actually exist.</h1>
+      <h2>404 page not found</h2>
+      <p>Sorry, we can't find the page you're looking for. Head over to the <a href="/">homepage</a> or check out our <a href="/blog/">blog</a> to get started.</p>
+      <p>If you're a Surest member, visit the Surest app to search costs and coverage.</p>
+      <div class="button-container">
+      </div>
     </div>
   </main>
   <footer></footer>
