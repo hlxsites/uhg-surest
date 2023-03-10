@@ -314,7 +314,16 @@ export function decorateBlocks(main) {
  * @param {any} content two dimensional array or string or object of content
  */
 export function buildBlock(blockName, content) {
-  const table = Array.isArray(content) ? content : [[content]];
+  let table;
+  if (Array.isArray(content)) {
+    if (content[0]?.constructor === Array) {
+      table = content;
+    } else {
+      table = [content];
+    }
+  } else {
+    table = [[content]];
+  }
   const blockEl = document.createElement('div');
   // build image block nested div structure
   blockEl.classList.add(blockName);
