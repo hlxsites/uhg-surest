@@ -1,7 +1,39 @@
 .accordion details {
     box-shadow: 2px 2px 4px rgb(0 0 0 / 60%);
+    position: relative;
 }
 
 .accordion details summary {
     display: inline-block;
+}
+
+.accordion details summary::after {
+    /*
+    background-image: url("/icons/arrow-left.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+*/
+    background-color:var(--clr-orange);
+    mask:url("/icons/arrow-left.svg") no-repeat;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask:url("/icons/arrow-left.svg") no-repeat;
+    rotate:-90deg;
+    position:absolute;
+    right: 20px;
+    top: 55px;
+    min-width:13px;
+    min-height:20px;
+    max-width:13px;
+    max-height:20px;
+    content:" ";
+    transition:rotate 0.5s;
+}
+
+.accordion details summary::after * {
+    color:blue;
+}
+
+.accordion details[open] summary::after {
+    transition:rotate 0.5s;
+    rotate:90deg;
 }

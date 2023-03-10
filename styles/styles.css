@@ -25,6 +25,7 @@
   --clr-black: rgb(0 0 0);
   --clr-off-black: rgb(24 18 47);
   --clr-cool-white:  rgb(192 229 235);
+  --clr-orange: orange;
   
   /* element colors */
   --link-color: var(--clr-purple);
