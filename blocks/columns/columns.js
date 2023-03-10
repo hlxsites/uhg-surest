@@ -41,7 +41,7 @@ export default async function decorate(block) {
                 subBlocks.push(fragmentBlock);
               }
             } else {
-              const embedBlock = buildBlock('Embed', [['Source', link]]);
+              const embedBlock = buildBlock('embed', [['Source', link]]);
               linkWrapper.append(embedBlock);
               linkWrapper.classList.add('columns-img-col');
               decorateBlock(embedBlock);
