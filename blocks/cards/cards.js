@@ -58,13 +58,15 @@ async function getRelatedBlogs(block, limit = 3) {
     const blogs = await resp.json();
     const relatedBlogList = [];
     for (let i = 0; i < blogs.data.length; i += 1) {
-      const tag = tagList.slice(-1)[0];
       const { tags, title } = blogs.data[i];
-      if (tags.includes(tag) && getMetadata('og:title') !== title) {
-        relatedBlogList.push(blogs.data[i]);
-        if (relatedBlogList.length >= limit) {
+      for (let j = 0; j < tagList.length; j += 1) {
+        if (tags.includes(tagList[j]) && getMetadata('og:title') !== title) {
+          relatedBlogList.push(blogs.data[i]);
           break;
         }
+      }
+      if (relatedBlogList.length >= limit) {
+        break;
       }
     }
     relatedBlogList.forEach((blog) => {
