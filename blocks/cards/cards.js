@@ -1,21 +1,84 @@
-import { createElement, createOptimizedPicture } from '../../scripts/scripts.js';
+import { getMetadata } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture, createElement } from '../../scripts/scripts.js';
 
-function addLinksToNewsCards(block) {
-  [...block.firstChild.children].forEach((card) => {
-    const cardBody = card.children[1];
-    const link = cardBody.querySelector('p');
-    const linkWrapper = createElement('a', 'card-link');
-    linkWrapper.href = link.textContent;
-    link.remove();
-    linkWrapper.appendChild(card.children[0].cloneNode(true));
-    linkWrapper.appendChild(card.children[1].cloneNode(true));
-    card.children[1].remove();
-    card.children[0].remove();
-    card.appendChild(linkWrapper);
-  });
+function createBlogCard(blog) {
+  const blogImage = createElement('div');
+  const blogPicture = createElement('picture');
+  const img = createElement('img');
+  img.src = blog.image;
+  blogPicture.appendChild(img);
+  blogImage.appendChild(blogPicture);
+  const blogBody = createElement('div');
+  const blogLinkWrapper = createElement('p');
+  const blogLink = createElement('a');
+  blogLinkWrapper.appendChild(blogLink);
+  blogLink.href = blog.path;
+  const blogDescription = createElement('div', 'blog-description');
+  const blogAuthor = createElement('p', 'blog-author');
+  blogAuthor.textContent = getMetadata('author');
+  const blogDate = createElement('p', 'blog-date');
+  blogDate.textContent = getMetadata('date');
+  const blogTags = JSON.parse(blog.tags);
+  blogDescription.appendChild(blogAuthor);
+  const separator = createElement('p', 'description-separator');
+  separator.textContent = '•';
+  if (blogDate) {
+    blogDescription.appendChild(separator.cloneNode(true));
+    blogDescription.appendChild(blogDate);
+  }
+  if (blogTags.length > 0) {
+    blogDescription.appendChild(separator.cloneNode(true));
+    blogTags.forEach((tag, index, array) => {
+      const blogTag = createElement('p', 'blog-tag');
+      blogTag.textContent = tag;
+      if (index !== (array.length - 1)) {
+        blogTag.textContent += ',';
+      }
+      blogDescription.appendChild(blogTag);
+    });
+  }
+  const blogTitle = createElement('h3');
+  blogTitle.textContent = blog.title;
+  blogBody.appendChild(blogLinkWrapper);
+  blogBody.appendChild(blogDescription);
+  blogBody.appendChild(blogTitle);
+  const blogCard = createElement('div');
+  blogCard.appendChild(blogImage);
+  blogCard.appendChild(blogBody);
+  return blogCard;
 }
 
-function addLinksToFeaturedCards(block) {
+async function getRelatedBlogs(block, limit = 3) {
+  while (block.firstChild) {
+    block.removeChild(block.lastChild);
+  }
+  const tagList = getMetadata('article:tag').split(', ');
+  const resp = await fetch('/query-index.json');
+  if (resp.ok) {
+    const json = await resp.text();
+    const blogs = JSON.parse(json);
+    const relatedBlogList = [];
+    for (let i = 0; i < blogs.data.length; i += 1) {
+      const tag = tagList.slice(-1)[0];
+      const { tags, title } = blogs.data[i];
+      if (tags.includes(tag) && getMetadata('og:title') !== title) {
+        relatedBlogList.push(blogs.data[i]);
+        if (relatedBlogList.length >= limit) {
+          break;
+        }
+      }
+    }
+    relatedBlogList.forEach((blog) => {
+      block.appendChild(createBlogCard(blog));
+    });
+  }
+}
+
+function getBlogLimit(block) {
+  return Array.from(block.querySelectorAll('div')).find((el) => el.textContent === 'limit').nextElementSibling.textContent;
+}
+
+function addLinksToCards(block) {
   [...block.firstChild.children].forEach((card) => {
     const cardBody = card.children[1];
     const link = cardBody.querySelector('a');
@@ -26,7 +89,10 @@ function addLinksToFeaturedCards(block) {
   });
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  if (getMetadata('template') === 'Blog Post') {
+    await getRelatedBlogs(block, getBlogLimit(block));
+  }
   /* change to ul, li */
   const ul = createElement('ul');
   [...block.children].forEach((row) => {
@@ -42,12 +108,7 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(ul);
 
-  /* add links for news cards */
-  if (block.classList.contains('news')) {
-    addLinksToNewsCards(block);
-  }
-
-  if (block.classList.contains('featured')) {
-    addLinksToFeaturedCards(block);
+  if (block.classList.contains('news') || block.classList.contains('featured') || block.classList.contains('related')) {
+    addLinksToCards(block);
   }
 }
