@@ -2,7 +2,7 @@ import { createElement, createOptimizedPicture } from '../../scripts/scripts.js'
 
 export default async function decorate(block) {
   [...block.children].forEach((row) => {
-    row.classList.add('testimonia-inner');
+    row.classList.add('testimonial-inner');
     [...row.children].forEach((col) => {
       const blockquote = col.querySelector('blockquote');
       if (blockquote) {
