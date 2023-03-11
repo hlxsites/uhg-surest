@@ -226,7 +226,7 @@ a.button.secondary:hover, a.button.secondary:focus, button.secondary:hover, butt
 
 main .section {
   padding-block: 64px;
-  padding-inline: 16px;
+  padding-inline: 8.333%;
 }
 
 main .section .section-container {
@@ -287,7 +287,7 @@ main .section[data-section-status='initialized'] {
 @media (min-width: 600px) {
   main .section {
     padding-block-end: 100px;
-    padding-inline: 32px;
+
   }
 }
 

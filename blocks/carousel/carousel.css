@@ -107,6 +107,7 @@ main .carousel .carousel-slide-indicators .slide-indicator.selected {
 main .carousel.stats {
   height: 100%;
   display: flex;
+  overflow-x: hidden;
 }
 
 main .carousel.stats .carousel-inner {
@@ -138,7 +139,7 @@ main .carousel.stats .animator {
   width: 100%;
   height: 12px;
   background-color: var(--clr-purple);
-  overflow-x: hidden;
+  
 }
 
 main .carousel.stats .animator.animator-top {
