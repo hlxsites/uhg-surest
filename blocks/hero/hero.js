@@ -43,7 +43,7 @@ function decorateBlogHeader(block) {
  * @param {Element} hero the hero block element
  */
 export default function decorate(hero) {
-  const textContainer = hero.querySelector('h1').closest('div');
+  const textContainer = hero.querySelector('h1').closest('div').parentElement;
   textContainer.classList.add('hero-text-container');
 
   const pic = hero.querySelector('picture');
