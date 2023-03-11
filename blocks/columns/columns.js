@@ -1,4 +1,39 @@
 import { buildBlock, decorateBlock, loadBlock } from '../../scripts/lib-franklin.js';
+import { createOptimizedPicture } from '../../scripts/scripts.js';
+
+function replacePicture(pic) {
+  const img = pic.querySelector('img');
+  const { src } = img;
+  const imgUrl = new URL(src);
+  const newPic = createOptimizedPicture(imgUrl.pathname, img.alt, false, [
+    {
+      media: '(min-width: 900px)',
+      dimensions: [
+        {
+          width: '1400',
+          density: '1x',
+        },
+        {
+          width: '2800',
+          density: '2x',
+        },
+      ],
+    },
+    {
+      dimensions: [
+        {
+          width: '700',
+          density: '1x',
+        },
+        {
+          width: '1400',
+          density: '2x',
+        },
+      ],
+    },
+  ]);
+  pic.replaceWith(newPic);
+}
 
 export default async function decorate(block) {
   const cols = [...block.firstElementChild.children];
@@ -10,7 +45,7 @@ export default async function decorate(block) {
 
   const subBlocks = [];
   [...block.children].forEach((row) => {
-    [...row.children].forEach((col) => {
+    [...row.children].forEach((col, i) => {
       // setup embed
       const link = col.querySelector('a');
       if (link) {
@@ -32,6 +67,7 @@ export default async function decorate(block) {
                 // video
                 const videoBlock = buildBlock('video', [['Source', link]]);
                 linkWrapper.append(videoBlock);
+                linkWrapper.classList.add('media-col');
                 decorateBlock(videoBlock);
                 subBlocks.push(videoBlock);
               } else {
@@ -44,7 +80,7 @@ export default async function decorate(block) {
             } else {
               const embedBlock = buildBlock('embed', [['Source', link]]);
               linkWrapper.append(embedBlock);
-              linkWrapper.classList.add('columns-img-col');
+              linkWrapper.classList.add('media-col');
               decorateBlock(embedBlock);
               subBlocks.push(embedBlock);
             }
@@ -58,8 +94,14 @@ export default async function decorate(block) {
         const picWrapper = pic.closest('div');
         if (picWrapper && picWrapper.children.length === 1) {
           // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
+          picWrapper.classList.add('media-col');
+          let colImgClass = 'image-left';
+          if (i === 1) colImgClass = 'image-right';
+          if (!block.classList.contains('icons')) {
+            block.classList.add('image-columns', colImgClass);
+          }
         }
+        replacePicture(pic);
       }
     });
   });
