@@ -51,11 +51,13 @@
         grid-template-columns: 6fr 4fr;
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .columns > div > div {
         flex: 1;
         margin-left: 32px;
     }
     
+    /* stylelint-disable-next-line no-descending-specificity */
     .columns.icons > div {
         grid-template-columns: 120px minmax(0, 1fr);
         padding: 2em 0;
