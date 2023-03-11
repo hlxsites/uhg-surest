@@ -154,6 +154,10 @@
     filter: drop-shadow(0 5px 4px rgb(0 0 0 / 40%));
 }
 
+.cards.blog > ul > li.hidden {
+    display: none;
+}
+
 @media(max-width:900px) {
     .cards.blog > ul {
         margin: 0;

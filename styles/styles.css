@@ -449,3 +449,7 @@ main .section picture.section-background img {
 .blog-post.blog [class="section"] .section-container {
   max-width: 720px;
 }
+
+.blog .button.primary.active {
+  background-color: var(--clr-purple);
+}
