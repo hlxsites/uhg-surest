@@ -12,8 +12,11 @@ export default async function decorate(block) {
       url.searchParams.delete(key);
     });
     const source = url.toString();
+
+    const img = block.querySelector('img');
+
     block.innerHTML = `
-    <video controls>
+    <video controls poster="${img ? img.src : ''}">
       <source src="${source}" type="video/${source.split('.').pop()}" >
     </video>
     `;
