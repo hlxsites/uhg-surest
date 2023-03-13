@@ -45,6 +45,10 @@ main .hero-container.dark-text .hero .hero-text-container {
     color: var(--clr-dark-purple);
 }
 
+main .hero-container.dark-text .hero .hero-text-container p {
+    color: var(--clr-black);
+}
+
 main .hero-container.light-text .hero .hero-text-container {
     color:var(--clr-off-white);
 }
