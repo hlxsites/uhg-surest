@@ -13,10 +13,12 @@
 
 .accordion details summary :is(h2, h3, h4, h5, h6) {
     width:calc(100% - 16px);
+    color:var(--clr-black);
 }
 
 .accordion details div.details {
     padding:25px;
+    background-color: var(--clr-off-white);
 }
 
 .accordion details summary::after {
