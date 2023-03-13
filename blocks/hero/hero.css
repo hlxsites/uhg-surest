@@ -45,6 +45,10 @@ main .hero-container.dark-text .hero .hero-text-container {
     color: var(--clr-dark-purple);
 }
 
+main .hero-container.dark-text .hero .hero-text-container p {
+    color: var(--clr-black);
+}
+
 main .hero-container.light-text .hero .hero-text-container {
     color:var(--clr-off-white);
 }
@@ -110,6 +114,7 @@ main .hero img {
     height: 20%;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .blog-post.blog .hero.block p {
     margin: 0;
 }
