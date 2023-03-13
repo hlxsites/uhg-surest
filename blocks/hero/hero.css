@@ -115,12 +115,17 @@ main .hero img {
 }
 
 .blog-post.blog .hero.block .blog-header {
-    max-width: 720px;
+    max-width: 100%;
 }
 
 .blog-post.blog .hero-container {
     max-height: 500px;
     background-color: var(--clr-purple);
+}
+
+.blog-post.blog .hero.block .hero-text-container {
+    padding-left: 0;
+    max-width: 100%;
 }
 
 .blog-post.blog .hero.block .hero-text-container h1 {

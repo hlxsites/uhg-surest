@@ -1,6 +1,11 @@
 .blog-filter {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+}
+
+.section.blog-filter-container {
+  padding: 10px;
 }
 
 .blog-filter > button.secondary {
