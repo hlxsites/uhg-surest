@@ -1,6 +1,7 @@
 .accordion details {
     box-shadow: 2px 2px 4px rgb(0 0 0 / 60%);
     margin-bottom:14px;
+    color: var(--clr-black);
 }
 
 .accordion details summary {
@@ -8,7 +9,6 @@
     padding: 20px;
     position: relative;
     background-color: white;
-    color: var(--clr-black);
     cursor: pointer;
 }
 
