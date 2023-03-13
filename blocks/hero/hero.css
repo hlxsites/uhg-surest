@@ -114,6 +114,7 @@ main .hero img {
     height: 20%;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .blog-post.blog .hero.block p {
     margin: 0;
 }
