@@ -23,5 +23,6 @@
 .blog-filter > button.secondary .icon {
   position: relative;
   top: 2px;
+  
   --icon-width: 15px;
 }
