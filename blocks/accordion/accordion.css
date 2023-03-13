@@ -8,12 +8,12 @@
     padding: 20px;
     position: relative;
     background-color: white;
+    color: var(--clr-black);
     cursor: pointer;
 }
 
 .accordion details summary :is(h2, h3, h4, h5, h6) {
     width:calc(100% - 16px);
-    color:var(--clr-black);
 }
 
 .accordion details div.details {
