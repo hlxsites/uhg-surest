@@ -307,8 +307,6 @@ header nav .nav-tools {
   background-color: var(--clr-dark-purple);
   color: white;
   font-size: var(--body-font-size-xs);
-  display: flex;
-  justify-content: space-between;
 }
 
 header nav .nav-tools .nav-item-secondary em {
@@ -322,46 +320,6 @@ header nav .nav-tools .nav-item-primary .button {
   font-size: 1.4rem;
   line-height: 19px;
   display: flex;
-}
-
-header nav .nav-tools .nav-tool-links {
-  width: 100%;
-}
-
-header nav .nav-tools .nav-breadcrumb {
-  display: none;
-}
-
-header nav .nav-tools .nav-breadcrumb a {
-  position: relative;
-  padding-right: 1rem;
-}
-
-header nav .nav-tools .nav-breadcrumb a::after {
-  position:absolute;
-  content: '';
-  background-color: currentcolor;
-  mask: url('/icons/arrow-right.svg') no-repeat;
-   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask: url('/icons/arrow-right.svg') no-repeat;
-  width: 10px;
-  height: 10px;
-  top: 5px;
-  right: -.6rem;
-}
-
-@media (min-width: 900px) {
-  header nav .nav-tools .nav-breadcrumb {
-    display: flex;
-    width: 50%;
-    gap: 1rem;
-    justify-content: flex-start;
-    font-size: 14px;
-  }
-
-  header nav .nav-tools .nav-tool-links {
-    width: 50%;
-  }
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -423,4 +381,140 @@ header nav#movile-nav-menu .mobile-menu-cover {
   position: fixed;
   z-index: 120;
   top: 0;
+}
+
+/* search */
+header #movile-nav-menu .icon-search {
+  display: none;
+}
+
+header nav .icon-search {
+  cursor: pointer;
+}
+
+header .search-dialog {
+  display: none;
+}
+
+header .search-dialog[open] {
+  position: fixed;
+  inset: 16px 22px auto;
+  width: calc(100% - 44px);
+  z-index: 101;
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header .search-dialog-form-container {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 2rem;
+}
+
+@media(min-width:900px) {
+  header .search-dialog[open] {
+    transform: translateX(-50%);
+    left: 50%;
+    width: calc(91.6667%);
+    max-width: calc(8.3333% + var(--section-max-width));
+  }
+
+  header .search-dialog-form-container {
+    height: 93px;
+    padding-inline: 4rem;
+  }
+}
+
+header .search-dialog-form-container .icon {
+  --icon-width: 2rem;
+
+  flex: 0 0 32px;
+}
+
+header .search-dialog-form-container form {
+  height: 100%;
+  flex: 1 1 100%;
+  margin-inline: 2rem;
+}
+
+header .search-dialog-form-container form input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: transparent;
+  font-family: inherit;
+  font-size: var(--body-font-size-s);
+}
+
+header .search-dialog .icon-close {
+  --icon-width: 1.4rem;
+  cursor: pointer;
+}
+
+header .search-dialog .search-dialog-results-container {
+  width: 100%;
+  background-color: var(--clr-off-white);
+  max-height: 85vh;
+  overflow-y: scroll;
+}
+
+header .search-dialog .search-dialog-results-container > ul {
+  list-style: none;
+  display: grid;
+  margin: 0;
+  padding: 0;
+}
+
+header .search-dialog .search-dialog-results-container > ul > li {
+  display: flex;
+  gap: 2rem;
+  border-bottom: 1px solid rgb(217 217 217);
+  padding: 20px;
+}
+
+@media(min-width:900px) {
+  header .search-dialog .search-dialog-results-container > ul > li {
+    padding: 40px;
+  }
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-img {
+  flex: 0 1 20%;
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-img img {
+  max-width: 100%;
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-text {
+  flex: 1 0 80%;
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-text a:hover {
+  text-decoration: none;
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-text :is(h5, p) {
+  margin-block: 0 10px;
+  line-height: 1;
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-text h5 a:hover {
+  color: var(--clr-purple);
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-text p a {
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+}
+
+header .search-dialog .search-dialog-results-container > ul > li .result-text p a:hover {
+  color: var(--text-color);
 }
