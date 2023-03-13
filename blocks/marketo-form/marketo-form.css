@@ -13,6 +13,11 @@
   color: var(--text-color) !important;
 }
 
+.highlight-dark-purple .marketo-form form label {
+  color: var(--clr-white) !important;
+}
+
+
 .marketo-form form {
   margin: 0 auto;
   width: 100% !important;
@@ -135,6 +140,17 @@
   background-color: var(--link-hover-color) !important;
 }
 
+.highlight-dark-purple .marketo-form form .mktoButton {
+  background-color: var(--clr-white) !important;
+  color: var(--text-color) !important;
+}
+
+.highlight-dark-purple .marketo-form form .mktoButton:hover,
+.highlight-dark-purple .marketo-form form .mktoButton:focus {
+  background-color: var(--clr-purple) !important;
+  color: var(--clr-white) !important;
+}
+
 #LblmktoOptIn {
   margin-left: 30px;
 }
@@ -220,6 +236,10 @@
   padding: 0 !important;
   text-shadow: none !important;
   line-height: 1.6em !important;
+}
+
+.highlight-dark-purple .marketo-form form .mktoError .mktoErrorMsg {
+  color:var(--clr-white) !important;
 }
 
 .marketo-form form .mktoInstruction {
