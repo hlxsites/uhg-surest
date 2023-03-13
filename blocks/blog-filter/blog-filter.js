@@ -1,4 +1,5 @@
 import { createElement } from '../../scripts/scripts.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
 
 function getUniqueTags(pages) {
   const tags = new Set();
@@ -12,17 +13,17 @@ function getUniqueTags(pages) {
 }
 
 function filter(event) {
-  // set the button's active state
-  if (event.target.className.includes('active')) {
-    event.target.className = event.target.className.replace(' active', '');
+  const button = event.target.closest('button');
+  if (button.className.includes('active')) {
+    button.className = button.className.replace(' active', '');
   } else {
-    event.target.className += ' active';
+    button.className += ' active';
   }
 
   const cards = document.querySelector('.cards.blog.block > ul');
-  let activeTags = document.querySelectorAll('.blog-filter .button.primary.active');
+  let activeTags = document.querySelectorAll('.blog-filter .button.secondary.active');
   if (activeTags.length === 0) {
-    activeTags = document.querySelectorAll('.blog-filter .button.primary');
+    activeTags = document.querySelectorAll('.blog-filter .button.secondary');
   }
   for (let j = 0; j < cards.children.length; j += 1) {
     for (let i = 0; i < activeTags.length; i += 1) {
@@ -35,8 +36,8 @@ function filter(event) {
       }
     }
   }
+  button.blur();
 }
-
 
 export default async function decorate(block) {
   const resp = await fetch('/query-index.json');
@@ -44,12 +45,16 @@ export default async function decorate(block) {
     const pages = await resp.json();
     const tags = getUniqueTags(pages);
     tags.forEach((tag) => {
-      const button = createElement('a', ['button', 'primary']);
+      const button = createElement('button', ['button', 'secondary']);
+      const buttonText = createElement('p', 'button-text');
+      const x = createElement('span', ['icon', 'icon-x']);
+
       button.onclick = filter;
-      button.textContent = tag;
+      buttonText.textContent = tag;
+      button.appendChild(buttonText);
+      button.appendChild(x);
       block.appendChild(button);
     });
-    console.log(tags);
-    console.log(block);
+    decorateIcons();
   }
 }
