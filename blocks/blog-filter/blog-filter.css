@@ -21,8 +21,13 @@
 }
 
 .blog-filter > button.secondary .icon {
+  display: none;
+}
+
+.blog-filter > button.secondary.active .icon {
+  display: inline;
   position: relative;
   top: 2px;
-  
+
   --icon-width: 15px;
 }
