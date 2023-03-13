@@ -1,8 +1,52 @@
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
-import { createElement } from '../../scripts/scripts.js';
+import { createElement, createOptimizedPicture } from '../../scripts/scripts.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
+
+let qeData;
+async function execSearch(query, resultsContainer) {
+  if (!qeData) {
+    const resp = await fetch('/query-index.json');
+    if (resp.ok) {
+      const json = await resp.json();
+      qeData = json.data;
+    }
+  }
+
+  resultsContainer.innerHTML = '';
+  if (query.length >= 3) {
+    const results = qeData
+      .filter((page) => (!page.robots || !page.robots.toLowerCase().includes('noindex')) && page.content.includes(query))
+      .sort((pageA, pageB) => pageB.lastModified - pageA.lastModified);
+
+    const ul = createElement('ul');
+    if (results.length === 0) {
+      const li = createElement('li', 'no-results');
+      li.innerHTML = `
+          <div class="result-text">
+            <h5>No Results</h5>
+          </div>
+      `;
+      ul.append(li);
+    }
+
+    results.forEach((result) => {
+      const li = createElement('li');
+      const pic = createOptimizedPicture(result.image, '', false, [{ dimensions: [{ width: '750' }] }]);
+      li.innerHTML = `
+          <div class="result-img"><a href="${result.path}">${pic.outerHTML}</a></div>
+          <div class="result-text">
+            <h5><a href="${result.path}">${result.title}</a></h5>
+            <p><a href="${result.path}">${result.description}</a></p>
+          </div>
+      `;
+      ul.append(li);
+    });
+
+    resultsContainer.append(ul);
+  }
+}
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -174,8 +218,6 @@ export default async function decorate(block) {
 
     const navTools = nav.querySelector('.nav-tools');
     if (navTools) {
-      navTools.querySelector(':scope > ul').classList.add('nav-tool-links');
-
       navTools.querySelectorAll(':scope > ul > li').forEach((navTool) => {
         const link = navTool.querySelector('a');
         if (link) {
@@ -213,52 +255,32 @@ export default async function decorate(block) {
 
     block.append(navWrapper);
 
-    // breadcrumb
-    const breadcrumb = createElement('ul', 'nav-breadcrumb');
-    if (window.location.pathname !== '/') {
-      const home = createElement('li');
-      home.innerHTML = '<a href="/">Home</a>';
-      breadcrumb.append(home);
-
-      // find in nav
-      const navLink = block.querySelector(`.nav-sections a[href="${window.location.pathname}"]`);
-      if (navLink) {
-        const navParent = navLink.closest('.nav-drop');
-        if (navParent) {
-          const parentLink = navParent.querySelector(':scope > a');
-          if (parentLink && parentLink !== navLink) {
-            const parentLi = createElement('li');
-            parentLi.append(parentLink.cloneNode(true));
-            breadcrumb.append(parentLi);
-          }
-        }
-        const li = createElement('li');
-        li.textContent = navLink.textContent;
-        breadcrumb.append(li);
-      } else {
-        const li = createElement('li');
-        li.textContent = document.querySelector('h1').textContent;
-        breadcrumb.append(li);
-      }
-
-      // const items = window.location.pathname.split('/');
-      // let linkUrl = '/';
-      // items.forEach((item, i) => {
-      //   const li = createElement('li');
-      //   linkUrl += item;
-      //   const label = linkUrl === '/' ? 'Home' : item;
-      //   if (i === items.length - 1) {
-      //     // last item, no link and no >
-      //     li.textContent = label;
-      //   } else {
-      //     const link = createElement('a');
-      //     link.textContent = label;
-      //     link.href = linkUrl;
-      //     li.append(link);
-      //   }
-      //   breadcrumb.append(li);
-      // });
-    }
-    block.querySelector('#nav .nav-tools').prepend(breadcrumb);
+    const seachDialog = createElement('dialog', 'search-dialog');
+    seachDialog.innerHTML = `
+      <div class="search-dialog-form-container">
+        <span class="icon icon-search"></span>
+        <form>
+          <input type="text" placeholder="Search surest.com" class="search-input" value=""></input>
+        </form>
+        <span class="icon icon-close"></span>
+      </div>
+      <div class="search-dialog-results-container">
+      </div>
+    `;
+    const searchInput = seachDialog.querySelector('.search-input');
+    searchInput.addEventListener('keyup', () => {
+      const q = searchInput.value;
+      execSearch(q, seachDialog.querySelector('.search-dialog-results-container'));
+    });
+    seachDialog.querySelector('.icon-close').addEventListener('click', () => {
+      seachDialog.close();
+    });
+    decorateIcons(seachDialog);
+    block.append(seachDialog);
+    block.querySelectorAll('.icon-search').forEach((srch) => {
+      srch.addEventListener('click', () => {
+        seachDialog.show();
+      });
+    });
   }
 }

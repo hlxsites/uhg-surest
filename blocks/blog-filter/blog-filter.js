@@ -20,22 +20,22 @@ function filter(event) {
     button.className += ' active';
   }
 
-  const cards = document.querySelector('.cards.blog.block > ul');
-  let activeTags = document.querySelectorAll('.blog-filter .button.secondary.active');
-  if (activeTags.length === 0) {
-    activeTags = document.querySelectorAll('.blog-filter .button.secondary');
-  }
-  for (let j = 0; j < cards.children.length; j += 1) {
-    for (let i = 0; i < activeTags.length; i += 1) {
-      const tagResults = Array.from(cards.children[j].querySelectorAll('p.blog-tag')).find((card) => card.textContent.replace(',', '') === activeTags[i].textContent);
-      if (tagResults) {
-        cards.children[j].className = cards.children[j].className.replace(' hidden', '');
-        break;
-      } else if (!cards.children[j].className.includes(' hidden')) {
-        cards.children[j].className += ' hidden';
+  const cards = document.querySelectorAll('.cards.blog.block > ul > li');
+  const activeTags = [...document.querySelectorAll('.blog-filter .button.secondary.active')].map((tagEl) => tagEl.querySelector('.button-text').textContent);
+
+  cards.forEach((card) => {
+    // first, just unhide all
+    card.classList.remove('hidden');
+    const cardTags = [...card.querySelectorAll('p.blog-tag')].map((tagEl) => tagEl.textContent.replace(',', ''));
+    if (activeTags.length > 0) {
+      const some = cardTags
+        .some((cardTag) => activeTags.find((activeTag) => activeTag === cardTag));
+      if (!some) {
+        // rehide the ones we need to
+        card.classList.add('hidden');
       }
     }
-  }
+  });
   button.blur();
 }
 
@@ -47,14 +47,14 @@ export default async function decorate(block) {
     tags.forEach((tag) => {
       const button = createElement('button', ['button', 'secondary']);
       const buttonText = createElement('p', 'button-text');
-      const x = createElement('span', ['icon', 'icon-x']);
+      const close = createElement('span', ['icon', 'icon-close']);
 
       button.onclick = filter;
       buttonText.textContent = tag;
       button.appendChild(buttonText);
-      button.appendChild(x);
+      button.appendChild(close);
       block.appendChild(button);
     });
-    decorateIcons();
+    decorateIcons(block);
   }
 }
