@@ -27,10 +27,13 @@ function filter(event) {
     // first, just unhide all
     card.classList.remove('hidden');
     const cardTags = [...card.querySelectorAll('p.blog-tag')].map((tagEl) => tagEl.textContent.replace(',', ''));
-    const some = cardTags.some((cardTag) => activeTags.find((activeTag) => activeTag === cardTag));
-    if (!some) {
-      // rehide the ones we need to
-      card.classList.add('hidden');
+    if (activeTags.length > 0) {
+      const some = cardTags
+        .some((cardTag) => activeTags.find((activeTag) => activeTag === cardTag));
+      if (!some) {
+        // rehide the ones we need to
+        card.classList.add('hidden');
+      }
     }
   });
   button.blur();
