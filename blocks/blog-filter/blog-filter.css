@@ -1,0 +1,33 @@
+.blog-filter {
+  display: flex;
+  justify-content: center;
+}
+
+.blog-filter > button.secondary {
+  display: flex;
+  border: 1px solid var(--clr-gray);
+  margin: 4px;
+}
+
+.blog-filter > button.secondary > p {
+  margin: 0;
+  font-size: var(--body-font-size-xs)
+}
+
+.blog-filter > button.secondary.active, button.secondary:hover, button.secondary:focus-visible  {
+  background-color: var(--clr-light-purple);
+  color: var(--clr-purple);
+  border: none;
+}
+
+.blog-filter > button.secondary .icon {
+  display: none;
+}
+
+.blog-filter > button.secondary.active .icon {
+  display: inline;
+  position: relative;
+  top: 2px;
+
+  --icon-width: 15px;
+}
