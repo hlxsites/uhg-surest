@@ -4,6 +4,10 @@
   so to an extent, limited by that.
  */
 /* stylelint-disable */
+.marketo-form {
+  min-height: 800px;
+}
+
 .marketo-form form label {
   display: block;
   margin-bottom: 7px;
