@@ -174,6 +174,8 @@ export default async function decorate(block) {
 
     const navTools = nav.querySelector('.nav-tools');
     if (navTools) {
+      navTools.querySelector(':scope > ul').classList.add('nav-tool-links');
+
       navTools.querySelectorAll(':scope > ul > li').forEach((navTool) => {
         const link = navTool.querySelector('a');
         if (link) {
@@ -210,5 +212,53 @@ export default async function decorate(block) {
     navWrapper.append(mobileMenu);
 
     block.append(navWrapper);
+
+    // breadcrumb
+    const breadcrumb = createElement('ul', 'nav-breadcrumb');
+    if (window.location.pathname !== '/') {
+      const home = createElement('li');
+      home.innerHTML = '<a href="/">Home</a>';
+      breadcrumb.append(home);
+
+      // find in nav
+      const navLink = block.querySelector(`.nav-sections a[href="${window.location.pathname}"]`);
+      if (navLink) {
+        const navParent = navLink.closest('.nav-drop');
+        if (navParent) {
+          const parentLink = navParent.querySelector(':scope > a');
+          if (parentLink && parentLink !== navLink) {
+            const parentLi = createElement('li');
+            parentLi.append(parentLink.cloneNode(true));
+            breadcrumb.append(parentLi);
+          }
+        }
+        const li = createElement('li');
+        li.textContent = navLink.textContent;
+        breadcrumb.append(li);
+      } else {
+        const li = createElement('li');
+        li.textContent = document.querySelector('h1').textContent;
+        breadcrumb.append(li);
+      }
+
+      // const items = window.location.pathname.split('/');
+      // let linkUrl = '/';
+      // items.forEach((item, i) => {
+      //   const li = createElement('li');
+      //   linkUrl += item;
+      //   const label = linkUrl === '/' ? 'Home' : item;
+      //   if (i === items.length - 1) {
+      //     // last item, no link and no >
+      //     li.textContent = label;
+      //   } else {
+      //     const link = createElement('a');
+      //     link.textContent = label;
+      //     link.href = linkUrl;
+      //     li.append(link);
+      //   }
+      //   breadcrumb.append(li);
+      // });
+    }
+    block.querySelector('#nav .nav-tools').prepend(breadcrumb);
   }
 }

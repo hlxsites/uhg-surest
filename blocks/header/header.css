@@ -307,6 +307,8 @@ header nav .nav-tools {
   background-color: var(--clr-dark-purple);
   color: white;
   font-size: var(--body-font-size-xs);
+  display: flex;
+  justify-content: space-between;
 }
 
 header nav .nav-tools .nav-item-secondary em {
@@ -320,6 +322,46 @@ header nav .nav-tools .nav-item-primary .button {
   font-size: 1.4rem;
   line-height: 19px;
   display: flex;
+}
+
+header nav .nav-tools .nav-tool-links {
+  width: 100%;
+}
+
+header nav .nav-tools .nav-breadcrumb {
+  display: none;
+}
+
+header nav .nav-tools .nav-breadcrumb a {
+  position: relative;
+  padding-right: 1rem;
+}
+
+header nav .nav-tools .nav-breadcrumb a::after {
+  position:absolute;
+  content: '';
+  background-color: currentcolor;
+  mask: url('/icons/arrow-right.svg') no-repeat;
+   /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask: url('/icons/arrow-right.svg') no-repeat;
+  width: 10px;
+  height: 10px;
+  top: 5px;
+  right: -.6rem;
+}
+
+@media (min-width: 900px) {
+  header nav .nav-tools .nav-breadcrumb {
+    display: flex;
+    width: 50%;
+    gap: 1rem;
+    justify-content: flex-start;
+    font-size: 14px;
+  }
+
+  header nav .nav-tools .nav-tool-links {
+    width: 50%;
+  }
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
