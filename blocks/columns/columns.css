@@ -53,8 +53,8 @@
 
     /* stylelint-disable-next-line no-descending-specificity */
     .columns > div > div {
-        flex: 1;
         margin-left: 32px;
+        height: 100%;
     }
     
     /* stylelint-disable-next-line no-descending-specificity */
