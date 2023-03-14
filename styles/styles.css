@@ -409,6 +409,15 @@ main .section picture.section-background img {
   }
 }
 
+main .section.full-bleed-image {
+  padding: 0;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+main .section.full-bleed-image p {
+  margin: 0;
+}
+
 /* footnotes */
 .section.footnotes .default-content-wrapper {
   font-size: 60%;
