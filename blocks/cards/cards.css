@@ -257,3 +257,8 @@
         font-size: 18px;
     }
 }
+
+/* ----------------- Providers variation ------------------ */
+.cards.providers > ul > li {
+    background-color: transparent;
+}
