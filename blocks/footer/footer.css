@@ -10,6 +10,10 @@ footer {
     padding: 70px 8.3333%;
   }
 
+  footer .footer-column1 {
+    padding-right: 20px;
+  }
+
   footer .footer-block {
     display: grid;
     align-items: start;
