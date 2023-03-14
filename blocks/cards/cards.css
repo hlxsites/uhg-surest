@@ -116,6 +116,7 @@
     margin-left: 4em;
     opacity: 0.4;
     max-width: 1200px;
+    padding-top: 0;
 }
 
 .cards.blog > ul > li {
