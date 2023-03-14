@@ -460,3 +460,25 @@ main .section.full-bleed-image p {
 .blog-post.blog [class="section"] .section-container {
   max-width: 720px;
 }
+
+.blog-post.blog .section.footnotes {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.blog-post.blog .section.footnotes .section-container {
+  border-top: 1px solid var(--clr-black);
+  padding: 0;
+  width: 720px;
+}
+
+.blog-post.blog .section.footnotes .section-container .default-content-wrapper {
+  padding: 0;
+}
+
+@media (max-width: 720px) {
+  .blog-post.blog .section.footnotes .section-container {
+    max-width: 720px;
+  }
+}
