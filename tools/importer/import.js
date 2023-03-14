@@ -315,7 +315,8 @@ async function importPage(document, origHtml) {
     textWithImage.replaceWith(block);
   });
 
-  main.querySelectorAll('.section').forEach((section) => {
+  const sections = main.querySelectorAll('.section');
+  sections.forEach((section, sectionNumber) => {
     const metdataCells = [
       ['Section Metadata'],
     ];
@@ -323,6 +324,14 @@ async function importPage(document, origHtml) {
     const sectionStyle = [];
     if (section.querySelector('.rich-text-section')) {
       sectionStyle.push('Center');
+
+      // process footnotes
+      section.querySelectorAll('p > sup').forEach((sup) => {
+        const p = sup.parentElement;
+        if (p.firstChild === sup) {
+          sectionStyle.push('Footnotes');
+        }
+      });
     }
 
     if (section.querySelector('.split-block')) {
@@ -351,7 +360,9 @@ async function importPage(document, origHtml) {
       section.append(sectionMetadataBlock);
     }
 
-    section.append(sectionBreak.cloneNode(true));
+    if (sectionNumber !== (sections.length - 1)) {
+      section.append(sectionBreak.cloneNode(true));
+    }
   });
 
   addCommonMetadata(document, main, meta);
@@ -398,6 +409,32 @@ function importBlogPost(document) {
   addCommonMetadata(document, main, meta);
 
   main.querySelector('.blog-body').append(sectionBreak.cloneNode(true));
+
+  // process image captions
+  document.querySelectorAll('.rich-text-image').forEach((img) => {
+    const caption = img.querySelector('.rich-text-img-caption > p');
+    if (caption) {
+      const em = document.createElement('em');
+      em.textContent = caption.textContent;
+      caption.innerHTML = em.outerHTML;
+    }
+  });
+
+  // process footnotes
+  document.querySelectorAll('p > sup').forEach((sup) => {
+    const p = sup.parentElement;
+    const wrapper = p.parentElement;
+    if (wrapper && wrapper.lastChild === p && p.firstChild === sup) {
+      wrapper.insertBefore(sectionBreak.cloneNode(true), p);
+
+      const metdataCells = [
+        ['Section Metadata'],
+        ['Style', 'Footnotes'],
+      ];
+      const sectionMetadataBlock = WebImporter.DOMUtils.createTable(metdataCells, document);
+      wrapper.append(sectionMetadataBlock);
+    }
+  });
 
   const relatedBlogs = main.querySelector('.related-blogs-container');
   relatedBlogs.remove();
