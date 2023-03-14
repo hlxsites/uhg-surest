@@ -18,6 +18,13 @@ main .cta.narrow {
   padding-block: 1rem;
 }
 
+main .cta.narrow .button {
+  padding: 6px 20px;
+  font-weight: 400;
+  font-size: var(--body-font-size-xs);
+  min-width: unset;
+}
+
 main .cta.narrow :is(h2, p) {
   margin: 0;
 }
@@ -40,6 +47,11 @@ main .cta.narrow p {
     min-width: 220px;
     padding: 16px 30px;
   }
+
+  main .cta.narrow .button {
+    min-width: 170px;
+  }
+  
 
   main .cta.narrow h2 {
     font-size: var(--heading-font-size-m);
