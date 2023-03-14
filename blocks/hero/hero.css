@@ -119,6 +119,10 @@ main .hero img {
     margin: 0;
 }
 
+.blog-post.blog .hero.block .blog-header {
+    max-width: 720px;
+}
+
 .blog-post.blog .hero-container {
     max-height: 500px;
     background-color: var(--clr-purple);
