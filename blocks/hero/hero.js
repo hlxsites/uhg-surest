@@ -33,7 +33,7 @@ function decorateBlogHeader(block) {
   backButtonText.appendChild(backButtonLink);
   backButton.appendChild(leftArrow);
   backButton.appendChild(backButtonText);
-  const textContainer = block.querySelector('.hero-text-container');
+  const textContainer = block.querySelector('.hero-text-container > div');
   textContainer.insertBefore(backButton, textContainer.querySelector('h1'));
   decorateIcons(block);
 }

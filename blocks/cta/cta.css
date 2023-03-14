@@ -48,4 +48,23 @@ main .cta.narrow p {
   main .cta.narrow p {
     font-size: var(--body-font-size-s);
   }
+
+  .blog main .cta-container {
+    padding: 0;
+  }
+
+  .blog main .cta h2 {
+    font-size: var(--heading-font-size-m);
+  }
+
+  .blog main .cta p {
+    font-size: var(--body-font-size-xs);
+    padding-bottom: 20px;
+  }
+
+  .blog main .cta .button {
+    min-width: 160px;
+    font-size: var(--body-font-size-xs);
+    padding: 4px 20px;
+  }
 }

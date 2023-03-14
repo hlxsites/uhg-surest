@@ -45,6 +45,10 @@ main .hero-container.dark-text .hero .hero-text-container {
     color: var(--clr-dark-purple);
 }
 
+main .hero-container.dark-text .hero .hero-text-container p {
+    color: var(--clr-black);
+}
+
 main .hero-container.light-text .hero .hero-text-container {
     color:var(--clr-off-white);
 }
@@ -110,17 +114,19 @@ main .hero img {
     height: 20%;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .blog-post.blog .hero.block p {
     margin: 0;
-}
-
-.blog-post.blog .hero.block .blog-header {
-    max-width: 720px;
 }
 
 .blog-post.blog .hero-container {
     max-height: 500px;
     background-color: var(--clr-purple);
+}
+
+.blog-post.blog .hero.block .hero-text-container {
+    padding-left: 0;
+    max-width: 100%;
 }
 
 .blog-post.blog .hero.block .hero-text-container h1 {
